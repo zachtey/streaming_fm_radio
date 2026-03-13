@@ -1,186 +1,99 @@
-`timescale 1ns / 1ns
+`timescale 1ns/1ps
 
-module fir(
-    input clk,
-    input reset,
-    input signed [15:0] s_axis_fir_tdata, 
-    input [3:0] s_axis_fir_tkeep,
-    input s_axis_fir_tlast,
-    input s_axis_fir_tvalid,
-    input m_axis_fir_tready,
-    output reg m_axis_fir_tvalid,
-    output reg s_axis_fir_tready,
-    output reg m_axis_fir_tlast,
-    output reg [3:0] m_axis_fir_tkeep,
-    output reg signed [31:0] m_axis_fir_tdata
-    );
+module fir #(
+    parameter int DATA_W      = 16,
+    parameter int COEFF_W     = 16,
+    parameter int ACC_W       = 48,
+    parameter int TAPS        = 20,
+    parameter int DECIM       = 1,
+    parameter int SCALE_SHIFT = 15,
+    parameter string COEFF_FILE = "../src/channel_lpf_20tap.mem"
+)(
+    input  logic                         clk,
+    input  logic                         rst_n,
 
+    input  logic signed [DATA_W-1:0]     s_axis_tdata,
+    input  logic                         s_axis_tvalid,
+    output logic                         s_axis_tready,
+    input  logic                         s_axis_tlast,
 
-    always @ (posedge clk)
-        begin
-            m_axis_fir_tkeep <= 4'hf;
+    output logic signed [DATA_W-1:0]     m_axis_tdata,
+    output logic                         m_axis_tvalid,
+    input  logic                         m_axis_tready,
+    output logic                         m_axis_tlast
+);
+
+    localparam int DECIM_W = (DECIM <= 1) ? 1 : $clog2(DECIM);
+
+    logic signed [COEFF_W-1:0] coeffs [0:TAPS-1];
+    logic signed [DATA_W-1:0]  x      [0:TAPS-1];
+
+    logic [DECIM_W-1:0] decim_cnt;
+
+    logic signed [DATA_W-1:0] out_data_reg;
+    logic                     out_valid_reg;
+    logic                     out_last_reg;
+
+    integer i;
+    logic signed [ACC_W-1:0] prod;
+    logic signed [ACC_W-1:0] acc_next;
+    logic signed [ACC_W-1:0] shifted_acc;
+
+    initial begin
+        $readmemh(COEFF_FILE, coeffs);
+    end
+
+    assign m_axis_tdata  = out_data_reg;
+    assign m_axis_tvalid = out_valid_reg;
+    assign m_axis_tlast  = out_last_reg;
+
+    assign s_axis_tready = (~out_valid_reg) || m_axis_tready;
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            for (i = 0; i < TAPS; i++) begin
+                x[i] <= '0;
+            end
+            decim_cnt     <= '0;
+            out_data_reg  <= '0;
+            out_valid_reg <= 1'b0;
+            out_last_reg  <= 1'b0;
+        end else begin
+            if (out_valid_reg && m_axis_tready) begin
+                out_valid_reg <= 1'b0;
+            end
+
+            if (s_axis_tvalid && s_axis_tready) begin
+                for (i = TAPS-1; i > 0; i--) begin
+                    x[i] <= x[i-1];
+                end
+                x[0] <= s_axis_tdata;
+
+                if (decim_cnt == DECIM-1) begin
+                    decim_cnt <= '0;
+
+                    acc_next = '0;
+                    for (i = 0; i < TAPS; i++) begin
+                        prod = $signed(coeffs[i]) * $signed((i == 0) ? s_axis_tdata : x[i-1]);
+                        acc_next = acc_next + prod;
+                    end
+
+                    shifted_acc = acc_next >>> SCALE_SHIFT;
+
+                    if (shifted_acc > 32767)
+                        out_data_reg <= 16'sd32767;
+                    else if (shifted_acc < -32768)
+                        out_data_reg <= -16'sd32768;
+                    else
+                        out_data_reg <= shifted_acc[DATA_W-1:0];
+
+                    out_valid_reg <= 1'b1;
+                    out_last_reg  <= s_axis_tlast;
+                end else begin
+                    decim_cnt <= decim_cnt + 1'b1;
+                end
+            end
         end
-        
-    always @ (posedge clk)
-        begin
-            if (s_axis_fir_tlast == 1'b1)
-                begin
-                    m_axis_fir_tlast <= 1'b1;
-                end
-            else
-                begin
-                    m_axis_fir_tlast <= 1'b0;
-                end
-        end
-    
-    // 15-tap FIR 
-    reg enable_fir, enable_buff;
-    reg [3:0] buff_cnt;
-    reg signed [15:0] in_sample; 
-    reg signed [15:0] buff0, buff1, buff2, buff3, buff4, buff5, buff6, buff7, buff8, buff9, buff10, buff11, buff12, buff13, buff14; 
-    wire signed [15:0] tap0, tap1, tap2, tap3, tap4, tap5, tap6, tap7, tap8, tap9, tap10, tap11, tap12, tap13, tap14; 
-    reg signed [31:0] acc0, acc1, acc2, acc3, acc4, acc5, acc6, acc7, acc8, acc9, acc10, acc11, acc12, acc13, acc14; 
-
-    
-    /* Taps for LPF running @ 1MSps with a cutoff freq of 400kHz*/
-    assign tap0 = 16'hFC9C;  // twos(-0.0265 * 32768) = 0xFC9C
-    assign tap1 = 16'h0000;  // 0
-    assign tap2 = 16'h05A5;  // 0.0441 * 32768 = 1445.0688 = 1445 = 0x05A5
-    assign tap3 = 16'h0000;  // 0
-    assign tap4 = 16'hF40C;  // twos(-0.0934 * 32768) = 0xF40C
-    assign tap5 = 16'h0000;  // 0
-    assign tap6 = 16'h282D;  // 0.3139 * 32768 = 10285.8752 = 10285 = 0x282D
-    assign tap7 = 16'h4000;  // 0.5000 * 32768 = 16384 = 0x4000
-    assign tap8 = 16'h282D;  // 0.3139 * 32768 = 10285.8752 = 10285 = 0x282D
-    assign tap9 = 16'h0000;  // 0
-    assign tap10 = 16'hF40C; // twos(-0.0934 * 32768) = 0xF40C
-    assign tap11 = 16'h0000; // 0
-    assign tap12 = 16'h05A5; // 0.0441 * 32768 = 1445.0688 = 1445 = 0x05A5
-    assign tap13 = 16'h0000; // 0
-    assign tap14 = 16'hFC9C; // twos(-0.0265 * 32768) = 0xFC9C
-    
-    /* This loop sets the tvalid flag on the output of the FIR high once 
-     * the circular buffer has been filled with input samples for the 
-     * first time after a reset condition. */
-    always @ (posedge clk or negedge reset)
-        begin
-            if (reset == 1'b0) //if (reset == 1'b0 || tvalid_in == 1'b0)
-                begin
-                    buff_cnt <= 4'd0;
-                    enable_fir <= 1'b0;
-                    in_sample <= 8'd0;
-                end
-            else if (m_axis_fir_tready == 1'b0 || s_axis_fir_tvalid == 1'b0)
-                begin
-                    enable_fir <= 1'b0;
-                    buff_cnt <= 4'd15;
-                    in_sample <= in_sample;
-                end
-            else if (buff_cnt == 4'd15)
-                begin
-                    buff_cnt <= 4'd0;
-                    enable_fir <= 1'b1;
-                    in_sample <= s_axis_fir_tdata;
-                end
-            else
-                begin
-                    buff_cnt <= buff_cnt + 1;
-                    in_sample <= s_axis_fir_tdata;
-                end
-        end   
-
-    always @ (posedge clk)
-        begin
-            if(reset == 1'b0 || m_axis_fir_tready == 1'b0 || s_axis_fir_tvalid == 1'b0)
-                begin
-                    s_axis_fir_tready <= 1'b0;
-                    m_axis_fir_tvalid <= 1'b0;
-                    enable_buff <= 1'b0;
-                end
-            else
-                begin
-                    s_axis_fir_tready <= 1'b1;
-                    m_axis_fir_tvalid <= 1'b1;
-                    enable_buff <= 1'b1;
-                end
-        end
-    
-    /* Circular buffer bring in a serial input sample stream that 
-     * creates an array of 15 input samples for the 15 taps of the filter. */
-    always @ (posedge clk)
-        begin
-            if(enable_buff == 1'b1)
-                begin
-                    buff0 <= in_sample;
-                    buff1 <= buff0;        
-                    buff2 <= buff1;         
-                    buff3 <= buff2;      
-                    buff4 <= buff3;      
-                    buff5 <= buff4;       
-                    buff6 <= buff5;    
-                    buff7 <= buff6;       
-                    buff8 <= buff7;       
-                    buff9 <= buff8;       
-                    buff10 <= buff9;        
-                    buff11 <= buff10;       
-                    buff12 <= buff11;       
-                    buff13 <= buff12;       
-                    buff14 <= buff13;    
-                end
-            else
-                begin
-                    buff0 <= buff0;
-                    buff1 <= buff1;        
-                    buff2 <= buff2;         
-                    buff3 <= buff3;      
-                    buff4 <= buff4;      
-                    buff5 <= buff5;       
-                    buff6 <= buff6;    
-                    buff7 <= buff7;       
-                    buff8 <= buff8;       
-                    buff9 <= buff9;       
-                    buff10 <= buff10;        
-                    buff11 <= buff11;       
-                    buff12 <= buff12;       
-                    buff13 <= buff13;       
-                    buff14 <= buff14;
-                end
-        end
-        
-    /* Multiply stage of FIR */
-    always @ (posedge clk)
-        begin
-            if (enable_fir == 1'b1)
-                begin
-                    acc0 <= tap0 * buff0;
-                    acc1 <= tap1 * buff1;
-                    acc2 <= tap2 * buff2;
-                    acc3 <= tap3 * buff3;
-                    acc4 <= tap4 * buff4;
-                    acc5 <= tap5 * buff5;
-                    acc6 <= tap6 * buff6;
-                    acc7 <= tap7 * buff7;
-                    acc8 <= tap8 * buff8;
-                    acc9 <= tap9 * buff9;
-                    acc10 <= tap10 * buff10;
-                    acc11 <= tap11 * buff11;
-                    acc12 <= tap12 * buff12;
-                    acc13 <= tap13 * buff13;
-                    acc14 <= tap14 * buff14;
-                end
-        end    
-        
-     /* Accumulate stage of FIR */   
-    always @ (posedge clk) 
-        begin
-            if (enable_fir == 1'b1)
-                begin
-                    m_axis_fir_tdata <= acc0 + acc1 + acc2 + acc3 + acc4 + acc5 + acc6 + acc7 + acc8 + acc9 + acc10 + acc11 + acc12 + acc13 + acc14;
-                end
-        end     
-
-    
-    
-
+    end
 
 endmodule
