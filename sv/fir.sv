@@ -39,6 +39,7 @@ module fir #(
     logic signed [ACC_W-1:0] acc_next;
     logic signed [ACC_W-1:0] shifted_acc;
 
+
     initial begin
         $readmemh(COEFF_FILE, coeffs);
     end
