@@ -8,6 +8,7 @@ vlib work
 vmap work work
 
 # Compile RTL from ../sv
+vlog -sv ../sv/div.sv
 vlog -sv ../sv/atan.sv
 vlog -sv ../sv/demod.sv
 vlog -sv ../sv/demod_tb.sv

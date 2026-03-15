@@ -1,17 +1,27 @@
 /*
-atan2 via CORDIC, vectoring mode
-- one always_comb
-- one always_ff
-- pipelined
-- angle output is Q10 radians
+atan approximation matching C qarctan() structure
+without using variable division operator.
+Uses div for the ratio.
 
+C model target:
+
+if (x >= 0) {
+    r = QUANTIZE_I(x - abs_y) / (x + abs_y);
+    angle = quad1 - DEQUANTIZE(quad1 * r);
+} else {
+    r = QUANTIZE_I(x + abs_y) / (abs_y - x);
+    angle = quad3 - DEQUANTIZE(quad1 * r);
+}
+return (y < 0) ? -angle : angle;
+
+Interface matches your current demod instantiation.
 */
 
 module atan #(
     parameter int INPUT_W = 33,
     parameter int ANG_W   = 32,
     parameter int BITS    = 10,
-    parameter int ITER    = 11
+    parameter int ITER    = 11   // unused, kept for drop-in compatibility
 ) (
     input  logic                       clk,
     input  logic                       rst,
@@ -22,148 +32,250 @@ module atan #(
     output logic signed [ANG_W-1:0]    angle_out
 );
 
-    //localparams
-    localparam int XY_W = INPUT_W + 1;
-    // Q10 radians
-    localparam logic signed [ANG_W-1:0] PI_Q      = 32'sd3217;
-    localparam logic signed [ANG_W-1:0] HALF_PI_Q = 32'sd1608;
-    
-    //local variables + variables
-    // state registers
-    logic signed [XY_W-1:0]  x_pipe   [0:ITER];
-    logic signed [XY_W-1:0]  y_pipe   [0:ITER];
-    logic signed [ANG_W-1:0] z_pipe   [0:ITER];
-    logic                    valid_pipe[0:ITER];
-    logic                    special_pipe[0:ITER];
-    logic signed [ANG_W-1:0] special_angle_pipe[0:ITER];
-    // next-state signals
-    logic signed [XY_W-1:0]  x_pipe_c   [0:ITER];
-    logic signed [XY_W-1:0]  y_pipe_c   [0:ITER];
-    logic signed [ANG_W-1:0] z_pipe_c   [0:ITER];
-    logic                    valid_pipe_c[0:ITER];
-    logic                    special_pipe_c[0:ITER];
-    logic signed [ANG_W-1:0] special_angle_pipe_c[0:ITER];
+    // ------------------------------------------------------------
+    // localparams
+    // ------------------------------------------------------------
+    localparam int WORK_W = INPUT_W + 2;
+    localparam int NUM_W  = WORK_W + BITS;
+    localparam int DEN_W  = WORK_W;
+    localparam int DIV_LAT = NUM_W;
+    localparam int MUL_W  = ANG_W + NUM_W;
+
+    localparam logic signed [ANG_W-1:0] QUAD1_Q   = 32'sd804;   // round(pi/4 * 1024)
+    localparam logic signed [ANG_W-1:0] QUAD3_Q   = 32'sd2413;  // round(3pi/4 * 1024)
+    localparam logic signed [ANG_W-1:0] HALF_PI_Q = 32'sd1608;  // round(pi/2 * 1024)
+
+    // ------------------------------------------------------------
+    // divider input signals
+    // ------------------------------------------------------------
+    logic              div_valid_in;
+    logic [NUM_W-1:0]  div_numer_in;
+    logic [DEN_W-1:0]  div_denom_in;
+
+    logic              div_valid_out;
+    logic [NUM_W-1:0]  div_quot_out;
+
+    // ------------------------------------------------------------
+    // metadata pipeline aligned to divider latency
+    // ------------------------------------------------------------
+    logic                     num_neg_pipe        [0:DIV_LAT];
+    logic                     num_neg_pipe_c      [0:DIV_LAT];
+    logic                     special_pipe        [0:DIV_LAT];
+    logic                     special_pipe_c      [0:DIV_LAT];
+    logic                     negate_angle_pipe   [0:DIV_LAT];
+    logic                     negate_angle_pipe_c [0:DIV_LAT];
+
+    logic signed [ANG_W-1:0]  base_angle_pipe        [0:DIV_LAT];
+    logic signed [ANG_W-1:0]  base_angle_pipe_c      [0:DIV_LAT];
+    logic signed [ANG_W-1:0]  special_angle_pipe     [0:DIV_LAT];
+    logic signed [ANG_W-1:0]  special_angle_pipe_c   [0:DIV_LAT];
+
+    // ------------------------------------------------------------
+    // output regs next-state
+    // ------------------------------------------------------------
+    logic                     valid_out_c;
+    logic signed [ANG_W-1:0]  angle_out_c;
+
+    // ------------------------------------------------------------
+    // combinational temps
+    // ------------------------------------------------------------
+    logic signed [WORK_W-1:0] x_ext;
+    logic signed [WORK_W-1:0] y_ext;
+    logic signed [WORK_W-1:0] abs_y;
+    logic signed [WORK_W-1:0] abs_y_p1;
+
+    logic signed [WORK_W-1:0] delta_num_base;
+    logic signed [WORK_W-1:0] denom_signed;
+
+    logic                     num_neg;
+    logic [WORK_W-1:0]        numer_mag;
+    logic [NUM_W-1:0]         numer_q;
+    logic [DEN_W-1:0]         denom_u;
+
+    logic signed [NUM_W:0]    r_signed_ext;
+    logic signed [MUL_W-1:0]  mult_full;
+    logic signed [MUL_W-1:0]  mult_deq;
+    logic signed [MUL_W-1:0]  angle_wide;
 
     integer k;
-    function automatic logic signed [ANG_W-1:0] cordic_angle(input int idx);
-        begin
-            case (idx)
-                0:  cordic_angle = 32'sd804; // atan(1)      * 1024
-                1:  cordic_angle = 32'sd475; // atan(1/2)
-                2:  cordic_angle = 32'sd251; // atan(1/4)
-                3:  cordic_angle = 32'sd127; // atan(1/8)
-                4:  cordic_angle = 32'sd64;
-                5:  cordic_angle = 32'sd32;
-                6:  cordic_angle = 32'sd16;
-                7:  cordic_angle = 32'sd8;
-                8:  cordic_angle = 32'sd4;
-                9:  cordic_angle = 32'sd2;
-                10: cordic_angle = 32'sd1;
-                default: cordic_angle = '0;
-            endcase
-        end
-    endfunction
 
+    // ------------------------------------------------------------
+    // divider instance
+    // ------------------------------------------------------------
+    div #(
+        .NUM_W (NUM_W),
+        .DEN_W (DEN_W),
+        .QUOT_W(NUM_W)
+    ) u_divider (
+        .clk      (clk),
+        .rst      (rst),
+        .valid_in (div_valid_in),
+        .numer_in (div_numer_in),
+        .denom_in (div_denom_in),
+        .valid_out(div_valid_out),
+        .quot_out (div_quot_out)
+    );
+
+    // ------------------------------------------------------------
     // combinational process
+    // ------------------------------------------------------------
     always_comb begin
-        // defaults: hold current state
-        for (k = 0; k <= ITER; k = k + 1) begin
-            x_pipe_c[k]             = x_pipe[k];
-            y_pipe_c[k]             = y_pipe[k];
-            z_pipe_c[k]             = z_pipe[k];
-            valid_pipe_c[k]         = valid_pipe[k];
-            special_pipe_c[k]       = special_pipe[k];
-            special_angle_pipe_c[k] = special_angle_pipe[k];
+        // defaults
+        div_valid_in = 1'b0;
+        div_numer_in = '0;
+        div_denom_in = '0;
+
+        valid_out_c  = 1'b0;
+        angle_out_c  = angle_out;
+
+        x_ext          = '0;
+        y_ext          = '0;
+        abs_y          = '0;
+        abs_y_p1       = '0;
+        delta_num_base = '0;
+        denom_signed   = '0;
+        num_neg        = 1'b0;
+        numer_mag      = '0;
+        numer_q        = '0;
+        denom_u        = '0;
+
+        r_signed_ext   = '0;
+        mult_full      = '0;
+        mult_deq       = '0;
+        angle_wide     = '0;
+
+        for (k = 0; k <= DIV_LAT; k = k + 1) begin
+            num_neg_pipe_c[k]        = num_neg_pipe[k];
+            special_pipe_c[k]        = special_pipe[k];
+            negate_angle_pipe_c[k]   = negate_angle_pipe[k];
+            base_angle_pipe_c[k]     = base_angle_pipe[k];
+            special_angle_pipe_c[k]  = special_angle_pipe[k];
         end
 
-        // stage 0: load new input
-        valid_pipe_c[0] = valid_in;
+        // shift metadata pipeline every cycle
+        for (k = 0; k < DIV_LAT; k = k + 1) begin
+            num_neg_pipe_c[k+1]       = num_neg_pipe[k];
+            special_pipe_c[k+1]       = special_pipe[k];
+            negate_angle_pipe_c[k+1]  = negate_angle_pipe[k];
+            base_angle_pipe_c[k+1]    = base_angle_pipe[k];
+            special_angle_pipe_c[k+1] = special_angle_pipe[k];
+        end
+
+        // stage 0 metadata load
+        num_neg_pipe_c[0]       = 1'b0;
+        special_pipe_c[0]       = 1'b0;
+        negate_angle_pipe_c[0]  = 1'b0;
+        base_angle_pipe_c[0]    = '0;
+        special_angle_pipe_c[0] = '0;
 
         if (valid_in) begin
-            if (x_in == '0) begin
-                x_pipe_c[0]       = '0;
-                y_pipe_c[0]       = '0;
-                z_pipe_c[0]       = '0;
-                special_pipe_c[0] = 1'b1;
+            x_ext = $signed({{(WORK_W-INPUT_W){x_in[INPUT_W-1]}}, x_in});
+            y_ext = $signed({{(WORK_W-INPUT_W){y_in[INPUT_W-1]}}, y_in});
 
-                if (y_in > 0)
+            if (y_ext < 0)
+                abs_y = -y_ext;
+            else
+                abs_y = y_ext;
+
+            abs_y_p1 = abs_y + 1;
+
+            negate_angle_pipe_c[0] = (y_ext < 0);
+
+            // x == 0 special case
+            if (x_ext == 0) begin
+                div_valid_in         = 1'b1;
+                div_numer_in         = '0;
+                div_denom_in         = {{(DEN_W-1){1'b0}}, 1'b1};
+
+                special_pipe_c[0]    = 1'b1;
+                base_angle_pipe_c[0] = '0;
+                num_neg_pipe_c[0]    = 1'b0;
+
+                if (y_ext > 0)
                     special_angle_pipe_c[0] = HALF_PI_Q;
-                else if (y_in < 0)
+                else if (y_ext < 0)
                     special_angle_pipe_c[0] = -HALF_PI_Q;
                 else
                     special_angle_pipe_c[0] = '0;
             end else begin
-                special_pipe_c[0]       = 1'b0;
+                special_pipe_c[0] = 1'b0;
                 special_angle_pipe_c[0] = '0;
 
-                // quadrant preprocessing
-                if (x_in < 0) begin
-                    x_pipe_c[0] = -$signed({x_in[INPUT_W-1], x_in});
-                    y_pipe_c[0] = -$signed({y_in[INPUT_W-1], y_in});
-                    z_pipe_c[0] = (y_in >= 0) ? PI_Q : -PI_Q;
+                if (x_ext >= 0) begin
+                    delta_num_base    = x_ext - abs_y_p1;
+                    denom_signed      = x_ext + abs_y_p1;
+                    base_angle_pipe_c[0] = QUAD1_Q;
                 end else begin
-                    x_pipe_c[0] = $signed({x_in[INPUT_W-1], x_in});
-                    y_pipe_c[0] = $signed({y_in[INPUT_W-1], y_in});
-                    z_pipe_c[0] = '0;
+                    delta_num_base    = x_ext + abs_y_p1;
+                    denom_signed      = abs_y_p1 - x_ext;
+                    base_angle_pipe_c[0] = QUAD3_Q;
                 end
+
+                num_neg = (delta_num_base < 0);
+                num_neg_pipe_c[0] = num_neg;
+
+                if (delta_num_base < 0)
+                    numer_mag = -delta_num_base;
+                else
+                    numer_mag = delta_num_base;
+
+                numer_q = {{(NUM_W-WORK_W){1'b0}}, numer_mag} << BITS;
+                denom_u = denom_signed[DEN_W-1:0];
+
+                div_valid_in = 1'b1;
+                div_numer_in = numer_q;
+                div_denom_in = denom_u;
             end
-        end else begin
-            x_pipe_c[0]             = '0;
-            y_pipe_c[0]             = '0;
-            z_pipe_c[0]             = '0;
-            special_pipe_c[0]       = 1'b0;
-            special_angle_pipe_c[0] = '0;
         end
 
-        // stages 1..ITER
-        for (k = 0; k < ITER; k = k + 1) begin
-            valid_pipe_c[k+1]         = valid_pipe[k];
-            special_pipe_c[k+1]       = special_pipe[k];
-            special_angle_pipe_c[k+1] = special_angle_pipe[k];
-
-            if (special_pipe[k]) begin
-                x_pipe_c[k+1] = x_pipe[k];
-                y_pipe_c[k+1] = y_pipe[k];
-                z_pipe_c[k+1] = special_angle_pipe[k];
-            end else if (valid_pipe[k]) begin
-                if (y_pipe[k] >= 0) begin
-                    x_pipe_c[k+1] = x_pipe[k] + (y_pipe[k] >>> k);
-                    y_pipe_c[k+1] = y_pipe[k] - (x_pipe[k] >>> k);
-                    z_pipe_c[k+1] = z_pipe[k] + cordic_angle(k);
-                end else begin
-                    x_pipe_c[k+1] = x_pipe[k] - (y_pipe[k] >>> k);
-                    y_pipe_c[k+1] = y_pipe[k] + (x_pipe[k] >>> k);
-                    z_pipe_c[k+1] = z_pipe[k] - cordic_angle(k);
-                end
+        // final stage after divider
+        if (div_valid_out) begin
+            if (special_pipe[DIV_LAT]) begin
+                angle_out_c = special_angle_pipe[DIV_LAT];
             end else begin
-                x_pipe_c[k+1] = '0;
-                y_pipe_c[k+1] = '0;
-                z_pipe_c[k+1] = '0;
-            end
-        end
+                if (num_neg_pipe[DIV_LAT])
+                    r_signed_ext = -$signed({1'b0, div_quot_out});
+                else
+                    r_signed_ext =  $signed({1'b0, div_quot_out});
 
-        valid_out = valid_pipe[ITER];
-        angle_out = z_pipe[ITER];
+                mult_full  = $signed(QUAD1_Q) * $signed(r_signed_ext);
+                mult_deq   = mult_full >>> BITS;
+                angle_wide = $signed(base_angle_pipe[DIV_LAT]) - mult_deq;
+
+                if (negate_angle_pipe[DIV_LAT])
+                    angle_wide = -angle_wide;
+
+                angle_out_c = angle_wide[ANG_W-1:0];
+            end
+
+            valid_out_c = 1'b1;
+        end
     end
 
+    // ------------------------------------------------------------
     // sequential process
+    // ------------------------------------------------------------
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
-            for (k = 0; k <= ITER; k = k + 1) begin
-                x_pipe[k]             <= '0;
-                y_pipe[k]             <= '0;
-                z_pipe[k]             <= '0;
-                valid_pipe[k]         <= 1'b0;
+            valid_out <= 1'b0;
+            angle_out <= '0;
+
+            for (k = 0; k <= DIV_LAT; k = k + 1) begin
+                num_neg_pipe[k]       <= 1'b0;
                 special_pipe[k]       <= 1'b0;
+                negate_angle_pipe[k]  <= 1'b0;
+                base_angle_pipe[k]    <= '0;
                 special_angle_pipe[k] <= '0;
             end
         end else begin
-            for (k = 0; k <= ITER; k = k + 1) begin
-                x_pipe[k]             <= x_pipe_c[k];
-                y_pipe[k]             <= y_pipe_c[k];
-                z_pipe[k]             <= z_pipe_c[k];
-                valid_pipe[k]         <= valid_pipe_c[k];
+            valid_out <= valid_out_c;
+            angle_out <= angle_out_c;
+
+            for (k = 0; k <= DIV_LAT; k = k + 1) begin
+                num_neg_pipe[k]       <= num_neg_pipe_c[k];
                 special_pipe[k]       <= special_pipe_c[k];
+                negate_angle_pipe[k]  <= negate_angle_pipe_c[k];
+                base_angle_pipe[k]    <= base_angle_pipe_c[k];
                 special_angle_pipe[k] <= special_angle_pipe_c[k];
             end
         end
