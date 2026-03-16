@@ -10,86 +10,61 @@ z2
 cModel Technology
 Z0 d/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sim
 T_opt
-Z1 !s110 1773607689
-V>9IZJzSLH>5KN;PQBM2^G0
-04 14 4 work channel_fir_tb fast 0
-=1-a4bb6d3fef1e-69b71b09-3c703-16017b
+Z1 !s110 1773611695
+VLLX=bW[QmDU1JliQ8c8oK2
+04 21 4 work mult_pilot_squared_tb fast 0
+=1-a4bb6d3fef1e-69b72aaf-92f1c-1a5d0c
 o-quiet -auto_acc_if_foreign -work work +acc
 Z2 tCvgOpt 0
 n@_opt
 OL;O;2020.1;71
-vchannel_fir_tb
+vmult
 Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
 R1
 !i10b 1
-!s100 VfaSzjz@h>E@65YIhCH7G2
+!s100 =lNJ6Oh^Bk`=4NQ?>>0e03
 Z4 !s11b Dg1SIo80bB@j0V0VzS_@n1
-IS0B631R^0g]d7=@Jc4RR13
+Id=gH3F0=gA4;=H@eKmB9S1
 Z5 VDg1SIo80bB@j0V0VzS_@n1
 S1
 R0
-w1773601221
-8../sv/channel_fir_tb.sv
-F../sv/channel_fir_tb.sv
-!i122 2
-L0 3 158
+w1773611026
+8../sv/mult.sv
+F../sv/mult.sv
+!i122 0
+L0 3 107
 Z6 OL;L;2020.1;71
 r1
 !s85 0
 31
-Z7 !s108 1773607689.000000
-!s107 ../sv/channel_fir_tb.sv|
-!s90 -sv|../sv/channel_fir_tb.sv|
+Z7 !s108 1773611695.000000
+!s107 ../sv/mult.sv|
+!s90 -sv|../sv/mult.sv|
 !i113 0
 Z8 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R2
-vchannel_fir_top
+vmult_pilot_squared_tb
 R3
 R1
 !i10b 1
-!s100 <=UHRlL<NBKH?2WBE:3Zl3
+!s100 <jd`9>3FW7DDW2kN`UzCe2
 R4
-IL8GcnMz7C;4JV0Ele:YNE2
+IFjXM]`@C^i;f^A`dF<nUf3
 R5
 S1
 R0
-w1773602516
-8../sv/channel_fir_top.sv
-F../sv/channel_fir_top.sv
+w1773611682
+8../sv/mult_pilot_squared_tb.sv
+F../sv/mult_pilot_squared_tb.sv
 !i122 1
-L0 3 76
+L0 3 153
 R6
 r1
 !s85 0
 31
 R7
-!s107 ../sv/channel_fir_top.sv|
-!s90 -sv|../sv/channel_fir_top.sv|
-!i113 0
-R8
-R2
-vfir
-R3
-R1
-!i10b 1
-!s100 mNkCe0eCGGcW5j]7^S]Gm2
-R4
-I`MgXENC8;[j;HdeF2:T593
-R5
-S1
-R0
-w1773607459
-8../sv/fir.sv
-F../sv/fir.sv
-!i122 0
-L0 3 168
-R6
-r1
-!s85 0
-31
-!s108 1773607688.000000
-!s107 ../sv/fir.sv|
-!s90 -sv|../sv/fir.sv|
+!s107 ../sv/mult_pilot_squared_tb.sv|
+!s90 -sv|../sv/mult_pilot_squared_tb.sv|
 !i113 0
 R8
 R2
