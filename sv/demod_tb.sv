@@ -2,7 +2,7 @@
 
 module demod_tb;
 
-    localparam int INPUT_W       = 16;
+    localparam int INPUT_W       = 32;
     localparam int DATA_W        = 32;
     localparam int GAIN_W        = 16;
     localparam int N_SAMPLES_MAX = 2000000;
@@ -36,15 +36,6 @@ module demod_tb;
     longint sum_signed_diff;
     integer match_count;
 
-    integer within_1_count;
-    integer within_2_count;
-    integer within_4_count;
-    integer within_8_count;
-    integer within_16_count;
-    integer within_32_count;
-    integer within_64_count;
-    integer within_128_count;
-
     demod #(
         .INPUT_W(INPUT_W),
         .DATA_W (DATA_W),
@@ -67,18 +58,17 @@ module demod_tb;
             n_i = 0;
             fd_i = $fopen("sv_channel_i.txt", "r");
             if (fd_i == 0) begin
-                $display("ERROR: could not open sv_channel_i.txt");
+                $display("ERROR: could not open c_demod_in_i.txt");
                 $finish;
             end
             while ((!$feof(fd_i)) && (n_i < N_SAMPLES_MAX)) begin
                 r = $fscanf(fd_i, "%h\n", word_tmp);
                 if (r == 1) begin
-                    i_mem[n_i] = $signed(word_tmp[15:0]);
+                    i_mem[n_i] = $signed(word_tmp);
                     n_i = n_i + 1;
                 end
             end
             $fclose(fd_i);
-            $display("Loaded %0d I samples", n_i);
         end
     endtask
 
@@ -87,27 +77,26 @@ module demod_tb;
             n_q = 0;
             fd_q = $fopen("sv_channel_q.txt", "r");
             if (fd_q == 0) begin
-                $display("ERROR: could not open sv_channel_q.txt");
+                $display("ERROR: could not open c_demod_in_q.txt");
                 $finish;
             end
             while ((!$feof(fd_q)) && (n_q < N_SAMPLES_MAX)) begin
                 r = $fscanf(fd_q, "%h\n", word_tmp);
                 if (r == 1) begin
-                    q_mem[n_q] = $signed(word_tmp[15:0]);
+                    q_mem[n_q] = $signed(word_tmp);
                     n_q = n_q + 1;
                 end
             end
             $fclose(fd_q);
-            $display("Loaded %0d Q samples", n_q);
         end
     endtask
 
     task automatic load_golden_file;
         begin
             n_golden = 0;
-            fd_golden = $fopen("stage_demod.txt", "r");
+            fd_golden = $fopen("c_stage_demod.txt", "r");
             if (fd_golden == 0) begin
-                $display("ERROR: could not open stage_demod.txt");
+                $display("ERROR: could not open c_stage_demod.txt");
                 $finish;
             end
             while ((!$feof(fd_golden)) && (n_golden < N_SAMPLES_MAX)) begin
@@ -118,7 +107,6 @@ module demod_tb;
                 end
             end
             $fclose(fd_golden);
-            $display("Loaded %0d golden demod samples", n_golden);
         end
     endtask
 
@@ -150,14 +138,6 @@ module demod_tb;
         max_diff         = -2147483647;
         sum_abs_diff     = 0;
         sum_signed_diff  = 0;
-        within_1_count   = 0;
-        within_2_count   = 0;
-        within_4_count   = 0;
-        within_8_count   = 0;
-        within_16_count  = 0;
-        within_32_count  = 0;
-        within_64_count  = 0;
-        within_128_count = 0;
 
         repeat (5) @(posedge clk);
         rst = 1'b0;
@@ -177,7 +157,7 @@ module demod_tb;
 
         fork
             begin
-                wait (out_count == (n_i - 1));
+                wait (out_count == n_i);
             end
             begin
                 repeat (500000) @(posedge clk);
@@ -196,7 +176,7 @@ module demod_tb;
         $display("Input samples fed    : %0d", n_i);
         $display("Golden outputs read  : %0d", n_golden);
         $display("DUT outputs seen     : %0d", out_count);
-        $display("Golden compare start : golden[1]");
+        $display("Golden compare start : golden[0]");
         $display("Mismatches           : %0d", err_count);
         $display("Exact matches        : %0d", match_count);
 
@@ -206,15 +186,6 @@ module demod_tb;
             $display("Max abs diff         : %0d", max_abs_diff);
             $display("Avg signed diff      : %0f", $itor(sum_signed_diff) / out_count);
             $display("Avg abs diff         : %0f", $itor(sum_abs_diff) / out_count);
-
-            $display("|diff| <= 1          : %0d", within_1_count);
-            $display("|diff| <= 2          : %0d", within_2_count);
-            $display("|diff| <= 4          : %0d", within_4_count);
-            $display("|diff| <= 8          : %0d", within_8_count);
-            $display("|diff| <= 16         : %0d", within_16_count);
-            $display("|diff| <= 32         : %0d", within_32_count);
-            $display("|diff| <= 64         : %0d", within_64_count);
-            $display("|diff| <= 128        : %0d", within_128_count);
         end
 
         $display("====================================================");
@@ -231,43 +202,22 @@ module demod_tb;
         if (!rst && demod_valid_out) begin
             $fwrite(fd_out, "%08h\n", $unsigned(demod_out));
 
-            if ((out_count + 1) >= n_golden) begin
+            if (out_count >= n_golden) begin
                 $display("ERROR: extra DUT output at index %0d: got %08h",
                          out_count, $unsigned(demod_out));
                 err_count = err_count + 1;
             end else begin
-                expected_word = demod_golden[out_count + 1];
+                expected_word = demod_golden[out_count];
                 diff = demod_out - expected_word;
 
-                if (diff < min_diff)
-                    min_diff = diff;
-                if (diff > max_diff)
-                    max_diff = diff;
+                if (diff < min_diff) min_diff = diff;
+                if (diff > max_diff) max_diff = diff;
 
                 abs_diff_int = (diff < 0) ? -diff : diff;
-
-                if (abs_diff_int > max_abs_diff)
-                    max_abs_diff = abs_diff_int;
+                if (abs_diff_int > max_abs_diff) max_abs_diff = abs_diff_int;
 
                 sum_abs_diff    = sum_abs_diff + abs_diff_int;
                 sum_signed_diff = sum_signed_diff + diff;
-
-                if (abs_diff_int <= 1)
-                    within_1_count = within_1_count + 1;
-                if (abs_diff_int <= 2)
-                    within_2_count = within_2_count + 1;
-                if (abs_diff_int <= 4)
-                    within_4_count = within_4_count + 1;
-                if (abs_diff_int <= 8)
-                    within_8_count = within_8_count + 1;
-                if (abs_diff_int <= 16)
-                    within_16_count = within_16_count + 1;
-                if (abs_diff_int <= 32)
-                    within_32_count = within_32_count + 1;
-                if (abs_diff_int <= 64)
-                    within_64_count = within_64_count + 1;
-                if (abs_diff_int <= 128)
-                    within_128_count = within_128_count + 1;
 
                 if (diff == 0) begin
                     match_count = match_count + 1;

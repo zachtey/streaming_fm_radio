@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 
 module demod #(
-    parameter int INPUT_W = 16,
+    parameter int INPUT_W = 32,
     parameter int DATA_W  = 32,
     parameter int GAIN_W  = 16
 ) (
@@ -15,9 +15,6 @@ module demod #(
 );
 
     localparam int BITS = 10;
-
-    // From C header:
-    // FM_DEMOD_GAIN = QUANTIZE_F(QUAD_RATE / (2*pi*MAX_DEV)) ≈ 758
     localparam logic signed [31:0] FM_DEMOD_GAIN = 32'sd758;
     localparam logic signed [31:0] QUAD1_Q       = 32'sd804;
     localparam logic signed [31:0] QUAD3_Q       = 32'sd2413;
@@ -29,15 +26,12 @@ module demod #(
     logic signed [31:0] demod_out_c;
     logic               demod_valid_out_c;
 
-    // Re-quantized Q10 versions of the 16-bit FIR outputs
-    logic signed [31:0] i_prev_q10, q_prev_q10, i_in_q10, q_in_q10;
-
-    // 64-bit products because we re-quantize inputs before multiplying
+    logic signed [31:0] i_prev_32, q_prev_32, i_in_32, q_in_32;
     logic signed [63:0] prod_a, prod_b, prod_c, prod_d;
     logic signed [31:0] deq_a, deq_b, deq_c, deq_d;
     logic signed [31:0] r_now, i_now;
     logic signed [31:0] angle_now;
-    logic signed [63:0] gain_prod64;
+    logic signed [63:0] gain_prod;
 
     function automatic logic signed [31:0] quantize_i32;
         input logic signed [31:0] val;
@@ -80,7 +74,6 @@ module demod #(
         end
     endfunction
 
-    // Unsigned restoring divide, no "/" operator
     function automatic logic [31:0] udiv_u32;
         input logic [31:0] numer;
         input logic [31:0] denom;
@@ -172,11 +165,10 @@ module demod #(
         demod_out_c       = demod_out;
         demod_valid_out_c = 1'b0;
 
-        // Re-quantize 16-bit FIR outputs back to Q10 before demod math
-        i_prev_q10 = {{16{i_prev[INPUT_W-1]}}, i_prev} <<< BITS;
-        q_prev_q10 = {{16{q_prev[INPUT_W-1]}}, q_prev} <<< BITS;
-        i_in_q10   = {{16{i_in[INPUT_W-1]}},   i_in}   <<< BITS;
-        q_in_q10   = {{16{q_in[INPUT_W-1]}},   q_in}   <<< BITS;
+        i_prev_32 = i_prev;
+        q_prev_32 = q_prev;
+        i_in_32   = i_in;
+        q_in_32   = q_in;
 
         prod_a    = 64'sd0;
         prod_b    = 64'sd0;
@@ -189,30 +181,28 @@ module demod #(
         r_now     = 32'sd0;
         i_now     = 32'sd0;
         angle_now = 32'sd0;
-        gain_prod64 = 64'sd0;
+        gain_prod = 64'sd0;
 
         if (valid_in) begin
-            if (have_prev) begin
-                // Demod on re-quantized Q10 FIR outputs
-                prod_a = i_prev_q10 * i_in_q10;
-                prod_b = -(q_prev_q10 * q_in_q10);
-                prod_c = i_prev_q10 * q_in_q10;
-                prod_d = -(q_prev_q10 * i_in_q10);
+            // Match C behavior: produce output on every valid sample
+            // using current stored prev values, then update prev.
+            prod_a = i_prev_32 * i_in_32;
+            prod_b = -(q_prev_32 * q_in_32);
+            prod_c = i_prev_32 * q_in_32;
+            prod_d = -(q_prev_32 * i_in_32);
 
-                deq_a = dequantize_i64_to_32(prod_a);
-                deq_b = dequantize_i64_to_32(prod_b);
-                deq_c = dequantize_i64_to_32(prod_c);
-                deq_d = dequantize_i64_to_32(prod_d);
+            deq_a = dequantize_i64_to_32(prod_a);
+            deq_b = dequantize_i64_to_32(prod_b);
+            deq_c = dequantize_i64_to_32(prod_c);
+            deq_d = dequantize_i64_to_32(prod_d);
 
-                r_now = deq_a - deq_b;
-                i_now = deq_c + deq_d;
+            r_now = deq_a - deq_b;
+            i_now = deq_c + deq_d;
 
-                angle_now = qarctan32(i_now, r_now);
-
-                gain_prod64         = $signed(FM_DEMOD_GAIN) * $signed(angle_now);
-                demod_out_c         = dequantize_i64_to_32(gain_prod64);
-                demod_valid_out_c   = 1'b1;
-            end
+            angle_now         = qarctan32(i_now, r_now);
+            gain_prod         = $signed(FM_DEMOD_GAIN) * $signed(angle_now);
+            demod_out_c       = dequantize_i64_to_32(gain_prod);
+            demod_valid_out_c = 1'b1;
 
             i_prev_c    = i_in;
             q_prev_c    = q_in;
