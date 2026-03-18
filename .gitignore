@@ -1,2 +1,6 @@
 test/usrp.dat
 test/usrp.dat
+
+# sim artifacts
+sim/vsim.wlf
+sim/demod_tb.vcd
