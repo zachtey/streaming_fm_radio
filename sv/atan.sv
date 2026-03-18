@@ -1,24 +1,7 @@
-/*
-atan approximation matching C qarctan() structure
-without using variable division operator.
-Uses div for the ratio.
-
-C model target:
-
-if (x >= 0) {
-    r = QUANTIZE_I(x - abs_y) / (x + abs_y);
-    angle = quad1 - DEQUANTIZE(quad1 * r);
-} else {
-    r = QUANTIZE_I(x + abs_y) / (abs_y - x);
-    angle = quad3 - DEQUANTIZE(quad1 * r);
-}
-return (y < 0) ? -angle : angle;
-
-Interface matches your current demod instantiation.
-*/
+`timescale 1ns/1ps
 
 module atan #(
-    parameter int INPUT_W = 33,
+    parameter int INPUT_W = 32,
     parameter int ANG_W   = 32,
     parameter int BITS    = 10,
     parameter int ITER    = 11   // unused, kept for drop-in compatibility
@@ -32,252 +15,163 @@ module atan #(
     output logic signed [ANG_W-1:0]    angle_out
 );
 
-    // ------------------------------------------------------------
-    // localparams
-    // ------------------------------------------------------------
-    localparam int WORK_W = INPUT_W + 2;
-    localparam int NUM_W  = WORK_W + BITS;
-    localparam int DEN_W  = WORK_W;
-    localparam int DIV_LAT = NUM_W;
-    localparam int MUL_W  = ANG_W + NUM_W;
+    // C: QUANTIZE_F(PI/4), QUANTIZE_F(3PI/4) with BITS=10
+    localparam logic signed [31:0] QUAD1_Q = 32'sd804;
+    localparam logic signed [31:0] QUAD3_Q = 32'sd2413;
 
-    localparam logic signed [ANG_W-1:0] QUAD1_Q   = 32'sd804;   // round(pi/4 * 1024)
-    localparam logic signed [ANG_W-1:0] QUAD3_Q   = 32'sd2413;  // round(3pi/4 * 1024)
-    localparam logic signed [ANG_W-1:0] HALF_PI_Q = 32'sd1608;  // round(pi/2 * 1024)
+    logic               valid_out_c;
+    logic signed [31:0] angle_out_c;
 
-    // ------------------------------------------------------------
-    // divider input signals
-    // ------------------------------------------------------------
-    logic              div_valid_in;
-    logic [NUM_W-1:0]  div_numer_in;
-    logic [DEN_W-1:0]  div_denom_in;
+    logic signed [31:0] x32, y32;
+    logic signed [31:0] abs_y;
+    logic signed [31:0] abs_y_p1;
+    logic signed [31:0] delta;
+    logic signed [31:0] denom_s;
+    logic signed [31:0] r_signed;
+    logic signed [31:0] mult32;
+    logic signed [31:0] mult_deq32;
+    logic signed [31:0] angle32;
 
-    logic              div_valid_out;
-    logic [NUM_W-1:0]  div_quot_out;
+    // -----------------------------
+    // C macro equivalents
+    // -----------------------------
+    function automatic logic signed [31:0] quantize_i32;
+        input logic signed [31:0] val;
+        begin
+            // C macro: ((int)(i) * (int)QUANT_VAL)
+            quantize_i32 = val * 32'sd1024;
+        end
+    endfunction
 
-    // ------------------------------------------------------------
-    // metadata pipeline aligned to divider latency
-    // ------------------------------------------------------------
-    logic                     num_neg_pipe        [0:DIV_LAT];
-    logic                     num_neg_pipe_c      [0:DIV_LAT];
-    logic                     special_pipe        [0:DIV_LAT];
-    logic                     special_pipe_c      [0:DIV_LAT];
-    logic                     negate_angle_pipe   [0:DIV_LAT];
-    logic                     negate_angle_pipe_c [0:DIV_LAT];
+    function automatic logic signed [31:0] dequantize_i32;
+        input logic signed [31:0] val;
+        logic signed [31:0] bias;
+        begin
+            // C integer division truncates toward zero
+            if (BITS == 0) begin
+                dequantize_i32 = val;
+            end else begin
+                if (val < 0)
+                    bias = (32'sd1 <<< BITS) - 1;
+                else
+                    bias = 32'sd0;
+                dequantize_i32 = (val + bias) >>> BITS;
+            end
+        end
+    endfunction
 
-    logic signed [ANG_W-1:0]  base_angle_pipe        [0:DIV_LAT];
-    logic signed [ANG_W-1:0]  base_angle_pipe_c      [0:DIV_LAT];
-    logic signed [ANG_W-1:0]  special_angle_pipe     [0:DIV_LAT];
-    logic signed [ANG_W-1:0]  special_angle_pipe_c   [0:DIV_LAT];
+    // Unsigned restoring division, fully unrolled in function.
+    // Returns floor(numer/denom) for unsigned values.
+    function automatic logic [31:0] udiv_u32;
+        input logic [31:0] numer;
+        input logic [31:0] denom;
+        logic [32:0] rem;
+        logic [31:0] quot;
+        begin
+            rem  = 33'd0;
+            quot = 32'd0;
 
-    // ------------------------------------------------------------
-    // output regs next-state
-    // ------------------------------------------------------------
-    logic                     valid_out_c;
-    logic signed [ANG_W-1:0]  angle_out_c;
+            if (denom == 32'd0) begin
+                quot = 32'd0;
+            end else begin
+                for (int i = 31; i >= 0; i--) begin
+                    rem = {rem[31:0], numer[i]};
+                    if (rem >= {1'b0, denom}) begin
+                        rem     = rem - {1'b0, denom};
+                        quot[i] = 1'b1;
+                    end
+                end
+            end
 
-    // ------------------------------------------------------------
-    // combinational temps
-    // ------------------------------------------------------------
-    logic signed [WORK_W-1:0] x_ext;
-    logic signed [WORK_W-1:0] y_ext;
-    logic signed [WORK_W-1:0] abs_y;
-    logic signed [WORK_W-1:0] abs_y_p1;
+            udiv_u32 = quot;
+        end
+    endfunction
 
-    logic signed [WORK_W-1:0] delta_num_base;
-    logic signed [WORK_W-1:0] denom_signed;
+    // Signed divide with truncation toward zero, denominator assumed positive.
+    function automatic logic signed [31:0] sdiv_trunc0_num_by_posden;
+        input logic signed [31:0] numer;
+        input logic [31:0]        denom;
+        logic [31:0] qmag;
+        begin
+            if (denom == 32'd0) begin
+                sdiv_trunc0_num_by_posden = 32'sd0;
+            end else if (numer < 0) begin
+                qmag = udiv_u32($unsigned(-numer), denom);
+                sdiv_trunc0_num_by_posden = -$signed(qmag);
+            end else begin
+                qmag = udiv_u32($unsigned(numer), denom);
+                sdiv_trunc0_num_by_posden = $signed(qmag);
+            end
+        end
+    endfunction
 
-    logic                     num_neg;
-    logic [WORK_W-1:0]        numer_mag;
-    logic [NUM_W-1:0]         numer_q;
-    logic [DEN_W-1:0]         denom_u;
-
-    logic signed [NUM_W:0]    r_signed_ext;
-    logic signed [MUL_W-1:0]  mult_full;
-    logic signed [MUL_W-1:0]  mult_deq;
-    logic signed [MUL_W-1:0]  angle_wide;
-
-    integer k;
-
-    // ------------------------------------------------------------
-    // divider instance
-    // ------------------------------------------------------------
-    div #(
-        .NUM_W (NUM_W),
-        .DEN_W (DEN_W),
-        .QUOT_W(NUM_W)
-    ) u_divider (
-        .clk      (clk),
-        .rst      (rst),
-        .valid_in (div_valid_in),
-        .numer_in (div_numer_in),
-        .denom_in (div_denom_in),
-        .valid_out(div_valid_out),
-        .quot_out (div_quot_out)
-    );
-
-    // ------------------------------------------------------------
-    // combinational process
-    // ------------------------------------------------------------
+    // -----------------------------
+    // Bit-true C qarctan()
+    // -----------------------------
     always_comb begin
-        // defaults
-        div_valid_in = 1'b0;
-        div_numer_in = '0;
-        div_denom_in = '0;
+        valid_out_c = 1'b0;
+        angle_out_c = angle_out;
 
-        valid_out_c  = 1'b0;
-        angle_out_c  = angle_out;
-
-        x_ext          = '0;
-        y_ext          = '0;
-        abs_y          = '0;
-        abs_y_p1       = '0;
-        delta_num_base = '0;
-        denom_signed   = '0;
-        num_neg        = 1'b0;
-        numer_mag      = '0;
-        numer_q        = '0;
-        denom_u        = '0;
-
-        r_signed_ext   = '0;
-        mult_full      = '0;
-        mult_deq       = '0;
-        angle_wide     = '0;
-
-        for (k = 0; k <= DIV_LAT; k = k + 1) begin
-            num_neg_pipe_c[k]        = num_neg_pipe[k];
-            special_pipe_c[k]        = special_pipe[k];
-            negate_angle_pipe_c[k]   = negate_angle_pipe[k];
-            base_angle_pipe_c[k]     = base_angle_pipe[k];
-            special_angle_pipe_c[k]  = special_angle_pipe[k];
-        end
-
-        // shift metadata pipeline every cycle
-        for (k = 0; k < DIV_LAT; k = k + 1) begin
-            num_neg_pipe_c[k+1]       = num_neg_pipe[k];
-            special_pipe_c[k+1]       = special_pipe[k];
-            negate_angle_pipe_c[k+1]  = negate_angle_pipe[k];
-            base_angle_pipe_c[k+1]    = base_angle_pipe[k];
-            special_angle_pipe_c[k+1] = special_angle_pipe[k];
-        end
-
-        // stage 0 metadata load
-        num_neg_pipe_c[0]       = 1'b0;
-        special_pipe_c[0]       = 1'b0;
-        negate_angle_pipe_c[0]  = 1'b0;
-        base_angle_pipe_c[0]    = '0;
-        special_angle_pipe_c[0] = '0;
+        x32        = x_in;
+        y32        = y_in;
+        abs_y      = 32'sd0;
+        abs_y_p1   = 32'sd0;
+        delta      = 32'sd0;
+        denom_s    = 32'sd0;
+        r_signed   = 32'sd0;
+        mult32     = 32'sd0;
+        mult_deq32 = 32'sd0;
+        angle32    = 32'sd0;
 
         if (valid_in) begin
-            x_ext = $signed({{(WORK_W-INPUT_W){x_in[INPUT_W-1]}}, x_in});
-            y_ext = $signed({{(WORK_W-INPUT_W){y_in[INPUT_W-1]}}, y_in});
-
-            if (y_ext < 0)
-                abs_y = -y_ext;
+            // C: int abs_y = abs(y) + 1;
+            if (y32 < 0)
+                abs_y = -y32;
             else
-                abs_y = y_ext;
+                abs_y = y32;
 
-            abs_y_p1 = abs_y + 1;
+            abs_y_p1 = abs_y + 32'sd1;
 
-            negate_angle_pipe_c[0] = (y_ext < 0);
-
-            // x == 0 special case
-            if (x_ext == 0) begin
-                div_valid_in         = 1'b1;
-                div_numer_in         = '0;
-                div_denom_in         = {{(DEN_W-1){1'b0}}, 1'b1};
-
-                special_pipe_c[0]    = 1'b1;
-                base_angle_pipe_c[0] = '0;
-                num_neg_pipe_c[0]    = 1'b0;
-
-                if (y_ext > 0)
-                    special_angle_pipe_c[0] = HALF_PI_Q;
-                else if (y_ext < 0)
-                    special_angle_pipe_c[0] = -HALF_PI_Q;
-                else
-                    special_angle_pipe_c[0] = '0;
+            // C:
+            // if (x >= 0) {
+            //   r = QUANTIZE_I(x - abs_y) / (x + abs_y);
+            //   angle = quad1 - DEQUANTIZE(quad1 * r);
+            // } else {
+            //   r = QUANTIZE_I(x + abs_y) / (abs_y - x);
+            //   angle = quad3 - DEQUANTIZE(quad1 * r);
+            // }
+            if (x32 >= 0) begin
+                delta      = x32 - abs_y_p1;
+                denom_s    = x32 + abs_y_p1;
+                r_signed   = sdiv_trunc0_num_by_posden(quantize_i32(delta), $unsigned(denom_s));
+                mult32     = QUAD1_Q * r_signed;
+                mult_deq32 = dequantize_i32(mult32);
+                angle32    = QUAD1_Q - mult_deq32;
             end else begin
-                special_pipe_c[0] = 1'b0;
-                special_angle_pipe_c[0] = '0;
-
-                if (x_ext >= 0) begin
-                    delta_num_base    = x_ext - abs_y_p1;
-                    denom_signed      = x_ext + abs_y_p1;
-                    base_angle_pipe_c[0] = QUAD1_Q;
-                end else begin
-                    delta_num_base    = x_ext + abs_y_p1;
-                    denom_signed      = abs_y_p1 - x_ext;
-                    base_angle_pipe_c[0] = QUAD3_Q;
-                end
-
-                num_neg = (delta_num_base < 0);
-                num_neg_pipe_c[0] = num_neg;
-
-                if (delta_num_base < 0)
-                    numer_mag = -delta_num_base;
-                else
-                    numer_mag = delta_num_base;
-
-                numer_q = {{(NUM_W-WORK_W){1'b0}}, numer_mag} << BITS;
-                denom_u = denom_signed[DEN_W-1:0];
-
-                div_valid_in = 1'b1;
-                div_numer_in = numer_q;
-                div_denom_in = denom_u;
-            end
-        end
-
-        // final stage after divider
-        if (div_valid_out) begin
-            if (special_pipe[DIV_LAT]) begin
-                angle_out_c = special_angle_pipe[DIV_LAT];
-            end else begin
-                if (num_neg_pipe[DIV_LAT])
-                    r_signed_ext = -$signed({1'b0, div_quot_out});
-                else
-                    r_signed_ext =  $signed({1'b0, div_quot_out});
-
-                mult_full  = $signed(QUAD1_Q) * $signed(r_signed_ext);
-                mult_deq   = mult_full >>> BITS;
-                angle_wide = $signed(base_angle_pipe[DIV_LAT]) - mult_deq;
-
-                if (negate_angle_pipe[DIV_LAT])
-                    angle_wide = -angle_wide;
-
-                angle_out_c = angle_wide[ANG_W-1:0];
+                delta      = x32 + abs_y_p1;
+                denom_s    = abs_y_p1 - x32;
+                r_signed   = sdiv_trunc0_num_by_posden(quantize_i32(delta), $unsigned(denom_s));
+                mult32     = QUAD1_Q * r_signed;
+                mult_deq32 = dequantize_i32(mult32);
+                angle32    = QUAD3_Q - mult_deq32;
             end
 
+            // C: return ((y < 0) ? -angle : angle);
+            if (y32 < 0)
+                angle32 = -angle32;
+
+            angle_out_c = angle32;
             valid_out_c = 1'b1;
         end
     end
 
-    // ------------------------------------------------------------
-    // sequential process
-    // ------------------------------------------------------------
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             valid_out <= 1'b0;
-            angle_out <= '0;
-
-            for (k = 0; k <= DIV_LAT; k = k + 1) begin
-                num_neg_pipe[k]       <= 1'b0;
-                special_pipe[k]       <= 1'b0;
-                negate_angle_pipe[k]  <= 1'b0;
-                base_angle_pipe[k]    <= '0;
-                special_angle_pipe[k] <= '0;
-            end
+            angle_out <= 32'sd0;
         end else begin
             valid_out <= valid_out_c;
             angle_out <= angle_out_c;
-
-            for (k = 0; k <= DIV_LAT; k = k + 1) begin
-                num_neg_pipe[k]       <= num_neg_pipe_c[k];
-                special_pipe[k]       <= special_pipe_c[k];
-                negate_angle_pipe[k]  <= negate_angle_pipe_c[k];
-                base_angle_pipe[k]    <= base_angle_pipe_c[k];
-                special_angle_pipe[k] <= special_angle_pipe_c[k];
-            end
         end
     end
 
