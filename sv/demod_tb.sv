@@ -165,7 +165,7 @@ module demod_tb;
         $display("Input samples fed   : %0d", n_i);
         $display("Golden outputs read : %0d", n_golden);
         $display("DUT outputs seen    : %0d", out_count);
-        $display("Golden compare start: golden[1]");
+        $display("Golden compare start: golden[0]");
         $display("Mismatches          : %0d", err_count);
         $display("Exact matches       : %0d", match_count);
         if (out_count > 0) begin
@@ -187,12 +187,12 @@ module demod_tb;
         if (!rst && demod_valid_out) begin
             $fwrite(fd_out, "%08h\n", $unsigned(demod_out));
 
-            if ((out_count + 1) >= n_golden) begin
+            if (out_count >= n_golden) begin
                 $display("ERROR: extra DUT output at index %0d: got %08h",
                          out_count, $unsigned(demod_out));
                 err_count = err_count + 1;
             end else begin
-                expected_word = demod_golden[out_count + 1];
+                expected_word = demod_golden[out_count];
                 diff = demod_out - expected_word;
 
                 if (diff < min_diff) min_diff = diff;
