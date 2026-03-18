@@ -1,10 +1,4 @@
-/*
-demodulation module
-1. stores current and previous samples (signed)
-2. complex multiplication (signed)
-3. atan
-4. gain multiplication
-*/
+`timescale 1ns/1ps
 
 module demod #(
     parameter int INPUT_W = 16,
@@ -20,43 +14,60 @@ module demod #(
     output logic demod_valid_out
 );
 
-    //localparams
-    localparam int BITS      = 10;
-    localparam int QUANT_VAL = 1 << BITS;
-    localparam int QUAD_RATE = 256000;
-    localparam int PROD_W    = 2 * INPUT_W;
-    localparam int SUM_W     = PROD_W + 1;
-    localparam int ANG_W     = DATA_W;
-    localparam int OUT_W     = DATA_W;
-    // QUANTIZE_F(QUAD_RATE / (2*pi*MAX_DEV)) ≈ 758
-    localparam logic signed [GAIN_W-1:0] FM_DEMOD_GAIN = 758;
+    localparam int BITS = 10;
 
-    //logics + local variables
-    // 1) previous-sample storage
-    logic signed [INPUT_W-1:0] i_prev, i_prev_c;
-    logic signed [INPUT_W-1:0] q_prev, q_prev_c;
-    logic                      have_prev, have_prev_c;
-    // 2) complex multiplication path
-    logic signed [PROD_W-1:0] mul_ii, mul_ii_c;
-    logic signed [PROD_W-1:0] mul_qq, mul_qq_c;
-    logic signed [PROD_W-1:0] mul_iq, mul_iq_c;
-    logic signed [PROD_W-1:0] mul_qi, mul_qi_c;
-    logic signed [SUM_W-1:0]  r_calc, r_calc_c;
-    logic signed [SUM_W-1:0]  i_calc, i_calc_c;
-    // 3) atan interface
-    logic                     atan_valid_in, atan_valid_in_c;
-    logic                     atan_valid_out;
-    logic signed [SUM_W-1:0]  atan_x, atan_x_c;
-    logic signed [SUM_W-1:0]  atan_y, atan_y_c;
-    logic signed [ANG_W-1:0]  atan_angle;
-    // 4) gain stage
-    logic signed [ANG_W+GAIN_W-1:0] gain_mult, gain_mult_c;
-    logic                           gain_output_valid, gain_output_valid_c;
+    // From C header:
+    // FM_DEMOD_GAIN = QUANTIZE_F(QUAD_RATE / (2*pi*MAX_DEV)) ≈ 758
+    localparam logic signed [31:0] FM_DEMOD_GAIN = 32'sd758;
 
-    //atan instantiation
+    function automatic logic signed [31:0] dequantize_i32;
+        input logic signed [31:0] val;
+        logic signed [31:0] bias;
+        begin
+            // C integer division truncates toward zero
+            if (BITS == 0) begin
+                dequantize_i32 = val;
+            end else begin
+                if (val < 0)
+                    bias = (32'sd1 <<< BITS) - 1;
+                else
+                    bias = 32'sd0;
+                dequantize_i32 = (val + bias) >>> BITS;
+            end
+        end
+    endfunction
+
+    logic signed [15:0] i_prev, i_prev_c;
+    logic signed [15:0] q_prev, q_prev_c;
+    logic               have_prev, have_prev_c;
+
+    logic signed [31:0] prod_a, prod_a_c;
+    logic signed [31:0] prod_b, prod_b_c;
+    logic signed [31:0] prod_c, prod_c_c;
+    logic signed [31:0] prod_d, prod_d_c;
+
+    logic signed [31:0] deq_a, deq_a_c;
+    logic signed [31:0] deq_b, deq_b_c;
+    logic signed [31:0] deq_c, deq_c_c;
+    logic signed [31:0] deq_d, deq_d_c;
+
+    logic signed [31:0] r_calc, r_calc_c;
+    logic signed [31:0] i_calc, i_calc_c;
+
+    logic               atan_valid_in, atan_valid_in_c;
+    logic               atan_valid_out;
+    logic signed [31:0] atan_x, atan_x_c;
+    logic signed [31:0] atan_y, atan_y_c;
+    logic signed [31:0] atan_angle;
+
+    logic signed [31:0] gain_prod, gain_prod_c;
+    logic signed [31:0] gain_out32, gain_out32_c;
+    logic               gain_valid, gain_valid_c;
+
     atan #(
-        .INPUT_W (SUM_W),
-        .ANG_W   (ANG_W)
+        .INPUT_W(32),
+        .ANG_W  (32),
+        .BITS   (BITS)
     ) atan_inst (
         .clk      (clk),
         .rst      (rst),
@@ -67,91 +78,122 @@ module demod #(
         .angle_out(atan_angle)
     );
 
-    //combinational process
     always_comb begin
-        // defaults
-        i_prev_c            = i_prev;
-        q_prev_c            = q_prev;
-        have_prev_c         = have_prev;
-        mul_ii_c            = mul_ii;
-        mul_qq_c            = mul_qq;
-        mul_iq_c            = mul_iq;
-        mul_qi_c            = mul_qi;
-        r_calc_c            = r_calc;
-        i_calc_c            = i_calc;
-        atan_valid_in_c     = 1'b0;
-        atan_x_c            = atan_x;
-        atan_y_c            = atan_y;
-        gain_mult_c         = gain_mult;
-        gain_output_valid_c = atan_valid_out;
-        // outputs
-        demod_valid_out     = gain_output_valid;
-        demod_out           = gain_mult >>> BITS; //demodulate out
+        i_prev_c      = i_prev;
+        q_prev_c      = q_prev;
+        have_prev_c   = have_prev;
+
+        prod_a_c      = prod_a;
+        prod_b_c      = prod_b;
+        prod_c_c      = prod_c;
+        prod_d_c      = prod_d;
+
+        deq_a_c       = deq_a;
+        deq_b_c       = deq_b;
+        deq_c_c       = deq_c;
+        deq_d_c       = deq_d;
+
+        r_calc_c      = r_calc;
+        i_calc_c      = i_calc;
+
+        atan_valid_in_c = 1'b0;
+        atan_x_c        = atan_x;
+        atan_y_c        = atan_y;
+
+        gain_prod_c   = gain_prod;
+        gain_out32_c  = gain_out32;
+        gain_valid_c  = atan_valid_out;
+
+        demod_valid_out = gain_valid;
+        demod_out       = gain_out32;
 
         if (valid_in) begin
             if (have_prev) begin
-                // 1) complex multiply pieces
-                mul_ii_c = i_prev * i_in;
-                mul_qq_c = q_prev * q_in;
-                mul_iq_c = i_prev * q_in;
-                mul_qi_c = q_prev * i_in;
+                // Match C demodulate():
+                // r = DEQUANTIZE((*real_prev * real)) - DEQUANTIZE((-*imag_prev * imag));
+                // i = DEQUANTIZE((*real_prev * imag)) + DEQUANTIZE((-*imag_prev * real));
 
-                // r = I_prev*I + Q_prev*Q
-                r_calc_c = $signed({mul_ii_c[PROD_W-1], mul_ii_c}) +
-                           $signed({mul_qq_c[PROD_W-1], mul_qq_c});
+                prod_a_c = $signed(i_prev) * $signed(i_in);
+                prod_b_c = -($signed(q_prev) * $signed(q_in));
+                prod_c_c = $signed(i_prev) * $signed(q_in);
+                prod_d_c = -($signed(q_prev) * $signed(i_in));
 
-                // i = I_prev*Q - Q_prev*I
-                i_calc_c = $signed({mul_iq_c[PROD_W-1], mul_iq_c}) -
-                           $signed({mul_qi_c[PROD_W-1], mul_qi_c});
+                deq_a_c = dequantize_i32(prod_a_c);
+                deq_b_c = dequantize_i32(prod_b_c);
+                deq_c_c = dequantize_i32(prod_c_c);
+                deq_d_c = dequantize_i32(prod_d_c);
 
-                // 2) feed atan block
+                r_calc_c = deq_a_c - deq_b_c;
+                i_calc_c = deq_c_c + deq_d_c;
+
                 atan_x_c        = r_calc_c;
                 atan_y_c        = i_calc_c;
                 atan_valid_in_c = 1'b1;
             end
 
-            // update previous sample after using old previous sample
+            // update previous sample
             i_prev_c    = i_in;
             q_prev_c    = q_in;
             have_prev_c = 1'b1;
         end
 
-        // 3) gain stage
-        gain_mult_c = atan_angle * FM_DEMOD_GAIN;
+        // Match C:
+        // *demod_out = DEQUANTIZE(gain * qarctan(i, r));
+        gain_prod_c  = FM_DEMOD_GAIN * atan_angle;
+        gain_out32_c = dequantize_i32(gain_prod_c);
     end
 
-//sequential process
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
-            i_prev            <= '0;
-            q_prev            <= '0;
-            have_prev         <= 1'b0;
-            mul_ii            <= '0;
-            mul_qq            <= '0;
-            mul_iq            <= '0;
-            mul_qi            <= '0;
-            r_calc            <= '0;
-            i_calc            <= '0;
-            atan_valid_in     <= 1'b0;
-            atan_x            <= '0;
-            atan_y            <= '0;
-            gain_mult         <= '0;
-            gain_output_valid <= '0;
+            i_prev        <= 16'sd0;
+            q_prev        <= 16'sd0;
+            have_prev     <= 1'b0;
+
+            prod_a        <= 32'sd0;
+            prod_b        <= 32'sd0;
+            prod_c        <= 32'sd0;
+            prod_d        <= 32'sd0;
+
+            deq_a         <= 32'sd0;
+            deq_b         <= 32'sd0;
+            deq_c         <= 32'sd0;
+            deq_d         <= 32'sd0;
+
+            r_calc        <= 32'sd0;
+            i_calc        <= 32'sd0;
+
+            atan_valid_in <= 1'b0;
+            atan_x        <= 32'sd0;
+            atan_y        <= 32'sd0;
+
+            gain_prod     <= 32'sd0;
+            gain_out32    <= 32'sd0;
+            gain_valid    <= 1'b0;
         end else begin
-            i_prev            <= i_prev_c;
-            q_prev            <= q_prev_c;
-            have_prev         <= have_prev_c;
-            mul_ii            <= mul_ii_c;
-            mul_qq            <= mul_qq_c;
-            mul_iq            <= mul_iq_c;
-            mul_qi            <= mul_qi_c;
-            r_calc            <= r_calc_c;
-            i_calc            <= i_calc_c;
-            atan_valid_in     <= atan_valid_in_c;
-            atan_x            <= atan_x_c;
-            atan_y            <= atan_y_c;
-            gain_mult         <= gain_mult_c;
-            gain_output_valid <= gain_output_valid_c;
+            i_prev        <= i_prev_c;
+            q_prev        <= q_prev_c;
+            have_prev     <= have_prev_c;
+
+            prod_a        <= prod_a_c;
+            prod_b        <= prod_b_c;
+            prod_c        <= prod_c_c;
+            prod_d        <= prod_d_c;
+
+            deq_a         <= deq_a_c;
+            deq_b         <= deq_b_c;
+            deq_c         <= deq_c_c;
+            deq_d         <= deq_d_c;
+
+            r_calc        <= r_calc_c;
+            i_calc        <= i_calc_c;
+
+            atan_valid_in <= atan_valid_in_c;
+            atan_x        <= atan_x_c;
+            atan_y        <= atan_y_c;
+
+            gain_prod     <= gain_prod_c;
+            gain_out32    <= gain_out32_c;
+            gain_valid    <= gain_valid_c;
         end
     end
 
