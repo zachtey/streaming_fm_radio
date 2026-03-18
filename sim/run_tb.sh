@@ -1,2 +1,2 @@
 source /vol/eecs392/env/modelsim.env
-vsim -do demod_tb.do
+vsim -do add_sub_tb.do

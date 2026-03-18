@@ -10,86 +10,61 @@ z2
 cModel Technology
 Z0 d/home/vcs5888/CE387/streaming_fm_radio/sim
 T_opt
-Z1 !s110 1773874556
-V09_c:6U9^=g:UjmTo7h@T0
-04 8 4 work demod_tb fast 0
-=1-a4bb6d3fede8-69bb2d7c-98986-2ff31e
+!s110 1773875609
+Vo<bHhRL6@BFZgF_]SBF7I1
+04 10 4 work add_sub_tb fast 0
+=1-a4bb6d3fede8-69bb3199-1f8da-306859
 o-quiet -auto_acc_if_foreign -work work +acc
-Z2 tCvgOpt 0
+Z1 tCvgOpt 0
 n@_opt
 OL;O;2020.1;71
-vdemod
-Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-R1
+vadd_sub
+Z2 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z3 !s110 1773875608
 !i10b 1
-!s100 mdY>C42jT>N20nL??;4U52
+!s100 kc`FNZG1DoSOE4a`5koQ13
 Z4 !s11b Dg1SIo80bB@j0V0VzS_@n1
-I0RVKD@mBmUl`d_>PQ<o`81
+IRf_]i[@J`5e=_YDS[TD2Q2
 Z5 VDg1SIo80bB@j0V0VzS_@n1
 S1
 R0
-w1773874534
-8../sv/demod.sv
-F../sv/demod.sv
-!i122 1
-L0 316 283
+w1773875244
+8../sv/add_sub.sv
+F../sv/add_sub.sv
+!i122 0
+L0 1 87
 Z6 OL;L;2020.1;71
 r1
 !s85 0
 31
-Z7 !s108 1773874556.000000
-!s107 ../sv/demod.sv|
-!s90 -reportprogress|300|-sv|../sv/demod.sv|
+Z7 !s108 1773875608.000000
+!s107 ../sv/add_sub.sv|
+!s90 -reportprogress|300|-sv|../sv/add_sub.sv|
 !i113 0
 Z8 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R2
-vdemod_tb
-R3
 R1
+vadd_sub_tb
+R2
+R3
 !i10b 1
-!s100 nY7X<Bmm6IAF=cZPa4h]j2
+!s100 D<]]lDJ8V[Z047Uoh3H>d0
 R4
-I;OAg4F1>M<7eaMa9=dN`n0
+Id>:oPPNPn4;_OTRIT:<O@2
 R5
 S1
 R0
-w1773872653
-8../sv/demod_tb.sv
-F../sv/demod_tb.sv
-!i122 2
-L0 3 269
+w1773875438
+8../sv/add_sub_tb.sv
+F../sv/add_sub_tb.sv
+!i122 1
+L0 3 362
 R6
 r1
 !s85 0
 31
 R7
-!s107 ../sv/demod_tb.sv|
-!s90 -reportprogress|300|-sv|../sv/demod_tb.sv|
+!s107 ../sv/add_sub_tb.sv|
+!s90 -reportprogress|300|-sv|../sv/add_sub_tb.sv|
 !i113 0
 R8
-R2
-vseq_divider
-R3
 R1
-!i10b 1
-!s100 eO7`VS@AGKhH[nNa4ID8E2
-R4
-I=i1REASLiS>D:J6Cm<eM22
-R5
-S1
-R0
-w1773874551
-8../sv/restoring_divider_ctrl.sv
-F../sv/restoring_divider_ctrl.sv
-!i122 0
-L0 107 63
-R6
-r1
-!s85 0
-31
-R7
-!s107 ../sv/restoring_divider_ctrl.sv|
-!s90 -reportprogress|300|-sv|../sv/restoring_divider_ctrl.sv|
-!i113 0
-R8
-R2
