@@ -1,229 +1,296 @@
 `timescale 1ns/1ps
 
+// ============================================================================
+// FM quadrature demodulator
+// ============================================================================
+// Recovers baseband audio from complex I/Q samples via:
+//   phase_diff = atan2(imag, real)  of  sample[n] * conj(sample[n-1])
+//   output     = gain * phase_diff
+//
+// Fixed-point Q10 arithmetic throughout. The atan2 approximation avoids
+// a hardware divider IP by instantiating a bit-serial restoring divider.
+// ============================================================================
+
 module demod #(
     parameter int INPUT_W = 32,
     parameter int DATA_W  = 32,
     parameter int GAIN_W  = 16
 ) (
-    input  logic clk,
-    input  logic rst,
-    input  logic valid_in,
-    input  logic signed [INPUT_W-1:0] i_in,
-    input  logic signed [INPUT_W-1:0] q_in,
-    output logic signed [DATA_W-1:0] demod_out,
-    output logic demod_valid_out
+    input  logic                       clk,
+    input  logic                       rst,
+    input  logic                       valid_in,
+    input  logic signed [INPUT_W-1:0]  i_in,
+    input  logic signed [INPUT_W-1:0]  q_in,
+    output logic signed [DATA_W-1:0]   demod_out,
+    output logic                       demod_valid_out
 );
 
-    localparam int BITS = 10;
-    localparam logic signed [31:0] FM_DEMOD_GAIN = 32'sd758;
-    localparam logic signed [31:0] QUAD1_Q       = 32'sd804;
-    localparam logic signed [31:0] QUAD3_Q       = 32'sd2413;
+    // ----------------------------------------------------------------
+    // Fixed-point parameters
+    // ----------------------------------------------------------------
+    localparam int FXP_SHIFT = 10;
+    localparam int FXP_SCALE = 1 << FXP_SHIFT;                    // 1024
 
-    logic signed [INPUT_W-1:0] i_prev, i_prev_c;
-    logic signed [INPUT_W-1:0] q_prev, q_prev_c;
-    logic                      have_prev, have_prev_c;
+    localparam logic signed [31:0] K_GAIN    = 32'sd758;           // demod sensitivity
+    localparam logic signed [31:0] OCTANT_LO = 32'sd804;           // pi/4  in Q10
+    localparam logic signed [31:0] OCTANT_HI = 32'sd2412;          // 3pi/4 in Q10
 
-    logic signed [31:0] demod_out_c;
-    logic               demod_valid_out_c;
-
-    logic signed [31:0] i_prev_32, q_prev_32, i_in_32, q_in_32;
-    logic signed [63:0] prod_a, prod_b, prod_c, prod_d;
-    logic signed [31:0] deq_a, deq_b, deq_c, deq_d;
-    logic signed [31:0] r_now, i_now;
-    logic signed [31:0] angle_now;
-    logic signed [63:0] gain_prod;
-
-    function automatic logic signed [31:0] quantize_i32;
-        input logic signed [31:0] val;
-        begin
-            quantize_i32 = val <<< BITS;
-        end
+    // ----------------------------------------------------------------
+    // Truncation toward zero  (matches C integer division semantics)
+    // ----------------------------------------------------------------
+    function automatic logic signed [31:0] trunc_q10(input logic signed [31:0] v);
+        if (v >= 0)
+            trunc_q10 = v >>> FXP_SHIFT;
+        else
+            trunc_q10 = (v + (32'sd1 <<< FXP_SHIFT) - 32'sd1) >>> FXP_SHIFT;
     endfunction
 
-    function automatic logic signed [31:0] dequantize_i32;
-        input logic signed [31:0] val;
-        logic signed [31:0] bias;
-        begin
-            if (BITS == 0) begin
-                dequantize_i32 = val;
-            end else begin
-                if (val < 0)
-                    bias = (32'sd1 <<< BITS) - 1;
-                else
-                    bias = 32'sd0;
-                dequantize_i32 = (val + bias) >>> BITS;
-            end
-        end
-    endfunction
+    // ----------------------------------------------------------------
+    // Control FSM
+    // ----------------------------------------------------------------
+    typedef enum logic [3:0] {
+        IDLE,
+        CONJUGATE_PROD,
+        SCALE_PROD,
+        PHASE_SETUP,
+        PHASE_LOAD,
+        PHASE_DIVIDE,
+        PHASE_WEIGHT,
+        PHASE_RESOLVE,
+        APPLY_GAIN,
+        SCALE_OUTPUT,
+        EMIT
+    } phase_t;
 
-    function automatic logic signed [31:0] dequantize_i64_to_32;
-        input logic signed [63:0] val;
-        logic signed [63:0] bias;
-        logic signed [63:0] tmp;
-        begin
-            if (BITS == 0) begin
-                tmp = val;
-            end else begin
-                if (val < 0)
-                    bias = (64'sd1 <<< BITS) - 1;
-                else
-                    bias = 64'sd0;
-                tmp = (val + bias) >>> BITS;
-            end
-            dequantize_i64_to_32 = tmp[31:0];
-        end
-    endfunction
+    phase_t step, step_nxt;
 
-    function automatic logic [31:0] udiv_u32;
-        input logic [31:0] numer;
-        input logic [31:0] denom;
-        logic [32:0] rem;
-        logic [31:0] quot;
-        begin
-            rem  = 33'd0;
-            quot = 32'd0;
+    // ----------------------------------------------------------------
+    // Datapath registers
+    // ----------------------------------------------------------------
 
-            if (denom == 32'd0) begin
-                quot = 32'd0;
-            end else begin
-                for (int k = 31; k >= 0; k--) begin
-                    rem = {rem[31:0], numer[k]};
-                    if (rem >= {1'b0, denom}) begin
-                        rem     = rem - {1'b0, denom};
-                        quot[k] = 1'b1;
-                    end
-                end
-            end
+    // Delayed sample pair
+    logic signed [31:0] re_z1,  re_z1_nxt;
+    logic signed [31:0] im_z1,  im_z1_nxt;
 
-            udiv_u32 = quot;
-        end
-    endfunction
+    // Captured input
+    logic signed [31:0] re_now, re_now_nxt;
+    logic signed [31:0] im_now, im_now_nxt;
 
-    function automatic logic signed [31:0] sdiv_trunc0_num_by_posden;
-        input logic signed [31:0] numer;
-        input logic [31:0]        denom;
-        logic [31:0] qmag;
-        begin
-            if (denom == 32'd0) begin
-                sdiv_trunc0_num_by_posden = 32'sd0;
-            end else if (numer < 0) begin
-                qmag = udiv_u32($unsigned(-numer), denom);
-                sdiv_trunc0_num_by_posden = -$signed(qmag);
-            end else begin
-                qmag = udiv_u32($unsigned(numer), denom);
-                sdiv_trunc0_num_by_posden = $signed(qmag);
-            end
-        end
-    endfunction
+    // Conjugate-multiply partial products (32-bit wrapping, C-style)
+    logic signed [31:0] pp_aa, pp_aa_nxt;       // re_z1 * re_now
+    logic signed [31:0] pp_bb, pp_bb_nxt;       // −im_z1 * im_now
+    logic signed [31:0] pp_ab, pp_ab_nxt;       // re_z1 * im_now
+    logic signed [31:0] pp_ba, pp_ba_nxt;       // −im_z1 * re_now
 
-    function automatic logic signed [31:0] qarctan32;
-        input logic signed [31:0] y;
-        input logic signed [31:0] x;
-        logic signed [31:0] abs_y;
-        logic signed [31:0] abs_y_p1;
-        logic signed [31:0] delta;
-        logic signed [31:0] denom_s;
-        logic signed [31:0] r_signed;
-        logic signed [31:0] mult32;
-        logic signed [31:0] mult_deq32;
-        logic signed [31:0] angle32;
-        begin
-            if (y < 0)
-                abs_y = -y;
-            else
-                abs_y = y;
+    // Phase-difference components after dequant
+    logic signed [31:0] phi_re, phi_re_nxt;
+    logic signed [31:0] phi_im, phi_im_nxt;
 
-            abs_y_p1 = abs_y + 32'sd1;
+    // atan2 working registers
+    logic        neg_y,     neg_y_nxt;
+    logic        pos_x,     pos_x_nxt;
+    logic        q_sign,    q_sign_nxt;
+    logic [31:0] mag_num,   mag_num_nxt;
+    logic [31:0] mag_den,   mag_den_nxt;
 
-            if (x >= 0) begin
-                delta      = x - abs_y_p1;
-                denom_s    = x + abs_y_p1;
-                r_signed   = sdiv_trunc0_num_by_posden(quantize_i32(delta), $unsigned(denom_s));
-                mult32     = QUAD1_Q * r_signed;
-                mult_deq32 = dequantize_i32(mult32);
-                angle32    = QUAD1_Q - mult_deq32;
-            end else begin
-                delta      = x + abs_y_p1;
-                denom_s    = abs_y_p1 - x;
-                r_signed   = sdiv_trunc0_num_by_posden(quantize_i32(delta), $unsigned(denom_s));
-                mult32     = QUAD1_Q * r_signed;
-                mult_deq32 = dequantize_i32(mult32);
-                angle32    = QUAD3_Q - mult_deq32;
-            end
+    // Shared product register (reused for atan multiply + gain multiply)
+    logic signed [31:0] prod_reg, prod_reg_nxt;
 
-            if (y < 0)
-                angle32 = -angle32;
+    // Angle accumulator
+    logic signed [31:0] theta, theta_nxt;
 
-            qarctan32 = angle32;
-        end
-    endfunction
+    // Output holding register
+    logic signed [31:0] result, result_nxt;
+
+    // ----------------------------------------------------------------
+    // Divider interface
+    // ----------------------------------------------------------------
+    logic        div_go;
+    logic [31:0] div_quot;
+    logic [31:0] div_rem;
+    logic        div_rdy;
+
+    seq_divider u_div (
+        .clk         (clk),
+        .rst         (rst),
+        .start       (div_go),
+        .numerator   (mag_num),
+        .denominator (mag_den),
+        .q_out       (div_quot),
+        .r_out       (div_rem),
+        .done        (div_rdy)
+    );
+
+    // ----------------------------------------------------------------
+    // Combinational helpers for PHASE_SETUP
+    // ----------------------------------------------------------------
+    logic signed [31:0] y_mag;
+    logic signed [31:0] setup_num, setup_den;
 
     always_comb begin
-        i_prev_c          = i_prev;
-        q_prev_c          = q_prev;
-        have_prev_c       = have_prev;
-        demod_out_c       = demod_out;
-        demod_valid_out_c = 1'b0;
+        y_mag = ((phi_im < 0) ? -phi_im : phi_im) + 32'sd1;
 
-        i_prev_32 = i_prev;
-        q_prev_32 = q_prev;
-        i_in_32   = i_in;
-        q_in_32   = q_in;
-
-        prod_a    = 64'sd0;
-        prod_b    = 64'sd0;
-        prod_c    = 64'sd0;
-        prod_d    = 64'sd0;
-        deq_a     = 32'sd0;
-        deq_b     = 32'sd0;
-        deq_c     = 32'sd0;
-        deq_d     = 32'sd0;
-        r_now     = 32'sd0;
-        i_now     = 32'sd0;
-        angle_now = 32'sd0;
-        gain_prod = 64'sd0;
-
-        if (valid_in) begin
-            // Match C behavior: produce output on every valid sample
-            // using current stored prev values, then update prev.
-            prod_a = i_prev_32 * i_in_32;
-            prod_b = -(q_prev_32 * q_in_32);
-            prod_c = i_prev_32 * q_in_32;
-            prod_d = -(q_prev_32 * i_in_32);
-
-            deq_a = dequantize_i64_to_32(prod_a);
-            deq_b = dequantize_i64_to_32(prod_b);
-            deq_c = dequantize_i64_to_32(prod_c);
-            deq_d = dequantize_i64_to_32(prod_d);
-
-            r_now = deq_a - deq_b;
-            i_now = deq_c + deq_d;
-
-            angle_now         = qarctan32(i_now, r_now);
-            gain_prod         = $signed(FM_DEMOD_GAIN) * $signed(angle_now);
-            demod_out_c       = dequantize_i64_to_32(gain_prod);
-            demod_valid_out_c = 1'b1;
-
-            i_prev_c    = i_in;
-            q_prev_c    = q_in;
-            have_prev_c = 1'b1;
+        if (phi_re >= 0) begin
+            setup_num = (phi_re - y_mag) * 32'sd1024;
+            setup_den = phi_re + y_mag;
+        end else begin
+            setup_num = (phi_re + y_mag) * 32'sd1024;
+            setup_den = y_mag - phi_re;
         end
     end
 
+    // Signed quotient + angle product (used in PHASE_WEIGHT / PHASE_RESOLVE)
+    logic signed [31:0] signed_q;
+    logic signed [31:0] angle_product;
+
+    always_comb begin
+        signed_q      = q_sign ? -$signed(div_quot) : $signed(div_quot);
+        angle_product = OCTANT_LO * signed_q;
+    end
+
+    // ----------------------------------------------------------------
+    // State register
+    // ----------------------------------------------------------------
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
-            i_prev          <= '0;
-            q_prev          <= '0;
-            have_prev       <= 1'b0;
-            demod_out       <= 32'sd0;
-            demod_valid_out <= 1'b0;
+            step     <= IDLE;
+            re_z1    <= '0;  im_z1    <= '0;
+            re_now   <= '0;  im_now   <= '0;
+            pp_aa    <= '0;  pp_bb    <= '0;
+            pp_ab    <= '0;  pp_ba    <= '0;
+            phi_re   <= '0;  phi_im   <= '0;
+            neg_y    <= '0;  pos_x    <= '0;
+            q_sign   <= '0;
+            mag_num  <= '0;  mag_den  <= '0;
+            prod_reg <= '0;  theta    <= '0;
+            result   <= '0;
         end else begin
-            i_prev          <= i_prev_c;
-            q_prev          <= q_prev_c;
-            have_prev       <= have_prev_c;
-            demod_out       <= demod_out_c;
-            demod_valid_out <= demod_valid_out_c;
+            step     <= step_nxt;
+            re_z1    <= re_z1_nxt;    im_z1    <= im_z1_nxt;
+            re_now   <= re_now_nxt;   im_now   <= im_now_nxt;
+            pp_aa    <= pp_aa_nxt;    pp_bb    <= pp_bb_nxt;
+            pp_ab    <= pp_ab_nxt;    pp_ba    <= pp_ba_nxt;
+            phi_re   <= phi_re_nxt;   phi_im   <= phi_im_nxt;
+            neg_y    <= neg_y_nxt;    pos_x    <= pos_x_nxt;
+            q_sign   <= q_sign_nxt;
+            mag_num  <= mag_num_nxt;  mag_den  <= mag_den_nxt;
+            prod_reg <= prod_reg_nxt; theta    <= theta_nxt;
+            result   <= result_nxt;
         end
+    end
+
+    // ----------------------------------------------------------------
+    // Next-state + datapath logic
+    // ----------------------------------------------------------------
+    always_comb begin
+        // Hold everything by default
+        step_nxt     = step;
+        re_z1_nxt    = re_z1;    im_z1_nxt    = im_z1;
+        re_now_nxt   = re_now;   im_now_nxt   = im_now;
+        pp_aa_nxt    = pp_aa;    pp_bb_nxt    = pp_bb;
+        pp_ab_nxt    = pp_ab;    pp_ba_nxt    = pp_ba;
+        phi_re_nxt   = phi_re;   phi_im_nxt   = phi_im;
+        neg_y_nxt    = neg_y;    pos_x_nxt    = pos_x;
+        q_sign_nxt   = q_sign;
+        mag_num_nxt  = mag_num;  mag_den_nxt  = mag_den;
+        prod_reg_nxt = prod_reg; theta_nxt    = theta;
+        result_nxt   = result;
+
+        demod_out       = '0;
+        demod_valid_out = 1'b0;
+        div_go          = 1'b0;
+
+        case (step)
+
+            // Capture new I/Q pair
+            IDLE: begin
+                if (valid_in) begin
+                    re_now_nxt = i_in;
+                    im_now_nxt = q_in;
+                    step_nxt   = CONJUGATE_PROD;
+                end
+            end
+
+            // 32-bit products: sample[n] * conj(sample[n-1])
+            CONJUGATE_PROD: begin
+                pp_aa_nxt = re_z1 * re_now;              // Re(z1) · Re(z0)
+                pp_bb_nxt = (-im_z1) * im_now;           // −Im(z1) · Im(z0)
+                pp_ab_nxt = re_z1 * im_now;              // Re(z1) · Im(z0)
+                pp_ba_nxt = (-im_z1) * re_now;           // −Im(z1) · Re(z0)
+                step_nxt  = SCALE_PROD;
+            end
+
+            // Dequantize each product, form real/imag phase diff, advance z-1
+            SCALE_PROD: begin
+                phi_re_nxt = trunc_q10(pp_aa) - trunc_q10(pp_bb);
+                phi_im_nxt = trunc_q10(pp_ab) + trunc_q10(pp_ba);
+                re_z1_nxt  = re_now;
+                im_z1_nxt  = im_now;
+                step_nxt   = PHASE_SETUP;
+            end
+
+            // Prepare the linear atan2 division
+            PHASE_SETUP: begin
+                neg_y_nxt = (phi_im < 0);
+                pos_x_nxt = (phi_re >= 0);
+
+                q_sign_nxt  = (setup_num < 0);
+                mag_num_nxt = (setup_num < 0) ? -setup_num : setup_num;
+                mag_den_nxt = setup_den;
+
+                step_nxt = PHASE_LOAD;
+            end
+
+            // Kick off divider (mag_num / mag_den now registered)
+            PHASE_LOAD: begin
+                div_go   = 1'b1;
+                step_nxt = PHASE_DIVIDE;
+            end
+
+            // Wait for divider
+            PHASE_DIVIDE: begin
+                if (div_rdy)
+                    step_nxt = PHASE_WEIGHT;
+            end
+
+            // Latch OCTANT_LO * r
+            PHASE_WEIGHT: begin
+                prod_reg_nxt = angle_product;
+                step_nxt     = PHASE_RESOLVE;
+            end
+
+            // Compute final angle with quadrant/sign correction
+            PHASE_RESOLVE: begin
+                if (pos_x)
+                    theta_nxt = neg_y ? -(OCTANT_LO - trunc_q10(prod_reg))
+                                      :  (OCTANT_LO - trunc_q10(prod_reg));
+                else
+                    theta_nxt = neg_y ? -(OCTANT_HI - trunc_q10(prod_reg))
+                                      :  (OCTANT_HI - trunc_q10(prod_reg));
+                step_nxt = APPLY_GAIN;
+            end
+
+            // Multiply angle by demod gain constant
+            APPLY_GAIN: begin
+                prod_reg_nxt = K_GAIN * theta;
+                step_nxt     = SCALE_OUTPUT;
+            end
+
+            // Final dequantize
+            SCALE_OUTPUT: begin
+                result_nxt = trunc_q10(prod_reg);
+                step_nxt   = EMIT;
+            end
+
+            // Drive output for one cycle
+            EMIT: begin
+                demod_out       = result;
+                demod_valid_out = 1'b1;
+                step_nxt        = IDLE;
+            end
+
+            default: step_nxt = IDLE;
+        endcase
     end
 
 endmodule
