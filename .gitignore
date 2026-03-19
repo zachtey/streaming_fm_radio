@@ -22,3 +22,12 @@ transcript
 *.vcd
 
 sim/vsim.wlf
+
+sim/vsim.wlf
+*.wlf
+sim/work/
+*.qdb
+*.qpg
+*.qtl
+*.vcd
+transcript
