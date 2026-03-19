@@ -1,0 +1,1168 @@
+
+Copyright (C) 1994-2018 Synopsys, Inc.
+This Synopsys software and all associated documentation are proprietary to Synopsys, Inc.
+and may only be used pursuant to the terms and conditions of a written license agreement
+with Synopsys, Inc. All other use, reproduction, modification, or distribution of the
+Synopsys software or the associated documentation is strictly prohibited.
+Tool: Synplify (R) Premier
+Build: O-2018.09-SP1
+Install: /vol/synopsys/fpga/O-2018.09-SP1
+OS: Red Hat Enterprise Linux 8.10 (Ootpa)
+Hostname: batgirl.ece.northwestern.edu
+max virtual memory: unlimited (bytes)
+max user processes: 126617
+max stack size: 8388608 (bytes)
+
+
+Implementation : rev_1
+
+#### START OF AREA REPORT #####[
+
+Part:			EP4CE6EA22-7 (Altera)
+
+----------------------------------------------------------------------------
+########   Utilization report for  Top level view:   fm_radio_top   ########
+============================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     8896               100 %                
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio_top:	8896 (22.57 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     2590               100 %                
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio_top:	2590 (6.57 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     19                 79872              100 %                
+=========================================================================
+Total RAMS in the block fm_radio_top:	19 (0.05 % Utilization)
+
+
+DSPs
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+MACs     30                 100 %                
+=================================================
+Total DSPs in the block fm_radio_top:	30 (0.08 % Utilization)
+
+
+Black Boxes
+Name            Total elements     Utilization     Notes
+--------------------------------------------------------
+BLACK BOXES     15                 100 %                
+========================================================
+Total Black Boxes in the block fm_radio_top:	15 (0.04 % Utilization)
+
+--------------------------------------------------------------
+########   Utilization report for  cell:   fm_radio   ########
+Instance path:   fm_radio_top.fm_radio                        
+==============================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     8240               92.6 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio_top.fm_radio:	8240 (20.90 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     2389               92.2 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio_top.fm_radio:	2389 (6.06 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     16                 64512              84.2 %               
+=========================================================================
+Total RAMS in the block fm_radio_top.fm_radio:	16 (0.04 % Utilization)
+
+
+DSPs
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+MACs     30                 100 %                
+=================================================
+Total DSPs in the block fm_radio_top.fm_radio:	30 (0.08 % Utilization)
+
+
+Black Boxes
+Name            Total elements     Utilization     Notes
+--------------------------------------------------------
+BLACK BOXES     15                 100 %                
+========================================================
+Total Black Boxes in the block fm_radio_top.fm_radio:	15 (0.04 % Utilization)
+
+-------------------------------------------------------------
+########   Utilization report for  cell:   add_sub   ########
+Instance path:   fm_radio.add_sub                            
+=============================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     65                 0.7310 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.add_sub:	65 (0.16 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     133                5.14 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.add_sub:	133 (0.34 % Utilization)
+
+----------------------------------------------------------------------
+########   Utilization report for  cell:   channel_fir_pair   ########
+Instance path:   fm_radio.channel_fir_pair                            
+======================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     1271               14.3 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.channel_fir_pair:	1271 (3.22 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     130                5.02 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.channel_fir_pair:	130 (0.33 % Utilization)
+
+--------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_32s_32s_48s_20s_1s_10s_1s_Z1   ########
+Instance path:   channel_fir_pair.fir_32s_32s_48s_20s_1s_10s_1s_Z1                    
+======================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     636                7.15 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block channel_fir_pair.fir_32s_32s_48s_20s_1s_10s_1s_Z1:	636 (1.61 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     66                 2.55 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block channel_fir_pair.fir_32s_32s_48s_20s_1s_10s_1s_Z1:	66 (0.17 % Utilization)
+
+----------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_32s_32s_48s_20s_1s_10s_1s_Z1_0   ########
+Instance path:   channel_fir_pair.fir_32s_32s_48s_20s_1s_10s_1s_Z1_0                    
+========================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     635                7.14 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block channel_fir_pair.fir_32s_32s_48s_20s_1s_10s_1s_Z1_0:	635 (1.61 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     64                 2.47 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block channel_fir_pair.fir_32s_32s_48s_20s_1s_10s_1s_Z1_0:	64 (0.16 % Utilization)
+
+---------------------------------------------------------------------
+########   Utilization report for  cell:   demod_axis_wrap   ########
+Instance path:   fm_radio.demod_axis_wrap                            
+=====================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     573                6.44 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.demod_axis_wrap:	573 (1.45 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     875                33.8 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.demod_axis_wrap:	875 (2.22 % Utilization)
+
+
+DSPs
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+MACs     14                 46.7 %               
+=================================================
+Total DSPs in the block fm_radio.demod_axis_wrap:	14 (0.04 % Utilization)
+
+
+Black Boxes
+Name            Total elements     Utilization     Notes
+--------------------------------------------------------
+BLACK BOXES     7                  46.7 %               
+========================================================
+Total Black Boxes in the block fm_radio.demod_axis_wrap:	7 (0.02 % Utilization)
+
+-----------------------------------------------------------
+########   Utilization report for  cell:   demod   ########
+Instance path:   demod_axis_wrap.demod                     
+===========================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     549                6.17 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block demod_axis_wrap.demod:	549 (1.39 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     872                33.7 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block demod_axis_wrap.demod:	872 (2.21 % Utilization)
+
+
+DSPs
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+MACs     14                 46.7 %               
+=================================================
+Total DSPs in the block demod_axis_wrap.demod:	14 (0.04 % Utilization)
+
+
+Black Boxes
+Name            Total elements     Utilization     Notes
+--------------------------------------------------------
+BLACK BOXES     7                  46.7 %               
+========================================================
+Total Black Boxes in the block demod_axis_wrap.demod:	7 (0.02 % Utilization)
+
+-----------------------------------------------------------------
+########   Utilization report for  cell:   seq_divider   ########
+Instance path:   demod.seq_divider                               
+=================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     122                1.37 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block demod.seq_divider:	122 (0.31 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     124                4.79 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block demod.seq_divider:	124 (0.31 % Utilization)
+
+---------------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z5   ########
+Instance path:   fm_radio.fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z5                            
+=============================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     954                10.7 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z5:	954 (2.42 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     1                  0.03860 %            
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z5:	1 (0.00 % Utilization)
+
+-----------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_32s_32s_48s_32s_1s_10s_1s_Z4   ########   
+Instance path:   fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z5.fir_32s_32s_48s_32s_1s_10s_1s_Z4
+=========================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     954                10.7 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z5.fir_32s_32s_48s_32s_1s_10s_1s_Z4:	954 (2.42 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     1                  0.03860 %            
+==================================================
+Total COMBINATIONAL ATOMS in the block fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z5.fir_32s_32s_48s_32s_1s_10s_1s_Z4:	1 (0.00 % Utilization)
+
+---------------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z7   ########
+Instance path:   fm_radio.fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z7                            
+=============================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     1019               11.5 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z7:	1019 (2.58 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     65                 2.51 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z7:	65 (0.16 % Utilization)
+
+-----------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_32s_32s_48s_32s_1s_10s_1s_Z6   ########   
+Instance path:   fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z7.fir_32s_32s_48s_32s_1s_10s_1s_Z6
+=========================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     1019               11.5 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z7.fir_32s_32s_48s_32s_1s_10s_1s_Z6:	1019 (2.58 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     65                 2.51 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z7.fir_32s_32s_48s_32s_1s_10s_1s_Z6:	65 (0.16 % Utilization)
+
+---------------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z9   ########
+Instance path:   fm_radio.fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z9                            
+=============================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     1020               11.5 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z9:	1020 (2.59 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     65                 2.51 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z9:	65 (0.16 % Utilization)
+
+-----------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_32s_32s_48s_32s_1s_10s_1s_Z8   ########   
+Instance path:   fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z9.fir_32s_32s_48s_32s_1s_10s_1s_Z8
+=========================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     1020               11.5 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z9.fir_32s_32s_48s_32s_1s_10s_1s_Z8:	1020 (2.59 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     65                 2.51 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fir_fifo_wrap_32s_32s_48s_32s_1s_10s_Z9.fir_32s_32s_48s_32s_1s_10s_1s_Z8:	65 (0.16 % Utilization)
+
+---------------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3   ########
+Instance path:   fm_radio.fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3                            
+=============================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     1023               11.5 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3:	1023 (2.59 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     67                 2.59 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3:	67 (0.17 % Utilization)
+
+-----------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_32s_32s_48s_32s_8s_10s_3s_Z2   ########   
+Instance path:   fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3.fir_32s_32s_48s_32s_8s_10s_3s_Z2
+=========================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     1023               11.5 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3.fir_32s_32s_48s_32s_8s_10s_3s_Z2:	1023 (2.59 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     67                 2.59 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3.fir_32s_32s_48s_32s_8s_10s_3s_Z2:	67 (0.17 % Utilization)
+
+-----------------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3_0   ########
+Instance path:   fm_radio.fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3_0                            
+===============================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     1023               11.5 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3_0:	1023 (2.59 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     70                 2.7 %                
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3_0:	70 (0.18 % Utilization)
+
+---------------------------------------------------------------------------------------------
+########   Utilization report for  cell:   fir_32s_32s_48s_32s_8s_10s_3s_Z2_0   ########     
+Instance path:   fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3_0.fir_32s_32s_48s_32s_8s_10s_3s_Z2_0
+=============================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     1023               11.5 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3_0.fir_32s_32s_48s_32s_8s_10s_3s_Z2_0:	1023 (2.59 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     70                 2.7 %                
+==================================================
+Total COMBINATIONAL ATOMS in the block fir_fifo_wrap_32s_32s_48s_32s_8s_10s_Z3_0.fir_32s_32s_48s_32s_8s_10s_3s_Z2_0:	70 (0.18 % Utilization)
+
+--------------------------------------------------------------------------------
+########   Utilization report for  cell:   iir_32s_32s_2s_10s_64s_Z10   ########
+Instance path:   fm_radio.iir_32s_32s_2s_10s_64s_Z10                            
+================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     130                1.46 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.iir_32s_32s_2s_10s_64s_Z10:	130 (0.33 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     35                 1.35 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.iir_32s_32s_2s_10s_64s_Z10:	35 (0.09 % Utilization)
+
+----------------------------------------------------------------------------------
+########   Utilization report for  cell:   iir_32s_32s_2s_10s_64s_Z10_1   ########
+Instance path:   fm_radio.iir_32s_32s_2s_10s_64s_Z10_1                            
+==================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     130                1.46 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.iir_32s_32s_2s_10s_64s_Z10_1:	130 (0.33 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     35                 1.35 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.iir_32s_32s_2s_10s_64s_Z10_1:	35 (0.09 % Utilization)
+
+--------------------------------------------------------------------------
+########   Utilization report for  cell:   mult_gain_32s_10s_0s   ########
+Instance path:   fm_radio.mult_gain_32s_10s_0s                            
+==========================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     52                 0.5850 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.mult_gain_32s_10s_0s:	52 (0.13 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     67                 2.59 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.mult_gain_32s_10s_0s:	67 (0.17 % Utilization)
+
+
+DSPs
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+MACs     8                  26.7 %               
+=================================================
+Total DSPs in the block fm_radio.mult_gain_32s_10s_0s:	8 (0.02 % Utilization)
+
+
+Black Boxes
+Name            Total elements     Utilization     Notes
+--------------------------------------------------------
+BLACK BOXES     4                  26.7 %               
+========================================================
+Total Black Boxes in the block fm_radio.mult_gain_32s_10s_0s:	4 (0.01 % Utilization)
+
+----------------------------------------------------------------------------
+########   Utilization report for  cell:   mult_gain_32s_10s_0s_1   ########
+Instance path:   fm_radio.mult_gain_32s_10s_0s_1                            
+============================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     70                 0.7870 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.mult_gain_32s_10s_0s_1:	70 (0.18 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     135                5.21 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.mult_gain_32s_10s_0s_1:	135 (0.34 % Utilization)
+
+
+DSPs
+Name     Total elements     Utilization     Notes
+-------------------------------------------------
+MACs     8                  26.7 %               
+=================================================
+Total DSPs in the block fm_radio.mult_gain_32s_10s_0s_1:	8 (0.02 % Utilization)
+
+
+Black Boxes
+Name            Total elements     Utilization     Notes
+--------------------------------------------------------
+BLACK BOXES     4                  26.7 %               
+========================================================
+Total Black Boxes in the block fm_radio.mult_gain_32s_10s_0s_1:	4 (0.01 % Utilization)
+
+--------------------------------------------------------------------------
+########   Utilization report for  cell:   mult_gain_32s_10s_4s   ########
+Instance path:   fm_radio.mult_gain_32s_10s_4s                            
+==========================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     59                 0.6630 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.mult_gain_32s_10s_4s:	59 (0.15 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     32                 1.24 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.mult_gain_32s_10s_4s:	32 (0.08 % Utilization)
+
+----------------------------------------------------------------------------
+########   Utilization report for  cell:   mult_gain_32s_10s_4s_1   ########
+Instance path:   fm_radio.mult_gain_32s_10s_4s_1                            
+============================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     59                 0.6630 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.mult_gain_32s_10s_4s_1:	59 (0.15 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     32                 1.24 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.mult_gain_32s_10s_4s_1:	32 (0.08 % Utilization)
+
+-----------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_1   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_1                            
+=============================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     80                 0.8990 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_1:	80 (0.20 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     85                 3.28 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_1:	85 (0.22 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  3584               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_1:	1 (0.00 % Utilization)
+
+------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17                            
+==============================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     52                 0.5850 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17:	52 (0.13 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     31                 1.2 %                
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17:	31 (0.08 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17:	1 (0.00 % Utilization)
+
+--------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_0   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_0                            
+================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     52                 0.5850 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_0:	52 (0.13 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     30                 1.16 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_0:	30 (0.08 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_0:	1 (0.00 % Utilization)
+
+--------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_1   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_1                            
+================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     48                 0.540 %              
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_1:	48 (0.12 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     28                 1.08 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_1:	28 (0.07 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_1:	1 (0.00 % Utilization)
+
+---------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_10   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_10                            
+=================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     16                 0.180 %              
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_10:	16 (0.04 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     28                 1.08 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_10:	28 (0.07 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_10:	1 (0.00 % Utilization)
+
+---------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_11   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_11                            
+=================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     46                 0.5170 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_11:	46 (0.12 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     69                 2.66 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_11:	69 (0.18 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_11:	1 (0.00 % Utilization)
+
+---------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_12   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_12                            
+=================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     16                 0.180 %              
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_12:	16 (0.04 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     33                 1.27 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_12:	33 (0.08 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_12:	1 (0.00 % Utilization)
+
+--------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_2   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_2                            
+================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     56                 0.6290 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_2:	56 (0.14 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     29                 1.12 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_2:	29 (0.07 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_2:	1 (0.00 % Utilization)
+
+--------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_3   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_3                            
+================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     51                 0.5730 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_3:	51 (0.13 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     32                 1.24 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_3:	32 (0.08 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_3:	1 (0.00 % Utilization)
+
+--------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_4   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_4                            
+================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     56                 0.6290 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_4:	56 (0.14 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     33                 1.27 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_4:	33 (0.08 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_4:	1 (0.00 % Utilization)
+
+--------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_5   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_5                            
+================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     44                 0.4950 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_5:	44 (0.11 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     34                 1.31 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_5:	34 (0.09 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_5:	1 (0.00 % Utilization)
+
+--------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_6   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_6                            
+================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     56                 0.6290 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_6:	56 (0.14 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     34                 1.31 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_6:	34 (0.09 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_6:	1 (0.00 % Utilization)
+
+--------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_7   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_7                            
+================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     51                 0.5730 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_7:	51 (0.13 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     30                 1.16 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_7:	30 (0.08 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_7:	1 (0.00 % Utilization)
+
+--------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_8   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_8                            
+================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     51                 0.5730 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_8:	51 (0.13 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     33                 1.27 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_8:	33 (0.08 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_8:	1 (0.00 % Utilization)
+
+--------------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_17_9   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_17_9                            
+================================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     44                 0.4950 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_9:	44 (0.11 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     33                 1.27 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_17_9:	33 (0.08 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  4096               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_17_9:	1 (0.00 % Utilization)
+
+-----------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_2   ########
+Instance path:   fm_radio.sync_fifo_32s_128s_7s_2                            
+=============================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     73                 0.8210 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_2:	73 (0.19 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     85                 3.28 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio.sync_fifo_32s_128s_7s_2:	85 (0.22 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  3584               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio.sync_fifo_32s_128s_7s_2:	1 (0.00 % Utilization)
+
+---------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s   ########
+Instance path:   fm_radio_top.sync_fifo_32s_128s_7s                        
+===========================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     73                 0.8210 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio_top.sync_fifo_32s_128s_7s:	73 (0.19 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     87                 3.36 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio_top.sync_fifo_32s_128s_7s:	87 (0.22 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  3584               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio_top.sync_fifo_32s_128s_7s:	1 (0.00 % Utilization)
+
+-----------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_32s_128s_7s_0   ########
+Instance path:   fm_radio_top.sync_fifo_32s_128s_7s_0                        
+=============================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     72                 0.8090 %             
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio_top.sync_fifo_32s_128s_7s_0:	72 (0.18 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     86                 3.32 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio_top.sync_fifo_32s_128s_7s_0:	86 (0.22 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  3584               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio_top.sync_fifo_32s_128s_7s_0:	1 (0.00 % Utilization)
+
+---------------------------------------------------------------------------
+########   Utilization report for  cell:   sync_fifo_64s_128s_7s   ########
+Instance path:   fm_radio_top.sync_fifo_64s_128s_7s                        
+===========================================================================
+
+SEQUENTIAL ATOMS
+Name          Total elements     Utilization     Notes
+------------------------------------------------------
+REGISTERS     106                1.19 %               
+======================================================
+Total SEQUENTIAL ATOMS in the block fm_radio_top.sync_fifo_64s_128s_7s:	106 (0.27 % Utilization)
+
+
+COMBINATIONAL ATOMS
+Name      Total elements     Utilization     Notes
+--------------------------------------------------
+ATOMS     28                 1.08 %               
+==================================================
+Total COMBINATIONAL ATOMS in the block fm_radio_top.sync_fifo_64s_128s_7s:	28 (0.07 % Utilization)
+
+
+RAMS
+Name          Total elements     Number of bits     Utilization     Notes
+-------------------------------------------------------------------------
+SYNC RAMS     1                  8192               5.26 %               
+=========================================================================
+Total RAMS in the block fm_radio_top.sync_fifo_64s_128s_7s:	1 (0.00 % Utilization)
+
+
+##### END OF AREA REPORT #####]
+

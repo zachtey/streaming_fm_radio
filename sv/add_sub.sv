@@ -1,3 +1,6 @@
+`timescale 1ns/1ps
+import fm_radio_pkg::*;
+
 module add_sub (
     input  logic        clock,
     input  logic        reset,

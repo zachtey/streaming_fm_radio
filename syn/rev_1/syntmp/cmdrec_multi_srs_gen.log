@@ -1,0 +1,8 @@
+/vol/synopsys/fpga/O-2018.09-SP1/bin/syn_nfilter  -link  -multisrs  /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/synwork/seq_divider_comp.srs  -osyn  /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/synwork/seq_divider_mult.srs  -log  /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/synlog/seq_divider_multi_srs_gen.srr 
+relcom:/vol/synopsys/fpga/O-2018.09-SP1/bin/syn_nfilter -link -multisrs ../synwork/seq_divider_comp.srs -osyn ../synwork/seq_divider_mult.srs -log ../synlog/seq_divider_multi_srs_gen.srr
+rc:0 success:1 runtime:0
+file:../synwork/seq_divider_comp.srs|io:i|time:1773892591|size:83816|exec:0|csum:820A94F310DBAFDB9700E6869EC39D50
+file:../synwork/seq_divider_mult.srs|io:o|time:1773892592|size:3626|exec:0|csum:
+file:../synlog/seq_divider_multi_srs_gen.srr|io:o|time:1773892592|size:1450|exec:0|csum:
+file:/vol/synopsys/fpga/O-2018.09-SP1/linux_a_64/syn_nfilter|io:i|time:1543382463|size:12202632|exec:1|csum:2CF5CA82A12C53A85C3E36D57C2461DC
+file:/vol/synopsys/fpga/O-2018.09-SP1/bin/syn_nfilter|io:i|time:1543382354|size:368|exec:1|csum:004E4455B64BA10AD6A92FB2301610E0

@@ -9,6 +9,9 @@ vmap work work
 
 # Compile RTL from ../sv
 vlog -sv ../sv/fm_radio_pkg.sv
+vlog -sv ../sv/helpers.sv
+vlog -sv ../sv/fm_radio.sv
+#vlog -sv ../sv/read_iq.sv
 vlog -sv ../sv/fir.sv
 vlog -sv ../sv/seq_divider.sv
 vlog -sv ../sv/demod.sv

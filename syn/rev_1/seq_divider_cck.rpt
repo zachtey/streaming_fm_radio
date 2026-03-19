@@ -1,0 +1,211 @@
+
+Copyright (C) 1994-2018 Synopsys, Inc.
+This Synopsys software and all associated documentation are proprietary to Synopsys, Inc.
+and may only be used pursuant to the terms and conditions of a written license agreement
+with Synopsys, Inc. All other use, reproduction, modification, or distribution of the
+Synopsys software or the associated documentation is strictly prohibited.
+Tool: Synplify (R) Premier
+Build: O-2018.09-SP1
+Install: /vol/synopsys/fpga/O-2018.09-SP1
+OS: Red Hat Enterprise Linux 8.10 (Ootpa)
+Hostname: batgirl.ece.northwestern.edu
+max virtual memory: unlimited (bytes)
+max user processes: 126617
+max stack size: 8388608 (bytes)
+
+
+Implementation : rev_1
+
+# Written on Wed Mar 18 22:56:34 2026
+
+##### DESIGN INFO #######################################################
+
+Top View:                "fm_radio_top"
+Constraint File(s):      (none)
+
+
+
+
+##### SUMMARY ############################################################
+
+Found 0 issues in 0 out of 0 constraints
+
+
+##### DETAILS ############################################################
+
+
+
+Clock Relationships
+*******************
+
+Starting               Ending                 |     rise to rise     |     fall to fall     |     rise to fall     |     fall to rise                     
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+fm_radio_top|clock     fm_radio_top|clock     |     10.296           |     No paths         |     No paths         |     No paths                         
+=========================================================================================================================================================
+ Note: 'No paths' indicates there are no paths in the design for that pair of clock edges.
+       'Diff grp' indicates that paths exist but the starting clock and ending clock are in different clock groups.
+
+
+Unconstrained Start/End Points
+******************************
+
+p:in_din[0]
+p:in_din[1]
+p:in_din[2]
+p:in_din[3]
+p:in_din[4]
+p:in_din[5]
+p:in_din[6]
+p:in_din[7]
+p:in_din[8]
+p:in_din[9]
+p:in_din[10]
+p:in_din[11]
+p:in_din[12]
+p:in_din[13]
+p:in_din[14]
+p:in_din[15]
+p:in_din[16]
+p:in_din[17]
+p:in_din[18]
+p:in_din[19]
+p:in_din[20]
+p:in_din[21]
+p:in_din[22]
+p:in_din[23]
+p:in_din[24]
+p:in_din[25]
+p:in_din[26]
+p:in_din[27]
+p:in_din[28]
+p:in_din[29]
+p:in_din[30]
+p:in_din[31]
+p:in_din[32]
+p:in_din[33]
+p:in_din[34]
+p:in_din[35]
+p:in_din[36]
+p:in_din[37]
+p:in_din[38]
+p:in_din[39]
+p:in_din[40]
+p:in_din[41]
+p:in_din[42]
+p:in_din[43]
+p:in_din[44]
+p:in_din[45]
+p:in_din[46]
+p:in_din[47]
+p:in_din[48]
+p:in_din[49]
+p:in_din[50]
+p:in_din[51]
+p:in_din[52]
+p:in_din[53]
+p:in_din[54]
+p:in_din[55]
+p:in_din[56]
+p:in_din[57]
+p:in_din[58]
+p:in_din[59]
+p:in_din[60]
+p:in_din[61]
+p:in_din[62]
+p:in_din[63]
+p:in_full
+p:in_wr_en
+p:out_left_dout[0]
+p:out_left_dout[1]
+p:out_left_dout[2]
+p:out_left_dout[3]
+p:out_left_dout[4]
+p:out_left_dout[5]
+p:out_left_dout[6]
+p:out_left_dout[7]
+p:out_left_dout[8]
+p:out_left_dout[9]
+p:out_left_dout[10]
+p:out_left_dout[11]
+p:out_left_dout[12]
+p:out_left_dout[13]
+p:out_left_dout[14]
+p:out_left_dout[15]
+p:out_left_dout[16]
+p:out_left_dout[17]
+p:out_left_dout[18]
+p:out_left_dout[19]
+p:out_left_dout[20]
+p:out_left_dout[21]
+p:out_left_dout[22]
+p:out_left_dout[23]
+p:out_left_dout[24]
+p:out_left_dout[25]
+p:out_left_dout[26]
+p:out_left_dout[27]
+p:out_left_dout[28]
+p:out_left_dout[29]
+p:out_left_dout[30]
+p:out_left_dout[31]
+p:out_left_empty
+p:out_left_rd_en
+p:out_right_dout[0]
+p:out_right_dout[1]
+p:out_right_dout[2]
+p:out_right_dout[3]
+p:out_right_dout[4]
+p:out_right_dout[5]
+p:out_right_dout[6]
+p:out_right_dout[7]
+p:out_right_dout[8]
+p:out_right_dout[9]
+p:out_right_dout[10]
+p:out_right_dout[11]
+p:out_right_dout[12]
+p:out_right_dout[13]
+p:out_right_dout[14]
+p:out_right_dout[15]
+p:out_right_dout[16]
+p:out_right_dout[17]
+p:out_right_dout[18]
+p:out_right_dout[19]
+p:out_right_dout[20]
+p:out_right_dout[21]
+p:out_right_dout[22]
+p:out_right_dout[23]
+p:out_right_dout[24]
+p:out_right_dout[25]
+p:out_right_dout[26]
+p:out_right_dout[27]
+p:out_right_dout[28]
+p:out_right_dout[29]
+p:out_right_dout[30]
+p:out_right_dout[31]
+p:out_right_empty
+p:out_right_rd_en
+p:reset
+
+
+Inapplicable constraints
+************************
+
+(none)
+
+
+Applicable constraints with issues
+**********************************
+
+(none)
+
+
+Constraints with matching wildcard expressions
+**********************************************
+
+(none)
+
+
+Library Report
+**************
+
+
+# End of Constraint Checker Report

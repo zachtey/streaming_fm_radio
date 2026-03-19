@@ -1,0 +1,32 @@
+/vol/synopsys/fpga/O-2018.09-SP1/bin/c_hdl  -osyn  /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/synwork/seq_divider_comp.srs  -hdllog  /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/synlog/seq_divider_compiler.srr  -encrypt  -mp  4  -prodtype  synplify_premier  -licensetype  synplifypremierdp  -distcompmode 1 -verification_mode 0  -verilog  -prodtype  synplify_premier  -verification_mode 0 -infer_seqShift -primux -fixsmult -dspmac -nram -divnmod -continue_on_error -nostructver   -I /home/vcs5888/CE387/streaming_fm_radio/syn/  -I /vol/synopsys/fpga/O-2018.09-SP1/lib   -sysv  -devicelib  /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/altera.v  -devicelib  /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cycloneive.v  -devicelib  /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_mf.v  -devicelib  /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_lpm.v  -devicelib  /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_primitives.v  -encrypt  -pro  -dmgen  /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/dm  -auto_infer_blackbox 0 -proto -ui -fid2 -ram -sharing on -ll 2000 -autosm  -D_MULTIPLE_FILE_COMPILATION_UNIT_  -fast_synthesis 0  -lib work -fsysv /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_pkg.sv -lib work -fsysv /home/vcs5888/CE387/streaming_fm_radio/sv/demod.sv -lib work -fsysv /home/vcs5888/CE387/streaming_fm_radio/sv/add_sub.sv -lib work -fsysv /home/vcs5888/CE387/streaming_fm_radio/sv/fir.sv -lib work -fsysv /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv -lib work -fsysv /home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv -lib work -fsysv /home/vcs5888/CE387/streaming_fm_radio/sv/iir.sv -lib work -fsysv /home/vcs5888/CE387/streaming_fm_radio/sv/mult_gain.sv -lib work -fsysv /home/vcs5888/CE387/streaming_fm_radio/sv/seq_divider.sv -lib work -fsysv /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv  -jobname  "compiler" 
+relcom:/vol/synopsys/fpga/O-2018.09-SP1/bin/c_hdl -osyn ../synwork/seq_divider_comp.srs -hdllog ../synlog/seq_divider_compiler.srr -encrypt -mp 4 -prodtype synplify_premier -licensetype synplifypremierdp -distcompmode 1 -verification_mode 0 -verilog -prodtype synplify_premier -verification_mode 0 -infer_seqShift -primux -fixsmult -dspmac -nram -divnmod -continue_on_error -nostructver -I ../../ -I /vol/synopsys/fpga/O-2018.09-SP1/lib -sysv -devicelib /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/altera.v -devicelib /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cycloneive.v -devicelib /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_mf.v -devicelib /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_lpm.v -devicelib /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_primitives.v -encrypt -pro -dmgen ../dm -auto_infer_blackbox 0 -proto -ui -fid2 -ram -sharing on -ll 2000 -autosm -D_MULTIPLE_FILE_COMPILATION_UNIT_ -fast_synthesis 0 -lib work -fsysv ../../../sv/fm_radio_pkg.sv -lib work -fsysv ../../../sv/demod.sv -lib work -fsysv ../../../sv/add_sub.sv -lib work -fsysv ../../../sv/fir.sv -lib work -fsysv ../../../sv/fm_radio.sv -lib work -fsysv ../../../sv/helpers.sv -lib work -fsysv ../../../sv/iir.sv -lib work -fsysv ../../../sv/mult_gain.sv -lib work -fsysv ../../../sv/seq_divider.sv -lib work -fsysv ../../../sv/fm_radio_top.sv -jobname "compiler"
+rc:0 success:1 runtime:6
+file:../synwork/seq_divider_comp.srs|io:o|time:1773892591|size:83816|exec:0|csum:
+file:../synlog/seq_divider_compiler.srr|io:o|time:1773892591|size:30123|exec:0|csum:
+file:/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/altera.v|io:i|time:1543381811|size:761|exec:0|csum:530DBF8BEE396EFE8B33F0255371F1EA
+file:/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cycloneive.v|io:i|time:1543381840|size:248626|exec:0|csum:B7FC851277DB49C2CA5F418047EB2E4F
+file:/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_mf.v|io:i|time:1543381839|size:2618882|exec:0|csum:84794777C52804010B1D63698E285DB9
+file:/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_lpm.v|io:i|time:1543381839|size:14867|exec:0|csum:01D82E1D5975CD832C9D765243E5182D
+file:/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_primitives.v|io:i|time:1543381839|size:35286|exec:0|csum:C0AAD8CA21730C472D624582C058B929
+file:./-fsysv|io:i|time:0|size:-1|exec:0|csum:
+file:../../../sv/fm_radio_pkg.sv|io:i|time:1773879459|size:7413|exec:0|csum:6522A6064A6D9DF5B6D61EA7FA1D01B3
+file:./-fsysv|io:i|time:0|size:-1|exec:0|csum:
+file:../../../sv/demod.sv|io:i|time:1773891841|size:10746|exec:0|csum:7540200AD14524AE881C89367D448640
+file:./-fsysv|io:i|time:0|size:-1|exec:0|csum:
+file:../../../sv/add_sub.sv|io:i|time:1773891819|size:2374|exec:0|csum:6B549669F37D27F2596D95EF582812E1
+file:./-fsysv|io:i|time:0|size:-1|exec:0|csum:
+file:../../../sv/fir.sv|io:i|time:1773891165|size:6049|exec:0|csum:62EC36993E22FB07FE55637872AC1B3E
+file:./-fsysv|io:i|time:0|size:-1|exec:0|csum:
+file:../../../sv/fm_radio.sv|io:i|time:1773891890|size:13466|exec:0|csum:5A60D6CCBFF3F962566D7DA4EE7FB2C7
+file:./-fsysv|io:i|time:0|size:-1|exec:0|csum:
+file:../../../sv/helpers.sv|io:i|time:1773891855|size:8033|exec:0|csum:73BF610DC86952709B87796F285EC100
+file:./-fsysv|io:i|time:0|size:-1|exec:0|csum:
+file:../../../sv/iir.sv|io:i|time:1773890441|size:5085|exec:0|csum:31792E54AE713517364D82E8A5B92336
+file:./-fsysv|io:i|time:0|size:-1|exec:0|csum:
+file:../../../sv/mult_gain.sv|io:i|time:1773890029|size:3219|exec:0|csum:C73FA1B7E47B5DB56B81A4D37BD9F975
+file:./-fsysv|io:i|time:0|size:-1|exec:0|csum:
+file:../../../sv/seq_divider.sv|io:i|time:1773879231|size:2094|exec:0|csum:62AEF4B9FCD00392BDEDA9E05475698A
+file:./-fsysv|io:i|time:0|size:-1|exec:0|csum:
+file:../../../sv/fm_radio_top.sv|io:i|time:1773892206|size:4508|exec:0|csum:2E095F067A97BB0F69D7816A649FF911
+file:/vol/synopsys/fpga/O-2018.09-SP1/linux_a_64/c_hdl|io:i|time:1543382462|size:8760008|exec:1|csum:CF968C540087EF9F5288FFCDBF191EA5
+file:/vol/synopsys/fpga/O-2018.09-SP1/bin/c_hdl|io:i|time:1543382354|size:367|exec:1|csum:E52A0D56112AD6C22F02B648B6F508CE

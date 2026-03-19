@@ -36,8 +36,12 @@ module fir #(
     logic                     out_last_reg,  out_last_next;
 
     logic signed [ACC_W-1:0] acc_sum;
-    logic signed [ACC_W-1:0] prod_full;
     logic signed [ACC_W-1:0] prod_scaled;
+
+    // ----------------------------------------------------------------
+    // 32-bit intermediate for the wrapping multiply (matches C int*int)
+    // ----------------------------------------------------------------
+    logic signed [DATA_W-1:0] prod_32;
 
     logic signed [DATA_W-1:0] max_pos_data;
     logic signed [DATA_W-1:0] min_neg_data;
@@ -83,7 +87,7 @@ module fir #(
         out_last_next  = out_last_reg;
 
         acc_sum      = '0;
-        prod_full    = '0;
+        prod_32      = '0;
         prod_scaled  = '0;
 
         max_pos_data = {1'b0, {(DATA_W-1){1'b1}}};
@@ -115,15 +119,25 @@ module fir #(
             if (produce_output) begin
                 acc_sum = '0;
 
-                // Match C behavior:
-                // k=0 uses current input, later taps use previous history
                 for (k = 0; k < TAPS; k = k + 1) begin
+                    // --------------------------------------------------
+                    // Force 32-bit wrapping multiply FIRST, then
+                    // sign-extend to ACC_W for the dequantize.
+                    //
+                    // C does: y += DEQUANTIZE( coeff * x )
+                    //   where coeff*x is int*int = int (32-bit wrapping).
+                    //
+                    // Without this, SV widens both operands to ACC_W
+                    // (48 bits) before multiplying, preserving the full
+                    // mathematical product. That differs from C when
+                    // |coeff * x| > 2^31 (e.g. 599 * 9,743,360).
+                    // --------------------------------------------------
                     if (k == 0)
-                        prod_full = $signed(COEFFS[k]) * $signed(s_axis_tdata);
+                        prod_32 = COEFFS[k] * s_axis_tdata;
                     else
-                        prod_full = $signed(COEFFS[k]) * $signed(x_reg[k-1]);
+                        prod_32 = COEFFS[k] * x_reg[k-1];
 
-                    prod_scaled = trunc_div_pow2(prod_full);
+                    prod_scaled = trunc_div_pow2({{(ACC_W-DATA_W){prod_32[DATA_W-1]}}, prod_32});
                     acc_sum     = acc_sum + prod_scaled;
                 end
 

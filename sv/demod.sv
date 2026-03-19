@@ -1,4 +1,6 @@
 `timescale 1ns/1ps
+import fm_radio_pkg::*;
+
 
 // ============================================================================
 // FM quadrature demodulator

@@ -1,0 +1,1 @@
+-distcompmode -link    -encrypt       -top work.fm_radio_top -osyn /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/synwork/seq_divider_comp.srs /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/synwork//distcomp/distcomp0/distcomp0.srs /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/synwork//distcomp/distcomp1/distcomp1.srs    
