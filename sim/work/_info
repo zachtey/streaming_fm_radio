@@ -10,17 +10,17 @@ z2
 cModel Technology
 Z0 d/home/vcs5888/CE387/streaming_fm_radio/sim
 T_opt
-Z1 !s110 1773879567
-Vjz4A=A@4GjJmcWd=Of6OL1
-04 6 4 work iir_tb fast 0
-=1-a4bb6d3fede8-69bb410f-3e465-319ed4
+Z1 !s110 1773879886
+VBoz2NEa3ZOFRcRCBLz?mn3
+04 12 4 work mult_gain_tb fast 0
+=1-a4bb6d3fede8-69bb424e-4df39-31db53
 o-quiet -auto_acc_if_foreign -work work +acc
 Z2 tCvgOpt 0
 n@_opt
 OL;O;2020.1;71
 Xfm_radio_pkg
 Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-!s110 1773879566
+R1
 !i10b 1
 !s100 c2EQoNXggMYAaA]0KLIH`3
 Z4 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -37,74 +37,74 @@ Z5 OL;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1773879566.000000
+!s108 1773879885.000000
 !s107 ../sv/fm_radio_pkg.sv|
 !s90 -reportprogress|300|-sv|../sv/fm_radio_pkg.sv|
 !i113 0
-Z7 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z6 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R2
-viir
+vmult_gain
 R3
 R1
 !i10b 1
-!s100 f_P=i0l6DN<Ai=LY1j2=D0
+!s100 za=kNWXWjoAeOkUB=g98b3
 R4
-I]TCYA@>Q]9fz`n=:8Cg0G0
-Z8 VDg1SIo80bB@j0V0VzS_@n1
+IJkCfV57>4izW7T5XdIi_N1
+Z7 VDg1SIo80bB@j0V0VzS_@n1
 S1
 R0
-w1773879540
-8../sv/iir.sv
-F../sv/iir.sv
+w1773879725
+8../sv/mult_gain.sv
+F../sv/mult_gain.sv
 !i122 1
-L0 3 172
+L0 3 115
 R5
 r1
 !s85 0
 31
-R6
-!s107 ../sv/iir.sv|
-!s90 -reportprogress|300|-sv|../sv/iir.sv|
+Z8 !s108 1773879886.000000
+!s107 ../sv/mult_gain.sv|
+!s90 -reportprogress|300|-sv|../sv/mult_gain.sv|
 !i113 0
-R7
+R6
 R2
-viir_tb
+vmult_gain_tb
 R3
 Z9 DXx4 work 12 fm_radio_pkg 0 22 YK<h`AfKnFDVUKB0^HmGk2
-DXx4 work 14 iir_tb_sv_unit 0 22 62KCiMVdWjBb[;7Z2FL^`1
+DXx4 work 20 mult_gain_tb_sv_unit 0 22 bi@0m_G2PY^beF=Z@GKDj2
 R1
-R8
+R7
 r1
 !s85 0
 !i10b 1
-!s100 O[>e4T1?2PoA]K0hk^Omf2
-I3=DVI?ACKgSW13C5aP<NN2
-!s105 iir_tb_sv_unit
+!s100 ;`=C]@ePJEVb5[<1P4gC^2
+IG@>lzIWMADP[[W7l=?;^91
+!s105 mult_gain_tb_sv_unit
 S1
 R0
-Z10 w1773879491
-Z11 8../sv/iir_tb.sv
-Z12 F../sv/iir_tb.sv
+Z10 w1773879749
+Z11 8../sv/mult_gain_tb.sv
+Z12 F../sv/mult_gain_tb.sv
 !i122 2
-L0 4 220
+L0 4 263
 R5
 31
-Z13 !s108 1773879567.000000
-Z14 !s107 ../sv/iir_tb.sv|
-Z15 !s90 -reportprogress|300|-sv|../sv/iir_tb.sv|
+R8
+Z13 !s107 ../sv/mult_gain_tb.sv|
+Z14 !s90 -reportprogress|300|-sv|../sv/mult_gain_tb.sv|
 !i113 0
-R7
+R6
 R2
-Xiir_tb_sv_unit
+Xmult_gain_tb_sv_unit
 R3
 R9
 R1
-V62KCiMVdWjBb[;7Z2FL^`1
+Vbi@0m_G2PY^beF=Z@GKDj2
 r1
 !s85 0
 !i10b 1
-!s100 UFz;21`D3H^6i2]=7D1@a3
-I62KCiMVdWjBb[;7Z2FL^`1
+!s100 0n5G;P^DXbfR`z^K61Gk01
+Ibi@0m_G2PY^beF=Z@GKDj2
 !i103 1
 S1
 R0
@@ -115,9 +115,9 @@ R12
 L0 2 0
 R5
 31
+R8
 R13
 R14
-R15
 !i113 0
-R7
+R6
 R2
