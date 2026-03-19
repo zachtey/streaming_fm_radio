@@ -6,7 +6,7 @@ if {[file exists work]} {
 vlib work
 vmap work work
 
-# Match the built-in Questa UVM version
+# Match built-in Questa UVM
 set UVM_INC /vol/mentor/questa_sim-2019.3_2/questasim/verilog_src/uvm-1.1d/src
 
 # RTL
@@ -17,6 +17,8 @@ vlog -64 -sv ../sv/demod.sv
 vlog -64 -sv ../sv/mult_gain.sv
 vlog -64 -sv ../sv/add_sub.sv
 vlog -64 -sv ../sv/iir.sv
+vlog -64 -sv ../sv/helpers.sv
+vlog -64 -sv ../sv/fm_radio.sv
 vlog -64 -sv ../sv/fm_radio_top.sv
 
 # Interface
