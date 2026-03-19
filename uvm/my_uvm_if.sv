@@ -1,25 +1,14 @@
-// my_uvm_if.sv - interface for FFT streaming with FIFOs
-import uvm_pkg::*;
+interface my_uvm_if(input logic clock);
 
-interface my_uvm_if;
-  logic        clock;
-  logic        reset;
+    logic               reset;
 
-  // input FIFOs (testbench writes, DUT reads)
-  logic        in_r_full;
-  logic        in_r_wr_en;
-  logic [31:0] in_r_din;
-  
-  logic        in_i_full;
-  logic        in_i_wr_en;
-  logic [31:0] in_i_din;
+    logic [7:0]         iq_byte;
+    logic               iq_valid;
+    logic               iq_ready;
 
-  // output FIFOs (DUT writes, testbench reads)
-  logic        out_r_empty;
-  logic        out_r_rd_en;
-  logic [31:0] out_r_dout;
-  
-  logic        out_i_empty;
-  logic        out_i_rd_en;
-  logic [31:0] out_i_dout;
+    logic signed [31:0] out_left;
+    logic signed [31:0] out_right;
+    logic               out_valid;
+    logic               out_ready;
+
 endinterface

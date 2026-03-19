@@ -1,5 +1,4 @@
-`ifndef __GLOBALS__
-`define __GLOBALS__
-localparam int CLOCK_PERIOD = 10;
-
-`endif
+typedef enum int {
+    UVM_PASS = 0,
+    UVM_FAIL = 1
+} uvm_result_e;

@@ -1,4 +1,8 @@
+#!/bin/bash
+# Run UVM testbench for FM Radio
+
+# Source QuestaSim environment
 source /vol/eecs392/env/questasim.env
-mkdir -p lib
-make -f Makefile.questa dpi_lib32 LIBDIR=lib
-vsim -do ____.do
+
+# Run the simulation with the UVM .do file
+vsim -do fm_radio_uvm.do
