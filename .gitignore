@@ -20,3 +20,5 @@ transcript
 *.qtl
 *.wlf
 *.vcd
+
+sim/vsim.wlf
