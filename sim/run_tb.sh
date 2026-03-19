@@ -1,2 +1,2 @@
 source /vol/eecs392/env/modelsim.env
-vsim -do mult_gain_tb.do
+vsim -do fir_regression_tb.do

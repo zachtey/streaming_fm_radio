@@ -1,13 +1,14 @@
 `timescale 1ns/1ps
+import fm_radio_pkg::*;
 
 module fir #(
-    parameter int DATA_W      = 16,
-    parameter int COEFF_W     = 16,
+    parameter int DATA_W      = 32,
+    parameter int COEFF_W     = 32,
     parameter int ACC_W       = 48,
-    parameter int TAPS        = 20,
+    parameter int TAPS        = 32,
     parameter int DECIM       = 1,
-    parameter int SCALE_SHIFT = 15,
-    parameter string COEFF_FILE = "../src/channel_lpf_20tap.mem"
+    parameter int SCALE_SHIFT = 10,
+    parameter logic signed [COEFF_W-1:0] COEFFS [0:TAPS-1] = '{default:'0}
 )(
     input  logic                         clk,
     input  logic                         rst_n,
@@ -24,8 +25,6 @@ module fir #(
 );
 
     localparam int DECIM_W = (DECIM <= 1) ? 1 : $clog2(DECIM);
-
-    logic signed [COEFF_W-1:0] coeffs [0:TAPS-1];
 
     logic signed [DATA_W-1:0] x_reg  [0:TAPS-1];
     logic signed [DATA_W-1:0] x_next [0:TAPS-1];
@@ -48,19 +47,12 @@ module fir #(
     logic accept_input;
     logic produce_output;
 
-    initial begin
-        $readmemh(COEFF_FILE, coeffs);
-    end
-
     assign m_axis_tdata  = out_data_reg;
     assign m_axis_tvalid = out_valid_reg;
     assign m_axis_tlast  = out_last_reg;
 
     assign s_axis_tready = (~out_valid_reg) || m_axis_tready;
 
-    // Truncation toward zero:
-    // trunc(val / 2^SCALE_SHIFT)
-    // Matches MATLAB fix(...) and your dequantize_i(...)
     function automatic logic signed [ACC_W-1:0] trunc_div_pow2;
         input logic signed [ACC_W-1:0] val;
         logic signed [ACC_W-1:0] bias;
@@ -69,7 +61,7 @@ module fir #(
                 trunc_div_pow2 = val;
             end else begin
                 if (val < 0)
-                    bias = ({{(ACC_W-1){1'b0}},1'b1} <<< SCALE_SHIFT) - 1;
+                    bias = ({{(ACC_W-1){1'b0}}, 1'b1} <<< SCALE_SHIFT) - 1;
                 else
                     bias = '0;
 
@@ -79,7 +71,9 @@ module fir #(
     endfunction
 
     always_comb begin
-        for (int k = 0; k < TAPS; k++) begin
+        integer k;
+
+        for (k = 0; k < TAPS; k = k + 1) begin
             x_next[k] = x_reg[k];
         end
 
@@ -107,7 +101,7 @@ module fir #(
 
         if (accept_input) begin
             x_next[0] = s_axis_tdata;
-            for (int k = 1; k < TAPS; k++) begin
+            for (k = 1; k < TAPS; k = k + 1) begin
                 x_next[k] = x_reg[k-1];
             end
 
@@ -121,18 +115,18 @@ module fir #(
             if (produce_output) begin
                 acc_sum = '0;
 
-                // BIT TRUE AYAYAYAYAYAYAYAYA7
-                for (int k = 0; k < TAPS; k++) begin
+                // Match C behavior:
+                // k=0 uses current input, later taps use previous history
+                for (k = 0; k < TAPS; k = k + 1) begin
                     if (k == 0)
-                        prod_full = $signed(coeffs[k]) * $signed(s_axis_tdata);
+                        prod_full = $signed(COEFFS[k]) * $signed(s_axis_tdata);
                     else
-                        prod_full = $signed(coeffs[k]) * $signed(x_reg[k-1]);
+                        prod_full = $signed(COEFFS[k]) * $signed(x_reg[k-1]);
 
                     prod_scaled = trunc_div_pow2(prod_full);
                     acc_sum     = acc_sum + prod_scaled;
                 end
 
-                // Saturate final accumulated result to DATA_W
                 if (acc_sum > max_pos_ext)
                     out_data_next = max_pos_data;
                 else if (acc_sum < min_neg_ext)
@@ -147,8 +141,9 @@ module fir #(
     end
 
     always_ff @(posedge clk or negedge rst_n) begin
+        integer k;
         if (!rst_n) begin
-            for (int k = 0; k < TAPS; k++) begin
+            for (k = 0; k < TAPS; k = k + 1) begin
                 x_reg[k] <= '0;
             end
             decim_cnt_reg <= '0;
@@ -156,7 +151,7 @@ module fir #(
             out_valid_reg <= 1'b0;
             out_last_reg  <= 1'b0;
         end else begin
-            for (int k = 0; k < TAPS; k++) begin
+            for (k = 0; k < TAPS; k = k + 1) begin
                 x_reg[k] <= x_next[k];
             end
             decim_cnt_reg <= decim_cnt_next;
