@@ -31,3 +31,12 @@ sim/work/
 *.qtl
 *.vcd
 transcript
+
+sim/vsim.wlf
+*.wlf
+sim/work/
+*.qdb
+*.qpg
+*.qtl
+*.vcd
+transcript
