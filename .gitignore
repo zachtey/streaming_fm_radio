@@ -7,3 +7,5 @@ sim/demod_tb.vcd
 
 # simulation artifacts
 sim/work/
+transcript
+sim/transcript
