@@ -9,3 +9,14 @@ sim/demod_tb.vcd
 sim/work/
 transcript
 sim/transcript
+
+# simulation artifacts
+sim/work/
+sim/vsim.wlf
+sim/demod_tb.vcd
+transcript
+*.qdb
+*.qpg
+*.qtl
+*.wlf
+*.vcd
