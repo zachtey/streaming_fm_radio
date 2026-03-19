@@ -24,15 +24,28 @@ class my_uvm_monitor extends uvm_component;
     virtual task run_phase(uvm_phase phase);
         my_uvm_transaction tr;
 
+        vif.out_left_rd_en  <= 1'b0;
+        vif.out_right_rd_en <= 1'b0;
+
         wait(vif.reset == 1'b0);
 
         forever begin
+            @(negedge vif.clock);
+
+            if (!vif.out_left_empty && !vif.out_right_empty) begin
+                vif.out_left_rd_en  <= 1'b1;
+                vif.out_right_rd_en <= 1'b1;
+            end else begin
+                vif.out_left_rd_en  <= 1'b0;
+                vif.out_right_rd_en <= 1'b0;
+            end
+
             @(posedge vif.clock);
-            if (vif.out_valid && vif.out_ready) begin
+            if (vif.out_left_rd_en && vif.out_right_rd_en &&
+                !vif.out_left_empty && !vif.out_right_empty) begin
                 tr = my_uvm_transaction::type_id::create("mon_tr");
-                tr.out_left  = vif.out_left;
-                tr.out_right = vif.out_right;
-                tr.out_valid = 1'b1;
+                tr.out_left  = vif.out_left_dout;
+                tr.out_right = vif.out_right_dout;
                 ap.write(tr);
             end
         end

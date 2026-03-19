@@ -1,9 +1,0 @@
-@N: MF284 |Setting synthesis effort to medium for the design
-@N: MF915 |Option synthesis_strategy=advanced is enabled. 
-@N: MF248 |Running in 64-bit mode.
-@N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
-@N: MF284 |Setting synthesis effort to medium for the design
-@N: MH105 |UMR3 is only supported for HAPS-80.
-@N: MH105 |UMR3 is only supported for HAPS-80.
-@N: BN225 |Writing default property annotation file /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/seq_divider.sap.
-@N: MO225 :"/home/vcs5888/CE387/streaming_fm_radio/sv/add_sub.sv":39:4:39:12|There are no possible illegal states for state machine curr_state[1:0] (in view: work.add_sub(verilog)); safe FSM implementation is not required.

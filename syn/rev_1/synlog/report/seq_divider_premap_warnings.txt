@@ -1,2 +1,0 @@
-@W: FA406 |Environment variable QUARTUS_ROOTDIR not set. Cannot determine PAR version.
-@W: MT529 :"/home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv":253:4:253:12|Found inferred clock fm_radio_top|clock which controls 8564 sequential elements including fifo_in.count[7:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 

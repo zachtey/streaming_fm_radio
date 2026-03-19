@@ -1,0 +1,419 @@
+@N: MF284 |Setting synthesis effort to medium for the design
+@N: MF915 |Option synthesis_strategy=advanced is enabled. 
+@N: MF248 |Running in 64-bit mode.
+@N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
+@N: FA350 |Clearbox flow is not supported when QUARTUS_ROOTDIR is not set
+@N: FA351 |Clearbox flow is not supported because clearbox does not exist
+@N: MF284 |Setting synthesis effort to medium for the design
+@N: FA113 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Pipelining module pp_ba[31:0]
+@N: FA113 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Pipelining module pp_bb[31:0]
+@N: FA113 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Pipelining module pp_ab[31:0]
+@N: FA113 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Pipelining module pp_aa[31:0]
+@N: FA113 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Pipelining module a_reg[31:0]
+@N: FA113 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Pipelining module b_reg[31:0]
+@N: MT206 |Auto Constrain mode is enabled
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio_top(verilog) instance fifo_out_right.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio_top(verilog) instance fifo_out_left.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio_top(verilog) instance fifo_in.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_demod_lpr.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_demod_lmr.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_demod_pilot.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_lpr.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_bplmr.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_pilot.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_sq.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_hp.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_mult.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_lmr.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_add.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_sub.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_lde.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_rde.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_lg.count[7:0]  
+@N: MO230 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found up-down counter in view:work.fm_radio(verilog_1) instance fifo_rg.count[7:0]  
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/seq_divider.sv":36:4:36:12|Removing sequential instance q_reg[31] (in view: work.seq_divider(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/seq_divider.sv":36:4:36:12|Removing sequential instance r_reg[31] (in view: work.seq_divider(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/seq_divider.sv":36:4:36:12|Removing sequential instance q_reg[30] (in view: work.seq_divider(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_0 (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_1 (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_2 (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_3 (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_4 (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_5 (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_6 (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_7 (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_8 (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[0] (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[1] (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[2] (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[3] (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[4] (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[5] (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[6] (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[7] (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[8] (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[9] (in view: work.mult_gain_32s_10s_0s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_0 (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_1 (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_2 (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_3 (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_4 (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_5 (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_6 (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_7 (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_8 (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[0] (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[1] (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[2] (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[3] (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[4] (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[5] (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[6] (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[7] (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[8] (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[9] (in view: work.mult_gain_32s_10s_0s(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: MO225 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/add_sub.sv":39:4:39:12|There are no possible illegal states for state machine curr_state[1:0] (in view: work.add_sub(verilog)); safe FSM implementation is not required.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_0 (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_1 (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_2 (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_3 (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_4 (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_5 (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_6 (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_7 (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_8 (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[4] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[5] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[6] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[7] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[8] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[9] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[10] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[11] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[12] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[13] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[14] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[15] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[16] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[17] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[18] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[19] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[20] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[21] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[22] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[23] (in view: work.mult_gain_32s_10s_4s_1(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_0 (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_1 (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_2 (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_3 (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_4 (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_5 (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_6 (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_7 (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance NoName_8 (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[4] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[5] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[6] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[7] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[8] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[9] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[10] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[11] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[12] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Removing sequential instance y_reg[13] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[14] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[15] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[16] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[17] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[18] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[19] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[20] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[21] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[22] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance y_reg[23] (in view: work.mult_gain_32s_10s_4s_0(verilog)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_right.mem_115 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_right.mem_117 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_right.mem_119 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_right.mem_121 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_right.mem_123 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_right.mem_125 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_right.mem_127 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_left.mem_115 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_left.mem_117 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_left.mem_119 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_left.mem_121 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_left.mem_123 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_left.mem_125 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_out_left.mem_127 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_in.mem_259 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_in.mem_261 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_in.mem_263 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_in.mem_265 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_in.mem_267 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_in.mem_269 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_in.mem_271 (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lpr.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lpr.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lpr.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lpr.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lpr.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lpr.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lpr.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lmr.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lmr.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lmr.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lmr.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lmr.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lmr.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_lmr.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_pilot.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_pilot.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_pilot.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_pilot.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_pilot.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_pilot.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_demod_pilot.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lpr.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lpr.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lpr.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lpr.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lpr.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lpr.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lpr.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_bplmr.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_bplmr.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_bplmr.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_bplmr.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_bplmr.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_bplmr.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_bplmr.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_pilot.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_pilot.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_pilot.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_pilot.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_pilot.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_pilot.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_pilot.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sq.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sq.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sq.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sq.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sq.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sq.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sq.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_hp.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_hp.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_hp.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_hp.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_hp.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_hp.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_hp.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_mult.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_mult.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_mult.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_mult.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_mult.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_mult.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_mult.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lmr.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lmr.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lmr.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lmr.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lmr.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lmr.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lmr.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_add.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_add.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_add.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_add.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_add.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_add.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_add.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sub.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sub.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sub.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sub.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sub.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sub.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_sub.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lde.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lde.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lde.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lde.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lde.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lde.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lde.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rde.mem_131 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rde.mem_133 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rde.mem_135 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rde.mem_137 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rde.mem_139 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rde.mem_141 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rde.mem_143 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lg.mem_115 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lg.mem_117 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lg.mem_119 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lg.mem_121 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lg.mem_123 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lg.mem_125 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_lg.mem_127 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rg.mem_115 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rg.mem_117 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rg.mem_119 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rg.mem_121 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rg.mem_123 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rg.mem_125 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance fifo_rg.mem_127 (in view: work.fm_radio(verilog_1)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: MF135 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":178:4:178:12|RAM x_reg_CR31[31:0] (in view: work.fir_32s_32s_48s_32s_1s_10s_1s_5s_Z6(verilog)) is 32 words by 32 bits.
+@N: MF135 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":178:4:178:12|RAM x_reg_CR31[31:0] (in view: work.fir_32s_32s_48s_32s_8s_10s_3s_5s_Z2_1(verilog)) is 32 words by 32 bits.
+@N: MF135 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":178:4:178:12|RAM x_reg_CR31[31:0] (in view: work.fir_32s_32s_48s_32s_1s_10s_1s_5s_Z8(verilog)) is 32 words by 32 bits.
+@N: MF135 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":178:4:178:12|RAM x_reg_CR31[31:0] (in view: work.fir_32s_32s_48s_20s_1s_10s_1s_5s_Z1_1(verilog)) is 32 words by 32 bits.
+@N: MF135 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":178:4:178:12|RAM x_reg_CR31[31:0] (in view: work.fir_32s_32s_48s_32s_1s_10s_1s_5s_Z4(verilog)) is 32 words by 32 bits.
+@N: MF135 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":178:4:178:12|RAM x_reg_CR31[31:0] (in view: work.fir_32s_32s_48s_32s_8s_10s_3s_5s_Z2_0(verilog)) is 32 words by 32 bits.
+@N: MF135 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":178:4:178:12|RAM x_reg_CR31[31:0] (in view: work.fir_32s_32s_48s_20s_1s_10s_1s_5s_Z1_0(verilog)) is 32 words by 32 bits.
+@N: MO106 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":142:30:142:50|Found ROM un4_prod_32[10:0] (in view: work.fir_32s_32s_48s_20s_1s_10s_1s_5s_Z1_1(verilog)) with 20 words by 11 bits.
+@N: MO106 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":142:30:142:50|Found ROM un4_prod_32[10:0] (in view: work.fir_32s_32s_48s_20s_1s_10s_1s_5s_Z1_0(verilog)) with 20 words by 11 bits.
+@N: MO106 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":142:30:142:50|Found ROM un15_prod_32[10:0] (in view: work.fir_32s_32s_48s_32s_8s_10s_3s_5s_Z2_0(verilog)) with 32 words by 11 bits.
+@N: MO106 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":142:30:142:50|Found ROM un25_prod_32[8:0] (in view: work.fir_32s_32s_48s_32s_1s_10s_1s_5s_Z4(verilog)) with 32 words by 9 bits.
+@N: MO106 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":142:30:142:50|Found ROM un36_prod_32[9:0] (in view: work.fir_32s_32s_48s_32s_1s_10s_1s_5s_Z6(verilog)) with 32 words by 10 bits.
+@N: MO106 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":142:30:142:50|Found ROM un46_prod_32[8:0] (in view: work.fir_32s_32s_48s_32s_1s_10s_1s_5s_Z8(verilog)) with 32 words by 9 bits.
+@N: MO106 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":142:30:142:50|Found ROM un15_prod_32[10:0] (in view: work.fir_32s_32s_48s_32s_8s_10s_3s_5s_Z2_1(verilog)) with 32 words by 11 bits.
+@N: MF794 |RAM fifo_demod_lpr.mem[31:0] required 532 registers during mapping 
+@N: MF794 |RAM fifo_in.mem[63:0] required 66 registers during mapping 
+@N: FA113 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":138:24:138:44|Pipelining module angle_product[31:2]. For more information, search for "pipelining" in Online Help.
+@N: MF169 :|Pushed in register NoName.
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/seq_divider.sv":36:4:36:12|Pushed in register q_reg[31:0].
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Pushed in register q_sign.
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Pushed in register step[10:0].
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/seq_divider.sv":36:4:36:12|Pushed in register active.
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/seq_divider.sv":36:4:36:12|Pushed in register done.
+@N: FA113 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio.sv":212:6:212:13|Pipelining module u_square. For more information, search for "pipelining" in Online Help.
+@N: MF169 :|Pushed in register NoName.
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio_top.sv":105:13:105:22|Pushed in register u_fm_radio.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[31] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[30] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[29] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[28] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[27] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[26] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[25] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[24] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[23] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[22] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[21] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[20] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[19] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[18] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[17] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[16] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[15] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[14] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[13] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[12] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[11] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[10] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[9] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[8] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[7] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[6] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[5] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[4] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[3] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[2] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[1] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Removing sequential instance u_fm_radio.u_demod.u_demod.im_z1[0] (in view: VhdlGenLib.retime_0_25(retime_moves)) of type view:PrimLib.dffre(prim) because it does not drive other instances.
+@N: FA113 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":35:25:35:60|Pipelining module un44_trunc_q10[31:0]. For more information, search for "pipelining" in Online Help.
+@N: MF169 :|Pushed in register NoName.
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":162:10:162:16|Pushed in register u_demod.
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Pushed in register neg_y.
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Pushed in register step[10:0].
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":144:4:144:12|Pushed in register im_z1[31:0].
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":178:4:178:12|Pushed in register out_data_reg[31:0].
+@N: FA113 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio.sv":261:6:261:12|Pipelining module u_mult2. For more information, search for "pipelining" in Online Help.
+@N: MF169 :|Pushed in register NoName.
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Pushed in register y_reg[31:0].
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":58:4:58:12|Pushed in register curr_state[2:0].
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio_top.sv":105:13:105:22|Pushed in register u_fm_radio.
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Pushed in register mem\\\[0\\\].
+@N: MF169 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":178:4:178:12|Pushed in register out_data_reg[31:0].
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Removing sequential instance u_fm_radio.fifo_lpr.rd_ptr[6] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Removing sequential instance u_fm_radio.fifo_lpr.rd_ptr[5] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Removing sequential instance u_fm_radio.fifo_lpr.rd_ptr[4] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Removing sequential instance u_fm_radio.fifo_lpr.rd_ptr[2] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Removing sequential instance u_fm_radio.fifo_lpr.rd_ptr[0] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance fifo_out_right.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_rde.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_rg.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_lde.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_lg.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_pilot.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_demod_lmr.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_bplmr.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_lmr.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_lpr.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_hp.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_sq.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_mult.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_sub.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance u_fm_radio.fifo_add.wr_ptr[6:0] 
+@N: MO231 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":250:4:250:12|Found counter in view:work.fm_radio_top(verilog) instance fifo_in.wr_ptr[6:0] 
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":162:10:162:16|Removing sequential instance u_fm_radio.u_demod.u_demod.re_z1[17] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":162:10:162:16|Removing sequential instance u_fm_radio.u_demod.u_demod.re_z1[16] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":162:10:162:16|Removing sequential instance u_fm_radio.u_demod.u_demod.re_z1[15] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":162:10:162:16|Removing sequential instance u_fm_radio.u_demod.u_demod.re_z1[14] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[24] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[25] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[26] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[27] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[28] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[29] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[30] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[31] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[32] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[33] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[24] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[25] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[26] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[27] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[28] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[29] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[30] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[31] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[32] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[33] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_iir_left.y_hist\[0\]_2[27] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_iir_right.y_hist\[0\]_2[27] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[34] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[35] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[36] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[37] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[38] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[39] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[40] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[41] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[42] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_left.y_reg[43] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[34] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[35] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[36] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[37] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[38] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[39] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[40] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[41] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[42] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: BN362 :|Removing sequential instance u_fm_radio.u_gain_right.y_reg[43] (in view: work.fm_radio_top(verilog)) of type view:PrimLib.dffr(prim) because it does not drive other instances.
+@N: MO106 :"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":162:10:162:16|Found ROM u_fm_radio.u_demod.u_demod.angle_product_mu_0Rom[2:0] (in view: work.fm_radio_top(verilog)) with 8 words by 3 bits.
+@N: MF794 |RAM fifo_demod_lpr.mem[31:0] required 514 registers during mapping 
+@N: MF794 |RAM fifo_in.mem[63:0] required 66 registers during mapping 
+@N: FA443 |10 sequential registers and 16 combinational logic cells added via dsp, datapath, or control separation driver replication. 
+@N: FA444 |62 sequential registers and / or combinational logic cells added using replication. 
+@N: BW103 |The default time unit for the Synopsys Constraint File (SDC or FDC) is 1ns.
+@N: BW107 |Synopsys Constraint File capacitance units using default value of 1pF 
+@N: MT320 |This timing report is an estimate of place and route data. For final timing results, use the FPGA vendor place and route report.
+@N: MT322 |Clock constraints include only register-to-register paths associated with each individual clock.
+@N: FA174 |The following device usage report estimates place and route data. Please look at the place and route report for final resource usage.

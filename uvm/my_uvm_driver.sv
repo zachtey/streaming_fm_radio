@@ -21,9 +21,10 @@ class my_uvm_driver extends uvm_driver #(my_uvm_transaction);
     virtual task run_phase(uvm_phase phase);
         my_uvm_transaction tr;
 
-        vif.iq_valid <= 1'b0;
-        vif.iq_byte  <= '0;
-        vif.out_ready <= 1'b1;
+        vif.in_wr_en        <= 1'b0;
+        vif.in_din          <= '0;
+        vif.out_left_rd_en  <= 1'b0;
+        vif.out_right_rd_en <= 1'b0;
 
         wait(vif.reset == 1'b0);
 
@@ -31,18 +32,18 @@ class my_uvm_driver extends uvm_driver #(my_uvm_transaction);
             seq_item_port.get_next_item(tr);
 
             @(negedge vif.clock);
-            while (!vif.iq_ready) begin
-                vif.iq_valid <= 1'b0;
-                vif.iq_byte  <= '0;
+            while (vif.in_full) begin
+                vif.in_wr_en <= 1'b0;
+                vif.in_din   <= '0;
                 @(negedge vif.clock);
             end
 
-            vif.iq_byte  <= tr.iq_byte;
-            vif.iq_valid <= 1'b1;
+            vif.in_din   <= {tr.in_i, tr.in_q};
+            vif.in_wr_en <= 1'b1;
 
             @(negedge vif.clock);
-            vif.iq_valid <= 1'b0;
-            vif.iq_byte  <= '0;
+            vif.in_wr_en <= 1'b0;
+            vif.in_din   <= '0;
 
             seq_item_port.item_done();
         end

@@ -8,7 +8,7 @@ Tool: Synplify (R) Premier
 Build: O-2018.09-SP1
 Install: /vol/synopsys/fpga/O-2018.09-SP1
 OS: Red Hat Enterprise Linux 8.10 (Ootpa)
-Hostname: batgirl.ece.northwestern.edu
+Hostname: joker.ece.northwestern.edu
 max virtual memory: unlimited (bytes)
 max user processes: 126617
 max stack size: 8388608 (bytes)
@@ -17,99 +17,71 @@ max stack size: 8388608 (bytes)
 Implementation : rev_1
 Synopsys HDL compiler and linker, Version comp2018q4p1, Build 004R, Built Nov 27 2018 21:19:49
 
-Modified Files: 22
+Modified Files: 3
 FID:  path (prevtimestamp, timestamp)
-0        /home/vcs5888/CE387/streaming_fm_radio/sv/add_sub.sv (N/A, 2026-03-18 22:43:39)
-1        /home/vcs5888/CE387/streaming_fm_radio/sv/demod.sv (N/A, 2026-03-18 22:44:01)
-2        /home/vcs5888/CE387/streaming_fm_radio/sv/fir.sv (N/A, 2026-03-18 22:32:45)
-3        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50)
-4        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_pkg.sv (N/A, 2026-03-18 19:17:39)
-5        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06)
-6        /home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv (N/A, 2026-03-18 22:44:15)
-7        /home/vcs5888/CE387/streaming_fm_radio/sv/iir.sv (N/A, 2026-03-18 22:20:41)
-8        /home/vcs5888/CE387/streaming_fm_radio/sv/mult_gain.sv (N/A, 2026-03-18 22:13:49)
-9        /home/vcs5888/CE387/streaming_fm_radio/sv/seq_divider.sv (N/A, 2026-03-18 19:13:51)
-10       /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/synwork//distcomp/distcomp0/distcomp0.xmr (N/A, 2026-03-18 22:56:27)
-11       /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/synwork//distcomp/distcomp1/distcomp1.xmr (N/A, 2026-03-18 22:56:27)
-12       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/altera.v (N/A, 2018-11-27 23:10:11)
-13       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_lpm.v (N/A, 2018-11-27 23:10:39)
-14       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_mf.v (N/A, 2018-11-27 23:10:39)
-15       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_primitives.v (N/A, 2018-11-27 23:10:39)
-16       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cycloneive.v (N/A, 2018-11-27 23:10:40)
-17       /vol/synopsys/fpga/O-2018.09-SP1/lib/synip/hcei/zceistubs.v (N/A, 2018-11-27 23:12:11)
-18       /vol/synopsys/fpga/O-2018.09-SP1/lib/vlog/hypermods.v (N/A, 2018-11-27 23:17:48)
-19       /vol/synopsys/fpga/O-2018.09-SP1/lib/vlog/scemi_objects.v (N/A, 2018-11-27 23:17:48)
-20       /vol/synopsys/fpga/O-2018.09-SP1/lib/vlog/scemi_pipes.svh (N/A, 2018-11-27 23:17:48)
-21       /vol/synopsys/fpga/O-2018.09-SP1/lib/vlog/umr_capim.v (N/A, 2018-08-08 02:43:25)
+1        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv (2026-03-18 23:12:39, 2026-03-18 23:55:44)
+3        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv (2026-03-18 23:12:39, 2026-03-18 23:59:48)
+7        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv (2026-03-18 23:12:39, 2026-03-18 23:56:14)
 
 *******************************************************************
-Modules that may have changed as a result of file changes: 12
+Modules that may have changed as a result of file changes: 8
 MID:  lib.cell.view
 0        work.add_sub.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/add_sub.sv (N/A, 2026-03-18 22:43:39) <-- (module definition)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (may instantiate this module)
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv (2026-03-18 23:12:39, 2026-03-18 23:55:44) <-- (may instantiate this module)
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv (2026-03-18 23:12:39, 2026-03-18 23:59:48) <-- (may instantiate this module)
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv (2026-03-18 23:12:39, 2026-03-18 23:56:14) <-- (may instantiate this module)
 1        work.channel_fir_pair.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv (N/A, 2026-03-18 22:44:15) <-- (module definition)
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv (2026-03-18 23:12:39, 2026-03-18 23:56:14) <-- (module definition)
 2        work.demod.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/add_sub.sv (N/A, 2026-03-18 22:43:39) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/demod.sv (N/A, 2026-03-18 22:44:01) <-- (module definition)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fir.sv (N/A, 2026-03-18 22:32:45) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_pkg.sv (N/A, 2026-03-18 19:17:39) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv (N/A, 2026-03-18 22:44:15) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/iir.sv (N/A, 2026-03-18 22:20:41) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/mult_gain.sv (N/A, 2026-03-18 22:13:49) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/seq_divider.sv (N/A, 2026-03-18 19:13:51) <-- (may instantiate this module)
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv (2026-03-18 23:12:39, 2026-03-18 23:55:44) <-- (module definition)
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv (2026-03-18 23:12:39, 2026-03-18 23:56:14) <-- (may instantiate this module)
 3        work.demod_axis_wrap.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv (N/A, 2026-03-18 22:44:15) <-- (module definition)
-4        work.fir.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fir.sv (N/A, 2026-03-18 22:32:45) <-- (module definition)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv (N/A, 2026-03-18 22:44:15) <-- (may instantiate this module)
-5        work.fir_fifo_wrap.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv (N/A, 2026-03-18 22:44:15) <-- (module definition)
-6        work.fm_radio.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50) <-- (module definition)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (may instantiate this module)
-7        work.fm_radio_top.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (module definition)
-8        work.iir.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/iir.sv (N/A, 2026-03-18 22:20:41) <-- (module definition)
-9        work.mult_gain.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/mult_gain.sv (N/A, 2026-03-18 22:13:49) <-- (module definition)
-10       work.seq_divider.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/add_sub.sv (N/A, 2026-03-18 22:43:39) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/demod.sv (N/A, 2026-03-18 22:44:01) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fir.sv (N/A, 2026-03-18 22:32:45) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_pkg.sv (N/A, 2026-03-18 19:17:39) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv (N/A, 2026-03-18 22:44:15) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/iir.sv (N/A, 2026-03-18 22:20:41) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/mult_gain.sv (N/A, 2026-03-18 22:13:49) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/seq_divider.sv (N/A, 2026-03-18 19:13:51) <-- (module definition)
-11       work.sync_fifo.verilog may have changed because the following files changed:
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv (N/A, 2026-03-18 22:44:50) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv (N/A, 2026-03-18 22:50:06) <-- (may instantiate this module)
-                        /home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv (N/A, 2026-03-18 22:44:15) <-- (module definition)
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv (2026-03-18 23:12:39, 2026-03-18 23:56:14) <-- (module definition)
+5        work.fir.verilog may have changed because the following files changed:
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv (2026-03-18 23:12:39, 2026-03-18 23:59:48) <-- (module definition)
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv (2026-03-18 23:12:39, 2026-03-18 23:56:14) <-- (may instantiate this module)
+6        work.fir_fifo_wrap.verilog may have changed because the following files changed:
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv (2026-03-18 23:12:39, 2026-03-18 23:56:14) <-- (module definition)
+11       work.seq_divider.verilog may have changed because the following files changed:
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv (2026-03-18 23:12:39, 2026-03-18 23:55:44) <-- (may instantiate this module)
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv (2026-03-18 23:12:39, 2026-03-18 23:56:14) <-- (may instantiate this module)
+12       work.sync_fifo.verilog may have changed because the following files changed:
+                        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv (2026-03-18 23:12:39, 2026-03-18 23:56:14) <-- (module definition)
 
 *******************************************************************
-Unmodified files: 0
+Unmodified files: 25
 FID:  path (timestamp)
+0        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/add_sub.sv (2026-03-18 23:12:39)
+2        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fifo.sv (2026-03-13 13:34:53)
+4        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio.sv (2026-03-18 23:12:39)
+5        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio_pkg.sv (2026-03-18 20:32:25)
+6        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio_top.sv (2026-03-18 23:12:39)
+8        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/iir.sv (2026-03-18 23:12:39)
+9        /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv (2026-03-18 23:12:39)
+10       /home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/seq_divider.sv (2026-03-18 22:31:35)
+11       /home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/rev_1/synwork//distcomp/distcomp0/distcomp0.xmr (2026-03-18 23:35:23)
+12       /home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/rev_1/synwork//distcomp/distcomp1/distcomp1.xmr (2026-03-18 23:35:23)
+13       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/altera.v (2018-11-27 23:10:11)
+14       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/altera_mult_add.v (2018-11-27 23:10:11)
+15       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_lpm.v (2018-11-27 23:10:39)
+16       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_mf.v (2018-11-27 23:10:39)
+17       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_primitives.v (2018-11-27 23:10:39)
+18       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cyclonev.v (2018-11-27 23:10:40)
+19       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cyclonev_atoms.v (2018-11-27 23:10:40)
+20       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cyclonev_hps_atoms.sv (2018-11-27 23:10:40)
+21       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cyclonev_hssi_atoms.v (2018-11-27 23:10:40)
+22       /vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cyclonev_pcie_hip_atoms.v (2018-11-27 23:10:40)
+23       /vol/synopsys/fpga/O-2018.09-SP1/lib/synip/hcei/zceistubs.v (2018-11-27 23:12:11)
+24       /vol/synopsys/fpga/O-2018.09-SP1/lib/vlog/hypermods.v (2018-11-27 23:17:48)
+25       /vol/synopsys/fpga/O-2018.09-SP1/lib/vlog/scemi_objects.v (2018-11-27 23:17:48)
+26       /vol/synopsys/fpga/O-2018.09-SP1/lib/vlog/scemi_pipes.svh (2018-11-27 23:17:48)
+27       /vol/synopsys/fpga/O-2018.09-SP1/lib/vlog/umr_capim.v (2018-08-08 02:43:25)
 
 *******************************************************************
-Unchanged modules: 0
+Unchanged modules: 5
 MID:  lib.cell.view
+4        work.fifo.verilog
+7        work.fm_radio.verilog
+8        work.fm_radio_top.verilog
+9        work.iir.verilog
+10       work.mult_gain.verilog

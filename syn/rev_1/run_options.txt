@@ -1,20 +1,21 @@
 #--  Synopsys, Inc.
 #--  Version O-2018.09-SP1
-#--  Project file /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/run_options.txt
-#--  Written on Wed Mar 18 22:56:26 2026
+#--  Project file /home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/rev_1/run_options.txt
+#--  Written on Thu Mar 19 00:06:17 2026
 
 
 #project files
 add_file -verilog -vlog_std sysv "../sv/fm_radio_pkg.sv"
-add_file -verilog -vlog_std sysv "../sv/demod.sv"
 add_file -verilog -vlog_std sysv "../sv/add_sub.sv"
+add_file -verilog -vlog_std sysv "../sv/demod.sv"
+add_file -verilog -vlog_std sysv "../sv/fifo.sv"
 add_file -verilog -vlog_std sysv "../sv/fir.sv"
 add_file -verilog -vlog_std sysv "../sv/fm_radio.sv"
-add_file -verilog -vlog_std sysv "../sv/helpers.sv"
-add_file -verilog -vlog_std sysv "../sv/iir.sv"
-add_file -verilog -vlog_std sysv "../sv/mult_gain.sv"
-add_file -verilog -vlog_std sysv "../sv/seq_divider.sv"
 add_file -verilog -vlog_std sysv "../sv/fm_radio_top.sv"
+add_file -verilog -vlog_std sysv "../sv/helpers.sv"
+add_file -verilog -vlog_std sysv "../sv/mult_gain.sv"
+add_file -verilog -vlog_std sysv "../sv/iir.sv"
+add_file -verilog -vlog_std sysv "../sv/seq_divider.sv"
 
 
 
@@ -31,10 +32,10 @@ set_option -project_relative_includes 1
 set_option -job par_1 -add par
 
 #device options
-set_option -technology CYCLONEIV-E
-set_option -part EP4CE6
-set_option -package EA22
-set_option -speed_grade -7
+set_option -technology CYCLONEV
+set_option -part 5CGXFC7C6
+set_option -package FC23
+set_option -speed_grade -6
 set_option -part_companion ""
 
 #compilation/mapping options
@@ -79,7 +80,7 @@ set_option -auto_infer_blackbox 0
 set_option -write_apr_constraint 1
 
 #set result format/file last
-project -result_file "rev_1/seq_divider.vqm"
+project -result_file "rev_1/fm_radio.vqm"
 
 #design plan options
 impl -active "rev_1"

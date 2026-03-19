@@ -1,0 +1,13 @@
+#--  Synopsys, Inc.
+#--  Version O-2018.09-SP1
+#--  Project file /home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/fm_radio.prd
+#--  Written on Thu Mar 19 00:05:58 2026
+
+#
+### Watch Implementation type ###
+#
+watch_impl -all
+#
+### Watch Implementation properties ###
+#
+watch_prop -clear

@@ -1,0 +1,174 @@
+
+fsm_encoding {18178417811} sequential
+
+fsm_state_encoding {18178417811} ST_WAIT {00}
+
+fsm_state_encoding {18178417811} ST_MAC {01}
+
+fsm_state_encoding {18178417811} ST_HOLD {10}
+
+fsm_registers {18178417811} {state_reg[1]}  {state_reg[0]} 
+
+fsm_encoding {18178417811} sequential
+
+fsm_state_encoding {18178417811} ST_WAIT {00}
+
+fsm_state_encoding {18178417811} ST_MAC {01}
+
+fsm_state_encoding {18178417811} ST_HOLD {10}
+
+fsm_registers {18178417811} {state_reg[1]}  {state_reg[0]} 
+
+fsm_encoding {2017241729} sequential
+
+fsm_state_encoding {2017241729} ST_IDLE {00}
+
+fsm_state_encoding {2017241729} ST_BUSY {01}
+
+fsm_state_encoding {2017241729} ST_HOLD {10}
+
+fsm_registers {2017241729} {state[1]}  {state[0]} 
+
+fsm_encoding {17144414410} onehot
+
+fsm_state_encoding {17144414410} IDLE {00000000001}
+
+fsm_state_encoding {17144414410} CONJUGATE_PROD {00000000010}
+
+fsm_state_encoding {17144414410} SCALE_PROD {00000000100}
+
+fsm_state_encoding {17144414410} PHASE_SETUP {00000001000}
+
+fsm_state_encoding {17144414410} PHASE_LOAD {00000010000}
+
+fsm_state_encoding {17144414410} PHASE_DIVIDE {00000100000}
+
+fsm_state_encoding {17144414410} PHASE_WEIGHT {00001000000}
+
+fsm_state_encoding {17144414410} PHASE_RESOLVE {00010000000}
+
+fsm_state_encoding {17144414410} APPLY_GAIN {00100000000}
+
+fsm_state_encoding {17144414410} SCALE_OUTPUT {01000000000}
+
+fsm_state_encoding {17144414410} EMIT {10000000000}
+
+fsm_registers {17144414410} {step[10]}  {step[9]}  {step[8]}  {step[7]}  {step[6]}  {step[5]}  {step[4]}  {step[3]}  {step[2]}  {step[1]}  {step[0]} 
+
+fsm_encoding {1817841788} sequential
+
+fsm_state_encoding {1817841788} ST_WAIT {00}
+
+fsm_state_encoding {1817841788} ST_MAC {01}
+
+fsm_state_encoding {1817841788} ST_HOLD {10}
+
+fsm_registers {1817841788} {state_reg[1]}  {state_reg[0]} 
+
+fsm_encoding {1817841787} sequential
+
+fsm_state_encoding {1817841787} ST_WAIT {00}
+
+fsm_state_encoding {1817841787} ST_MAC {01}
+
+fsm_state_encoding {1817841787} ST_HOLD {10}
+
+fsm_registers {1817841787} {state_reg[1]}  {state_reg[0]} 
+
+fsm_encoding {1817841786} sequential
+
+fsm_state_encoding {1817841786} ST_WAIT {00}
+
+fsm_state_encoding {1817841786} ST_MAC {01}
+
+fsm_state_encoding {1817841786} ST_HOLD {10}
+
+fsm_registers {1817841786} {state_reg[1]}  {state_reg[0]} 
+
+fsm_encoding {21584585} sequential
+
+fsm_state_encoding {21584585} ST_FETCH {00}
+
+fsm_state_encoding {21584585} ST_CALC {01}
+
+fsm_state_encoding {21584585} ST_PUSH {10}
+
+fsm_registers {21584585} {curr_state[1]}  {curr_state[0]} 
+
+fsm_encoding {1817841784} sequential
+
+fsm_state_encoding {1817841784} ST_WAIT {00}
+
+fsm_state_encoding {1817841784} ST_MAC {01}
+
+fsm_state_encoding {1817841784} ST_HOLD {10}
+
+fsm_registers {1817841784} {state_reg[1]}  {state_reg[0]} 
+
+fsm_encoding {21584585} sequential
+
+fsm_state_encoding {21584585} ST_FETCH {00}
+
+fsm_state_encoding {21584585} ST_CALC {01}
+
+fsm_state_encoding {21584585} ST_PUSH {10}
+
+fsm_registers {21584585} {curr_state[1]}  {curr_state[0]} 
+
+fsm_encoding {1817841788} sequential
+
+fsm_state_encoding {1817841788} ST_WAIT {00}
+
+fsm_state_encoding {1817841788} ST_MAC {01}
+
+fsm_state_encoding {1817841788} ST_HOLD {10}
+
+fsm_registers {1817841788} {state_reg[1]}  {state_reg[0]} 
+
+fsm_encoding {16394393} sequential
+
+fsm_state_encoding {16394393} ST_FETCH {0}
+
+fsm_state_encoding {16394393} ST_PUSH {1}
+
+fsm_registers {16394393} {curr_state[0]} 
+
+fsm_encoding {22674672} sequential
+
+fsm_state_encoding {22674672} ST_WAIT {00}
+
+fsm_state_encoding {22674672} ST_CALC {01}
+
+fsm_state_encoding {22674672} ST_SEND {10}
+
+fsm_registers {22674672} {curr_state[1]}  {curr_state[0]} 
+
+fsm_encoding {22674672} sequential
+
+fsm_state_encoding {22674672} ST_WAIT {00}
+
+fsm_state_encoding {22674672} ST_CALC {01}
+
+fsm_state_encoding {22674672} ST_SEND {10}
+
+fsm_registers {22674672} {curr_state[1]}  {curr_state[0]} 
+
+fsm_encoding {21584581} sequential
+
+fsm_state_encoding {21584581} ST_FETCH {00}
+
+fsm_state_encoding {21584581} ST_CALC {01}
+
+fsm_state_encoding {21584581} ST_PUSH {10}
+
+fsm_registers {21584581} {curr_state[1]}  {curr_state[0]} 
+
+fsm_encoding {21584581} sequential
+
+fsm_state_encoding {21584581} ST_FETCH {00}
+
+fsm_state_encoding {21584581} ST_CALC {01}
+
+fsm_state_encoding {21584581} ST_PUSH {10}
+
+fsm_registers {21584581} {curr_state[1]}  {curr_state[0]} 

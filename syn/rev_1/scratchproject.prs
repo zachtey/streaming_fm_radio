@@ -1,39 +1,40 @@
 #--  Synopsys, Inc.
 #--  Version O-2018.09-SP1
-#--  Project file /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/scratchproject.prs
+#--  Project file /home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/rev_1/scratchproject.prs
 
 #project files
-add_file -verilog -vlog_std sysv "/home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_pkg.sv"
-add_file -verilog -vlog_std sysv "/home/vcs5888/CE387/streaming_fm_radio/sv/demod.sv"
-add_file -verilog -vlog_std sysv "/home/vcs5888/CE387/streaming_fm_radio/sv/add_sub.sv"
-add_file -verilog -vlog_std sysv "/home/vcs5888/CE387/streaming_fm_radio/sv/fir.sv"
-add_file -verilog -vlog_std sysv "/home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv"
-add_file -verilog -vlog_std sysv "/home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv"
-add_file -verilog -vlog_std sysv "/home/vcs5888/CE387/streaming_fm_radio/sv/iir.sv"
-add_file -verilog -vlog_std sysv "/home/vcs5888/CE387/streaming_fm_radio/sv/mult_gain.sv"
-add_file -verilog -vlog_std sysv "/home/vcs5888/CE387/streaming_fm_radio/sv/seq_divider.sv"
-add_file -verilog -vlog_std sysv "/home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv"
+add_file -verilog -vlog_std sysv "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio_pkg.sv"
+add_file -verilog -vlog_std sysv "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/add_sub.sv"
+add_file -verilog -vlog_std sysv "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv"
+add_file -verilog -vlog_std sysv "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fifo.sv"
+add_file -verilog -vlog_std sysv "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv"
+add_file -verilog -vlog_std sysv "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio.sv"
+add_file -verilog -vlog_std sysv "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio_top.sv"
+add_file -verilog -vlog_std sysv "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv"
+add_file -verilog -vlog_std sysv "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv"
+add_file -verilog -vlog_std sysv "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/iir.sv"
+add_file -verilog -vlog_std sysv "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/seq_divider.sv"
 
 
 
 #implementation: "rev_1"
-impl -add /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1 -type fpga
+impl -add /home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/rev_1 -type fpga
 
 #
 #implementation attributes
 
 set_option -vlog_std sysv
 set_option -project_relative_includes 1
-set_option -include_path {/home/vcs5888/CE387/streaming_fm_radio/syn/}
+set_option -include_path {/home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/}
 
 #par_1 attributes
 set_option -job par_1 -add par
 
 #device options
-set_option -technology CYCLONEIV-E
-set_option -part EP4CE6
-set_option -package EA22
-set_option -speed_grade -7
+set_option -technology CYCLONEV
+set_option -part 5CGXFC7C6
+set_option -package FC23
+set_option -speed_grade -6
 set_option -part_companion ""
 
 #compilation/mapping options
@@ -78,7 +79,7 @@ set_option -auto_infer_blackbox 0
 set_option -write_apr_constraint 1
 
 #set result format/file last
-project -result_file "/home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/seq_divider.vqm"
+project -result_file "/home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/rev_1/fm_radio.vqm"
 
 #design plan options
 impl -active "rev_1"

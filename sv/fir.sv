@@ -25,23 +25,28 @@ module fir #(
 );
 
     localparam int DECIM_W = (DECIM <= 1) ? 1 : $clog2(DECIM);
+    localparam int TAP_W   = (TAPS <= 1)  ? 1 : $clog2(TAPS);
 
-    logic signed [DATA_W-1:0] x_reg  [0:TAPS-1];
-    logic signed [DATA_W-1:0] x_next [0:TAPS-1];
+    typedef enum logic [1:0] {
+        ST_WAIT,   // wait for input sample
+        ST_MAC,    // iterative multiply-accumulate
+        ST_HOLD    // hold output until downstream ready
+    } state_t;
 
-    logic [DECIM_W-1:0] decim_cnt_reg, decim_cnt_next;
+    state_t state_reg, state_next;
+
+    logic signed [DATA_W-1:0] x_reg [0:TAPS-1];
+    logic [DECIM_W-1:0]       decim_cnt_reg, decim_cnt_next;
+    logic [TAP_W-1:0]         tap_idx_reg, tap_idx_next;
+
+    logic signed [ACC_W-1:0]  acc_reg, acc_next;
 
     logic signed [DATA_W-1:0] out_data_reg, out_data_next;
     logic                     out_valid_reg, out_valid_next;
     logic                     out_last_reg,  out_last_next;
 
-    logic signed [ACC_W-1:0] acc_sum;
-    logic signed [ACC_W-1:0] prod_scaled;
-
-    // ----------------------------------------------------------------
-    // 32-bit intermediate for the wrapping multiply (matches C int*int)
-    // ----------------------------------------------------------------
-    logic signed [DATA_W-1:0] prod_32;
+    logic                     mac_active_reg, mac_active_next;
+    logic                     sampled_last_reg, sampled_last_next;
 
     logic signed [DATA_W-1:0] max_pos_data;
     logic signed [DATA_W-1:0] min_neg_data;
@@ -49,13 +54,22 @@ module fir #(
     logic signed [ACC_W-1:0]  min_neg_ext;
 
     logic accept_input;
-    logic produce_output;
+    logic produce_output_now;
+
+    logic signed [DATA_W-1:0] prod_32;
+    logic signed [ACC_W-1:0]  prod_scaled;
+    logic signed [ACC_W-1:0]  acc_candidate;
+
+    integer k;
 
     assign m_axis_tdata  = out_data_reg;
     assign m_axis_tvalid = out_valid_reg;
     assign m_axis_tlast  = out_last_reg;
 
-    assign s_axis_tready = (~out_valid_reg) || m_axis_tready;
+    // Backpressure: only accept a new sample when idle and not holding output
+    assign s_axis_tready = (state_reg == ST_WAIT) && !out_valid_reg;
+
+    assign accept_input = s_axis_tvalid && s_axis_tready;
 
     function automatic logic signed [ACC_W-1:0] trunc_div_pow2;
         input logic signed [ACC_W-1:0] val;
@@ -75,103 +89,125 @@ module fir #(
     endfunction
 
     always_comb begin
-        integer k;
-
-        for (k = 0; k < TAPS; k = k + 1) begin
-            x_next[k] = x_reg[k];
-        end
-
-        decim_cnt_next = decim_cnt_reg;
-        out_data_next  = out_data_reg;
-        out_valid_next = out_valid_reg;
-        out_last_next  = out_last_reg;
-
-        acc_sum      = '0;
-        prod_32      = '0;
-        prod_scaled  = '0;
-
         max_pos_data = {1'b0, {(DATA_W-1){1'b1}}};
         min_neg_data = {1'b1, {(DATA_W-1){1'b0}}};
 
         max_pos_ext  = {{(ACC_W-DATA_W){1'b0}}, max_pos_data};
         min_neg_ext  = {{(ACC_W-DATA_W){1'b1}}, min_neg_data};
+    end
 
-        accept_input   = s_axis_tvalid && s_axis_tready;
-        produce_output = 1'b0;
+    always_comb begin
+        state_next        = state_reg;
+        decim_cnt_next    = decim_cnt_reg;
+        tap_idx_next      = tap_idx_reg;
+        acc_next          = acc_reg;
+        out_data_next     = out_data_reg;
+        out_valid_next    = out_valid_reg;
+        out_last_next     = out_last_reg;
+        mac_active_next   = mac_active_reg;
+        sampled_last_next = sampled_last_reg;
 
+        prod_32       = '0;
+        prod_scaled   = '0;
+        acc_candidate = acc_reg;
+
+        produce_output_now = 1'b0;
+
+        // consume held output
         if (out_valid_reg && m_axis_tready) begin
             out_valid_next = 1'b0;
         end
 
-        if (accept_input) begin
-            x_next[0] = s_axis_tdata;
-            for (k = 1; k < TAPS; k = k + 1) begin
-                x_next[k] = x_reg[k-1];
-            end
+        case (state_reg)
 
-            if (decim_cnt_reg == DECIM-1) begin
-                decim_cnt_next = '0;
-                produce_output = 1'b1;
-            end else begin
-                decim_cnt_next = decim_cnt_reg + 1'b1;
-            end
+            ST_WAIT: begin
+                if (accept_input) begin
+                    sampled_last_next = s_axis_tlast;
 
-            if (produce_output) begin
-                acc_sum = '0;
-
-                for (k = 0; k < TAPS; k = k + 1) begin
-                    // --------------------------------------------------
-                    // Force 32-bit wrapping multiply FIRST, then
-                    // sign-extend to ACC_W for the dequantize.
-                    //
-                    // C does: y += DEQUANTIZE( coeff * x )
-                    //   where coeff*x is int*int = int (32-bit wrapping).
-                    //
-                    // Without this, SV widens both operands to ACC_W
-                    // (48 bits) before multiplying, preserving the full
-                    // mathematical product. That differs from C when
-                    // |coeff * x| > 2^31 (e.g. 599 * 9,743,360).
-                    // --------------------------------------------------
-                    if (k == 0)
-                        prod_32 = COEFFS[k] * s_axis_tdata;
-                    else
-                        prod_32 = COEFFS[k] * x_reg[k-1];
-
-                    prod_scaled = trunc_div_pow2({{(ACC_W-DATA_W){prod_32[DATA_W-1]}}, prod_32});
-                    acc_sum     = acc_sum + prod_scaled;
+                    if (decim_cnt_reg == DECIM-1) begin
+                        decim_cnt_next    = '0;
+                        tap_idx_next      = '0;
+                        acc_next          = '0;
+                        mac_active_next   = 1'b1;
+                        state_next        = ST_MAC;
+                    end else begin
+                        decim_cnt_next    = decim_cnt_reg + 1'b1;
+                        mac_active_next   = 1'b0;
+                    end
                 end
-
-                if (acc_sum > max_pos_ext)
-                    out_data_next = max_pos_data;
-                else if (acc_sum < min_neg_ext)
-                    out_data_next = min_neg_data;
-                else
-                    out_data_next = acc_sum[DATA_W-1:0];
-
-                out_valid_next = 1'b1;
-                out_last_next  = s_axis_tlast;
             end
-        end
+
+            ST_MAC: begin
+                // 32-bit wrapping multiply first, then sign-extend and dequantize
+                prod_32     = COEFFS[tap_idx_reg] * x_reg[tap_idx_reg];
+                prod_scaled = trunc_div_pow2({{(ACC_W-DATA_W){prod_32[DATA_W-1]}}, prod_32});
+
+                acc_candidate = acc_reg + prod_scaled;
+                acc_next      = acc_candidate;
+
+                if (tap_idx_reg == TAPS-1) begin
+                    // Final saturation after the last MAC term
+                    if (acc_candidate > max_pos_ext)
+                        out_data_next = max_pos_data;
+                    else if (acc_candidate < min_neg_ext)
+                        out_data_next = min_neg_data;
+                    else
+                        out_data_next = acc_candidate[DATA_W-1:0];
+
+                    out_valid_next  = 1'b1;
+                    out_last_next   = sampled_last_reg;
+                    mac_active_next = 1'b0;
+                    state_next      = ST_HOLD;
+                end else begin
+                    tap_idx_next = tap_idx_reg + 1'b1;
+                end
+            end
+
+            ST_HOLD: begin
+                if (out_valid_reg && m_axis_tready) begin
+                    state_next = ST_WAIT;
+                end
+            end
+
+            default: begin
+                state_next = ST_WAIT;
+            end
+        endcase
     end
 
     always_ff @(posedge clk or negedge rst_n) begin
-        integer k;
         if (!rst_n) begin
+            state_reg        <= ST_WAIT;
+            decim_cnt_reg    <= '0;
+            tap_idx_reg      <= '0;
+            acc_reg          <= '0;
+            out_data_reg     <= '0;
+            out_valid_reg    <= 1'b0;
+            out_last_reg     <= 1'b0;
+            mac_active_reg   <= 1'b0;
+            sampled_last_reg <= 1'b0;
+
             for (k = 0; k < TAPS; k = k + 1) begin
                 x_reg[k] <= '0;
             end
-            decim_cnt_reg <= '0;
-            out_data_reg  <= '0;
-            out_valid_reg <= 1'b0;
-            out_last_reg  <= 1'b0;
         end else begin
-            for (k = 0; k < TAPS; k = k + 1) begin
-                x_reg[k] <= x_next[k];
+            state_reg        <= state_next;
+            decim_cnt_reg    <= decim_cnt_next;
+            tap_idx_reg      <= tap_idx_next;
+            acc_reg          <= acc_next;
+            out_data_reg     <= out_data_next;
+            out_valid_reg    <= out_valid_next;
+            out_last_reg     <= out_last_next;
+            mac_active_reg   <= mac_active_next;
+            sampled_last_reg <= sampled_last_next;
+
+            // Shift input history only when a new sample is accepted
+            if (accept_input) begin
+                x_reg[0] <= s_axis_tdata;
+                for (k = 1; k < TAPS; k = k + 1) begin
+                    x_reg[k] <= x_reg[k-1];
+                end
             end
-            decim_cnt_reg <= decim_cnt_next;
-            out_data_reg  <= out_data_next;
-            out_valid_reg <= out_valid_next;
-            out_last_reg  <= out_last_next;
         end
     end
 

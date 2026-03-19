@@ -1,7 +1,12 @@
-#OPTIONS:"|-layerid|0|-orig_srs|/home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/synwork/seq_divider_comp.srs|-prodtype|synplify_premier|-verification_mode|0|-infer_seqShift|-primux|-fixsmult|-dspmac|-nram|-divnmod|-continue_on_error|-nostructver|-I|/home/vcs5888/CE387/streaming_fm_radio/syn/|-I|/vol/synopsys/fpga/O-2018.09-SP1/lib|-sysv|-devicelib|/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/altera.v|-devicelib|/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cycloneive.v|-devicelib|/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_mf.v|-devicelib|/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_lpm.v|-devicelib|/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_primitives.v|-encrypt|-pro|-distcompmode|-noobf|-auto_infer_blackbox|0|-proto|-ui|-fid2|-ram|-sharing|on|-ll|2000|-autosm|-D_MULTIPLE_FILE_COMPILATION_UNIT_|-fast_synthesis|0|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv"
+#OPTIONS:"|-layerid|0|-orig_srs|/home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/rev_1/synwork/fm_radio_comp.srs|-prodtype|synplify_premier|-pqdpadd|-verification_mode|0|-infer_seqShift|-primux|-fixsmult|-dspmac|-nram|-divnmod|-continue_on_error|-nostructver|-I|/home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/|-I|/vol/synopsys/fpga/O-2018.09-SP1/lib|-sysv|-devicelib|/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/altera.v|-devicelib|/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/altera_mult_add.v|-devicelib|/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cyclonev.v|-devicelib|/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_mf.v|-devicelib|/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_lpm.v|-devicelib|/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_primitives.v|-encrypt|-pro|-distcompmode|-noobf|-auto_infer_blackbox|0|-proto|-ui|-fid2|-ram|-sharing|on|-ll|2000|-autosm|-D_MULTIPLE_FILE_COMPILATION_UNIT_|-fast_synthesis|0|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv|-lib|work|-fsysv"
 #CUR:"/vol/synopsys/fpga/O-2018.09-SP1/linux_a_64/c_ver":1543382462
 #CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/altera.v":1543381811
-#CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cycloneive.v":1543381840
+#CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/altera_mult_add.v":1543381811
+#CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cyclonev.v":1543381840
+#CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cyclonev_atoms.v":1543381840
+#CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cyclonev_hssi_atoms.v":1543381840
+#CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cyclonev_hps_atoms.sv":1543381840
+#CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/cyclonev_pcie_hip_atoms.v":1543381840
 #CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_mf.v":1543381839
 #CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_lpm.v":1543381839
 #CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/altera/quartus_prime181/altera_primitives.v":1543381839
@@ -10,62 +15,67 @@
 #CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/synip/hcei/zceistubs.v":1543381931
 #CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/vlog/scemi_objects.v":1543382268
 #CUR:"/vol/synopsys/fpga/O-2018.09-SP1/lib/vlog/scemi_pipes.svh":1543382268
-#CUR:"/home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_pkg.sv":1773879459
-#CUR:"/home/vcs5888/CE387/streaming_fm_radio/sv/demod.sv":1773891841
-#CUR:"/home/vcs5888/CE387/streaming_fm_radio/sv/add_sub.sv":1773891819
-#CUR:"/home/vcs5888/CE387/streaming_fm_radio/sv/fir.sv":1773891165
-#CUR:"/home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv":1773891890
-#CUR:"/home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv":1773891855
-#CUR:"/home/vcs5888/CE387/streaming_fm_radio/sv/iir.sv":1773890441
-#CUR:"/home/vcs5888/CE387/streaming_fm_radio/sv/mult_gain.sv":1773890029
-#CUR:"/home/vcs5888/CE387/streaming_fm_radio/sv/seq_divider.sv":1773879231
-#CUR:"/home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv":1773892206
-#numinternalfiles:10
+#CUR:"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio_pkg.sv":1773883945
+#CUR:"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/add_sub.sv":1773893559
+#CUR:"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv":1773896144
+#CUR:"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fifo.sv":1773426893
+#CUR:"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv":1773896388
+#CUR:"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio.sv":1773893559
+#CUR:"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio_top.sv":1773893559
+#CUR:"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv":1773896174
+#CUR:"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv":1773893559
+#CUR:"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/iir.sv":1773893559
+#CUR:"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/seq_divider.sv":1773891095
+#numinternalfiles:15
 #defaultlanguage:verilog
-0			"/home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_pkg.sv" verilog
-1			"/home/vcs5888/CE387/streaming_fm_radio/sv/demod.sv" verilog
-2			"/home/vcs5888/CE387/streaming_fm_radio/sv/add_sub.sv" verilog
-3			"/home/vcs5888/CE387/streaming_fm_radio/sv/fir.sv" verilog
-4			"/home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio.sv" verilog
-5			"/home/vcs5888/CE387/streaming_fm_radio/sv/helpers.sv" verilog
-6			"/home/vcs5888/CE387/streaming_fm_radio/sv/iir.sv" verilog
-7			"/home/vcs5888/CE387/streaming_fm_radio/sv/mult_gain.sv" verilog
-8			"/home/vcs5888/CE387/streaming_fm_radio/sv/seq_divider.sv" verilog
-9			"/home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_top.sv" verilog
+0			"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio_pkg.sv" verilog
+1			"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/add_sub.sv" verilog
+2			"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/demod.sv" verilog
+3			"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fifo.sv" verilog
+4			"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fir.sv" verilog
+5			"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio.sv" verilog
+6			"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio_top.sv" verilog
+7			"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/helpers.sv" verilog
+8			"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/mult_gain.sv" verilog
+9			"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/iir.sv" verilog
+10			"/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/seq_divider.sv" verilog
 #Dependency Lists(Uses List)
 0 0 1
-1 0 8 1
-2 0 1
+1 0 1
+2 0 10 1
 3 0 1
-4 0 5 7 6 2 1
-5 0 3 1
-6 0 1
-7 0 1
+4 0 1
+5 0 7 8 9 1
+6 0 7 5 1
+7 0 4 2 1
 8 0 1
-9 0 5 4 1
+9 0 1
+10 0 1
 #Dependency Lists(Users Of)
-0 1 2 3 4 5 9 6 7 8
-1 5 0 2 3 4 6 7 8 9
-2 4
-3 5
-4 9
-5 4 9
-6 4
-7 4
-8 1
-9 -1
+0 1 2 4 5 6 7 3 8 9 10
+1 5 0 2 3 4 6 7 8 9 10
+2 7
+3 -1
+4 7
+5 6
+6 -1
+7 5 6
+8 5
+9 5
+10 2
 #Design Unit to File Association
 package work fm_radio_pkg 0
-package work work_/home/vcs5888/CE387/streaming_fm_radio/sv/fm_radio_pkg.sv_unit 1
-module work seq_divider 8
-module work demod 1
-module work add_sub 2
-module work fir 3
-module work channel_fir_pair 5
-module work demod_axis_wrap 5
-module work sync_fifo 5
-module work fir_fifo_wrap 5
-module work mult_gain 7
-module work iir 6
-module work fm_radio 4
-module work fm_radio_top 9
+package work work_/home/rnl2121/CE387/FinalProject/streaming_fm_radio/sv/fm_radio_pkg.sv_unit 1
+module work add_sub 1
+module work seq_divider 10
+module work demod 2
+module work fifo 3
+module work fir 4
+module work channel_fir_pair 7
+module work demod_axis_wrap 7
+module work sync_fifo 7
+module work fir_fifo_wrap 7
+module work mult_gain 8
+module work iir 9
+module work fm_radio 5
+module work fm_radio_top 6

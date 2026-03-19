@@ -11,25 +11,31 @@ module my_uvm_tb;
     my_uvm_if vif(clock);
 
     fm_radio_top dut (
-        .clock    (clock),
-        .reset    (vif.reset),
-        .iq_byte  (vif.iq_byte),
-        .iq_valid (vif.iq_valid),
-        .iq_ready (vif.iq_ready),
-        .out_left (vif.out_left),
-        .out_right(vif.out_right),
-        .out_valid(vif.out_valid),
-        .out_ready(vif.out_ready)
+        .clock          (clock),
+        .reset          (vif.reset),
+
+        .in_full        (vif.in_full),
+        .in_wr_en       (vif.in_wr_en),
+        .in_din         (vif.in_din),
+
+        .out_left_empty (vif.out_left_empty),
+        .out_left_rd_en (vif.out_left_rd_en),
+        .out_left_dout  (vif.out_left_dout),
+
+        .out_right_empty(vif.out_right_empty),
+        .out_right_rd_en(vif.out_right_rd_en),
+        .out_right_dout (vif.out_right_dout)
     );
 
     initial clock = 1'b0;
     always #5 clock = ~clock;
 
     initial begin
-        vif.reset     = 1'b1;
-        vif.iq_byte   = '0;
-        vif.iq_valid  = 1'b0;
-        vif.out_ready = 1'b1;
+        vif.reset          = 1'b1;
+        vif.in_wr_en       = 1'b0;
+        vif.in_din         = '0;
+        vif.out_left_rd_en = 1'b0;
+        vif.out_right_rd_en= 1'b0;
 
         repeat (5) @(posedge clock);
         vif.reset = 1'b0;

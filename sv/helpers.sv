@@ -1,9 +1,6 @@
 `timescale 1ns/1ps
 import fm_radio_pkg::*;
 
-// ============================================================
-// Wrap AXI-style FIR as FIFO-style block
-// ============================================================
 module fir_fifo_wrap #(
     parameter int DATA_W      = 32,
     parameter int COEFF_W     = 32,

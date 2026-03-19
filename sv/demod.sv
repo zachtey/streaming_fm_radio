@@ -1,18 +1,6 @@
 `timescale 1ns/1ps
 import fm_radio_pkg::*;
 
-
-// ============================================================================
-// FM quadrature demodulator
-// ============================================================================
-// Recovers baseband audio from complex I/Q samples via:
-//   phase_diff = atan2(imag, real)  of  sample[n] * conj(sample[n-1])
-//   output     = gain * phase_diff
-//
-// Fixed-point Q10 arithmetic throughout. The atan2 approximation avoids
-// a hardware divider IP by instantiating a bit-serial restoring divider.
-// ============================================================================
-
 module demod #(
     parameter int INPUT_W = 32,
     parameter int DATA_W  = 32,

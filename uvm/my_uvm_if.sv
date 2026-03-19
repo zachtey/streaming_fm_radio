@@ -2,13 +2,18 @@ interface my_uvm_if(input logic clock);
 
     logic               reset;
 
-    logic [7:0]         iq_byte;
-    logic               iq_valid;
-    logic               iq_ready;
+    // DUT input FIFO write side
+    logic               in_full;
+    logic               in_wr_en;
+    logic [63:0]        in_din;
 
-    logic signed [31:0] out_left;
-    logic signed [31:0] out_right;
-    logic               out_valid;
-    logic               out_ready;
+    // DUT output FIFO read side
+    logic               out_left_empty;
+    logic               out_left_rd_en;
+    logic signed [31:0] out_left_dout;
+
+    logic               out_right_empty;
+    logic               out_right_rd_en;
+    logic signed [31:0] out_right_dout;
 
 endinterface

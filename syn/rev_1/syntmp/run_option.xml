@@ -2,14 +2,14 @@
 <!-- 
   Synopsys, Inc.
   Version O-2018.09-SP1
-  Project file /home/vcs5888/CE387/streaming_fm_radio/syn/rev_1/syntmp/run_option.xml
-  Written on Wed Mar 18 22:56:26 2026
+  Project file /home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/rev_1/syntmp/run_option.xml
+  Written on Thu Mar 19 00:06:17 2026
 
 
 --> 
 <project_attribute_list name="Project Settings"> 
-     <option name="project_name" display_name="Project Name">proj_1</option>
-     <option name="device_name" display_name="Device Name">rev_1: Intel CYCLONE IV E : EP4CE6</option>
+     <option name="project_name" display_name="Project Name">fm_radio</option>
+     <option name="device_name" display_name="Device Name">rev_1: Intel CYCLONE V : 5CGXFC7C6</option>
      <option name="impl_name" display_name="Implementation Name">rev_1</option>
      <option name="top_module" display_name="Top Module"></option>
      <option name="pipe" display_name="Pipelining">1</option>

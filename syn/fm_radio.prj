@@ -1,0 +1,86 @@
+#--  Synopsys, Inc.
+#--  Version O-2018.09-SP1
+#--  Project file /home/rnl2121/CE387/FinalProject/streaming_fm_radio/syn/fm_radio.prj
+#--  Written on Thu Mar 19 00:05:58 2026
+
+
+#project files
+add_file -verilog -vlog_std sysv "../sv/fm_radio_pkg.sv"
+add_file -verilog -vlog_std sysv "../sv/add_sub.sv"
+add_file -verilog -vlog_std sysv "../sv/demod.sv"
+add_file -verilog -vlog_std sysv "../sv/fifo.sv"
+add_file -verilog -vlog_std sysv "../sv/fir.sv"
+add_file -verilog -vlog_std sysv "../sv/fm_radio.sv"
+add_file -verilog -vlog_std sysv "../sv/fm_radio_top.sv"
+add_file -verilog -vlog_std sysv "../sv/helpers.sv"
+add_file -verilog -vlog_std sysv "../sv/mult_gain.sv"
+add_file -verilog -vlog_std sysv "../sv/iir.sv"
+add_file -verilog -vlog_std sysv "../sv/seq_divider.sv"
+
+
+
+#implementation: "rev_1"
+impl -add rev_1 -type fpga
+
+#
+#implementation attributes
+
+set_option -vlog_std sysv
+set_option -project_relative_includes 1
+
+#par_1 attributes
+set_option -job par_1 -add par
+
+#device options
+set_option -technology CYCLONEV
+set_option -part 5CGXFC7C6
+set_option -package FC23
+set_option -speed_grade -6
+set_option -part_companion ""
+
+#compilation/mapping options
+set_option -use_fsm_explorer 0
+
+# hdl_compiler_options
+set_option -distributed_compile 1
+
+# altera_options
+set_option -rw_check_on_ram 1
+
+# mapper_without_write_options
+set_option -frequency auto
+set_option -srs_instrumentation 1
+
+# mapper_options
+set_option -write_verilog 0
+set_option -write_vhdl 0
+
+# Intel STRATIX
+set_option -run_prop_extract 1
+set_option -maxfan 30
+set_option -disable_io_insertion 0
+set_option -pipe 1
+set_option -update_models_cp 0
+set_option -retiming 0
+set_option -no_sequential_opt 0
+set_option -fix_gated_and_generated_clocks 1
+
+# sequential_optimization_options
+set_option -symbolic_fsm_compiler 1
+
+# Compiler Options
+set_option -compiler_compatible 0
+set_option -resource_sharing 1
+set_option -multi_file_compilation_unit 1
+
+# Compiler Options
+set_option -auto_infer_blackbox 0
+
+#automatic place and route (vendor) options
+set_option -write_apr_constraint 1
+
+#set result format/file last
+project -result_file "rev_1/fm_radio.vqm"
+
+#design plan options
+impl -active "rev_1"

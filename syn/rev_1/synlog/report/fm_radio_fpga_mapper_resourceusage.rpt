@@ -1,0 +1,35 @@
+##### START OF AREA REPORT #####[
+Design view:work.fm_radio_top(verilog)
+Selecting part 5CGXFC7C6F23C6
+
+Total combinational functions 5580 of 112960 ( 4%)
+ALUT usage by number of inputs
+		  7 input functions 	 12
+		  6 input functions 	 557
+		  5 input functions 	 1126
+		  4 input functions 	 813
+		  <=3 input functions 	 3072
+ALUTs by mode
+		  normal mode            3292
+		  extended LUT mode      12
+		  arithmetic mode        2155
+		  shared arithmetic mode 121
+Total registers 3470 of 225920 ( 1%)
+Total Estimated Packed ALMs 3280 of 56480 ( 5%)
+I/O pins 136 of 522 (26%), total I/O based on largest package of this part.
+
+Number of I/O registers
+			Input DDRs    :0
+			Output DDRs   :0
+
+DSP.M18X18_FULL: 10
+DSP.M18X18_SUMOF2: 6
+DSP.M27X27: 15
+DSP Blocks:     31 
+ShiftTap:       0  (0 registers)
+M10Ks:           20  (2% of 686)
+Memory ALUTs:   224  (0% of 28240)
+Total ESB:      87040 bits 
+
+##### END OF AREA REPORT #####]
+
