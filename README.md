@@ -4,6 +4,9 @@ A synthesizable SystemVerilog implementation of a fixed-point FM stereo receiver
 
 The receiver is organized as a backpressure-aware streaming datapath. Valid/ready interfaces connect the processing core, while 128-entry synchronous FIFOs buffer the top-level input, the left and right outputs, and the branches between DSP stages.
 
+Designed by Zach Tey, Gautham Anne
+Northwestern University, 2026
+
 ## Highlights
 
 - Synthesizable, parameterized SystemVerilog DSP blocks
