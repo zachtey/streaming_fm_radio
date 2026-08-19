@@ -1,87 +1,60 @@
-import uvm_pkg::*;
-import my_uvm_package::*;
-`include "my_uvm_if.sv"
-
-`timescale 1 ns / 1 ns
+`timescale 1ns/1ps
 
 module my_uvm_tb;
 
-  localparam integer N = 16;
-  localparam integer W = 32;
-  localparam integer FRAC = 14;
-  localparam integer FIFO_DEPTH = 16;
+    import uvm_pkg::*;
+    import my_uvm_pkg::*;
+    `include "uvm_macros.svh"
 
-  my_uvm_if vif();
+    logic clock;
 
-  // intermediate signals between FIFOs and DUT
-  wire in_rd_en;
-  wire [W-1:0] in_r_dout, in_i_dout;
-  wire in_r_empty, in_i_empty;
+    my_uvm_if vif(clock);
 
-  wire out_wr_en;
-  wire [W-1:0] out_r_din, out_i_din;
-  wire out_r_full, out_i_full;
+    fm_radio_top dut (
+        .clock          (clock),
+        .reset          (vif.reset),
 
-  // input FIFOs (testbench writes, DUT reads)
-  fifo #(.FIFO_DATA_WIDTH(W), .FIFO_BUFFER_SIZE(FIFO_DEPTH)) fifo_in_r (
-    .reset(vif.reset),
-    .wr_clk(vif.clock), .wr_en(vif.in_r_wr_en), .din(vif.in_r_din), .full(vif.in_r_full),
-    .rd_clk(vif.clock), .rd_en(in_rd_en), .dout(in_r_dout), .empty(in_r_empty)
-  );
+        .in_full        (vif.in_full),
+        .in_wr_en       (vif.in_wr_en),
+        .in_din         (vif.in_din),
 
-  fifo #(.FIFO_DATA_WIDTH(W), .FIFO_BUFFER_SIZE(FIFO_DEPTH)) fifo_in_i (
-    .reset(vif.reset),
-    .wr_clk(vif.clock), .wr_en(vif.in_i_wr_en), .din(vif.in_i_din), .full(vif.in_i_full),
-    .rd_clk(vif.clock), .rd_en(in_rd_en), .dout(in_i_dout), .empty(in_i_empty)
-  );
+        .out_left_empty (vif.out_left_empty),
+        .out_left_rd_en (vif.out_left_rd_en),
+        .out_left_dout  (vif.out_left_dout),
 
-  // output FIFOs (DUT writes, testbench reads)
-  fifo #(.FIFO_DATA_WIDTH(W), .FIFO_BUFFER_SIZE(FIFO_DEPTH)) fifo_out_r (
-    .reset(vif.reset),
-    .wr_clk(vif.clock), .wr_en(out_wr_en), .din(out_r_din), .full(out_r_full),
-    .rd_clk(vif.clock), .rd_en(vif.out_r_rd_en), .dout(vif.out_r_dout), .empty(vif.out_r_empty)
-  );
+        .out_right_empty(vif.out_right_empty),
+        .out_right_rd_en(vif.out_right_rd_en),
+        .out_right_dout (vif.out_right_dout)
+    );
 
-  fifo #(.FIFO_DATA_WIDTH(W), .FIFO_BUFFER_SIZE(FIFO_DEPTH)) fifo_out_i (
-    .reset(vif.reset),
-    .wr_clk(vif.clock), .wr_en(out_wr_en), .din(out_i_din), .full(out_i_full),
-    .rd_clk(vif.clock), .rd_en(vif.out_i_rd_en), .dout(vif.out_i_dout), .empty(vif.out_i_empty)
-  );
+    initial clock = 1'b0;
+    always #5 clock = ~clock;
 
-  // DUT - FFT with FIFO interface
-  fft_top_stream_fifo #(.N(N), .W(W), .FRAC(FRAC)) dut (
-    .clk(vif.clock),
-    .reset(vif.reset),
-    
-    .in_rd_en(in_rd_en),
-    .in_real_empty(in_r_empty),
-    .in_real_dout(in_r_dout),
-    .in_imag_empty(in_i_empty),
-    .in_imag_dout(in_i_dout),
-    
-    .out_wr_en(out_wr_en),
-    .out_real_full(out_r_full),
-    .out_real_din(out_r_din),
-    .out_imag_full(out_i_full),
-    .out_imag_din(out_i_din)
-  );
+    initial begin
+        vif.reset          = 1'b1;
+        vif.in_wr_en       = 1'b0;
+        vif.in_din         = '0;
+        vif.out_left_rd_en = 1'b0;
+        vif.out_right_rd_en= 1'b0;
 
-  initial begin
-    uvm_resource_db#(virtual my_uvm_if)::set(.scope("ifs"), .name("vif"), .val(vif));
-    run_test("my_uvm_test");
-  end
+        repeat (5) @(posedge clock);
+        vif.reset = 1'b0;
+    end
 
-  // reset sequence
-  initial begin
-    vif.clock <= 1'b1;
-    vif.reset <= 1'b0;
-    @(posedge vif.clock);
-    vif.reset <= 1'b1;
-    repeat(5) @(posedge vif.clock);
-    vif.reset <= 1'b0;
-  end
+    initial begin
+        my_uvm_config cfg;
 
-  // 10ns clock period
-  always #(CLOCK_PERIOD/2) vif.clock = ~vif.clock;
+        cfg = my_uvm_config::type_id::create("cfg");
+        cfg.vif             = vif;
+        cfg.usrp_file       = "usrp.txt";
+        cfg.left_gold_file  = "gold_12_left_gain.txt";
+        cfg.right_gold_file = "gold_12_right_gain.txt";
+        cfg.left_out_file   = "sv_left_audio_out.txt";
+        cfg.right_out_file  = "sv_right_audio_out.txt";
+
+        uvm_config_db#(my_uvm_config)::set(null, "*", "cfg", cfg);
+
+        run_test("my_uvm_test");
+    end
 
 endmodule

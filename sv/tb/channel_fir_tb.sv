@@ -56,7 +56,7 @@ module channel_fir_tb;
         .in_i(in_i),
         .in_q(in_q),
         .in_valid(in_valid),
-        .in_ready(in_ready),
+        .in_ready(in_ready),     
         .in_last(in_last),
         .out_i(out_i),
         .out_q(out_q),

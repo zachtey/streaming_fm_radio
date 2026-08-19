@@ -1,0 +1,16 @@
+@P:  Part : 5cgxfc7c6fc23-6
+@P:  Worst Slack : -3.003
+@P:  fm_radio_top|clock - Estimated Frequency : 53.9 MHz
+@P:  fm_radio_top|clock - Requested Frequency : 64.3 MHz
+@P:  fm_radio_top|clock - Estimated Period : 18.544
+@P:  fm_radio_top|clock - Requested Period : 15.541
+@P:  fm_radio_top|clock - Slack : -3.003
+@P: fm_radio_top Part : 5cgxfc7c6fc23-6
+@P: fm_radio_top I/O ATOMs : 69
+@P: fm_radio_top Total LUTs : 5580 
+@P: fm_radio_top Register bits : 3470
+@P: fm_radio_top Packed ALMs : 3280
+@P: fm_radio_top .M18X18_FULL : 10
+@P: fm_radio_top .M18X18_SUMOF2 : 6
+@P: fm_radio_top .M27X27 : 15
+@P:  CPU Time : 0h:02m:07s

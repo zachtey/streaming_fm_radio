@@ -1,2 +1,42 @@
 test/usrp.dat
 test/usrp.dat
+
+# sim artifacts
+sim/vsim.wlf
+sim/demod_tb.vcd
+
+# simulation artifacts
+sim/work/
+transcript
+sim/transcript
+
+# simulation artifacts
+sim/work/
+sim/vsim.wlf
+sim/demod_tb.vcd
+transcript
+*.qdb
+*.qpg
+*.qtl
+*.wlf
+*.vcd
+
+sim/vsim.wlf
+
+sim/vsim.wlf
+*.wlf
+sim/work/
+*.qdb
+*.qpg
+*.qtl
+*.vcd
+transcript
+
+sim/vsim.wlf
+*.wlf
+sim/work/
+*.qdb
+*.qpg
+*.qtl
+*.vcd
+transcript
